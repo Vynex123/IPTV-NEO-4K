@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark" data-lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VYNEX IPTV — عالم الترفيه بين يديك</title>
+<meta name="description" content="VYNEX IPTV — NEO 4K PRO Server">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --neon:#B026FF; --neon2:#7B00CC; --neon-soft:#D070FF;
+  --gold:#FFD700; --gold2:#FFA500; --green:#00E599; --orange:#FF8C00;
+  --radius:16px;
+  --bg:#07070f; --bg2:#0c0c1a; --bg3:#101020;
+  --card:#0f0f1e; --card-hov:#141430;
+  --border:rgba(176,38,255,.2); --border2:rgba(176,38,255,.5);
+  --text:#eeeeff; --text2:#c5c5dd; --muted:#6868a0;
+  --navbar-bg:rgba(7,7,15,.88); --grid-line:rgba(176,38,255,.03);
+  --glow-sm:0 0 10px rgba(176,38,255,.5),0 0 22px rgba(176,38,255,.22);
+  --glow-md:0 0 16px rgba(176,38,255,.7),0 0 44px rgba(176,38,255,.3),0 0 90px rgba(176,38,255,.1);
+  --gold-glow:0 0 10px rgba(255,215,0,.55),0 0 28px rgba(255,165,0,.28);
+  --font-ar:'Tajawal',sans-serif; --font-en:'Outfit',sans-serif;
+  --font-display:'Space Grotesk','Outfit',sans-serif;
+}
+[data-theme="light"] {
+  --bg:#f2f0ff; --bg2:#e8e4fd; --bg3:#ded9fc;
+  --card:#ffffff; --card-hov:#f0ecff;
+  --border:rgba(120,30,200,.14); --border2:rgba(120,30,200,.38);
+  --text:#1a1030; --text2:#3d2f60; --muted:#7a68a8;
+  --navbar-bg:rgba(242,240,255,.92); --grid-line:rgba(120,30,200,.04);
+  --neon:#8010cc; --neon2:#5500aa; --neon-soft:#9933dd;
+  --glow-sm:0 4px 18px rgba(120,30,200,.18),0 2px 8px rgba(120,30,200,.1);
+  --glow-md:0 6px 30px rgba(120,30,200,.28),0 12px 50px rgba(120,30,200,.14);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-ar);background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;transition:background .4s,color .4s}
+[data-lang="en"] body{font-family:var(--font-en)}
+[data-lang="en"] .logo-text,[data-lang="en"] .sec-title,[data-lang="en"] h1,[data-lang="en"] .plan-price,[data-lang="en"] .hstat-n,[data-lang="en"] .modal-title{font-family:var(--font-display)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--neon2);border-radius:4px}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+section{padding:5.5rem 0}
+
+/* BG */
+.bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:60px 60px;transition:background .4s}
+.bg-orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.orb1{width:750px;height:750px;background:radial-gradient(circle,rgba(176,38,255,.09),transparent 70%);top:-280px;right:-200px;animation:orbDrift 16s ease-in-out infinite}
+.orb2{width:550px;height:550px;background:radial-gradient(circle,rgba(100,0,180,.08),transparent 70%);bottom:-180px;left:-150px;animation:orbDrift 20s ease-in-out infinite reverse}
+.orb3{width:400px;height:400px;background:radial-gradient(circle,rgba(176,38,255,.05),transparent 70%);top:45%;left:50%;transform:translate(-50%,-50%);animation:orbPulse 8s ease-in-out infinite}
+[data-theme="light"] .orb1{background:radial-gradient(circle,rgba(140,20,230,.06),transparent 70%)}
+[data-theme="light"] .orb2{background:radial-gradient(circle,rgba(100,0,180,.04),transparent 70%)}
+[data-theme="light"] .orb3{background:radial-gradient(circle,rgba(140,20,230,.03),transparent 70%)}
+@keyframes orbDrift{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-30px)}}
+@keyframes orbPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.5}50%{transform:translate(-50%,-50%) scale(1.5);opacity:1}}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.45}
+[data-theme="light"] #particles{opacity:.2}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 1.5rem}
+
+/* NAVBAR */
+.navbar{position:sticky;top:0;z-index:300;padding:.85rem 0;background:var(--navbar-bg);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);transition:box-shadow .3s,background .4s,border-color .4s}
+.navbar.scrolled{box-shadow:0 4px 32px rgba(176,38,255,.1)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{display:flex;align-items:center;gap:.75rem;cursor:pointer;user-select:none}
+.logo-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--neon),var(--neon2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.5rem;font-weight:900;color:#fff;box-shadow:var(--glow-sm);flex-shrink:0;transition:box-shadow .3s}
+.logo:hover .logo-icon{box-shadow:var(--glow-md)}
+.logo-text{font-family:var(--font-display);font-size:1.7rem;font-weight:800;letter-spacing:3px;background:linear-gradient(135deg,var(--text) 0%,var(--neon-soft) 55%,var(--neon) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo-server{font-size:.58rem;font-weight:700;letter-spacing:1.8px;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;line-height:1;animation:goldPulse 2.5s ease-in-out infinite}
+@keyframes goldPulse{0%,100%{filter:drop-shadow(0 0 5px rgba(255,215,0,.4))}50%{filter:drop-shadow(0 0 14px rgba(255,215,0,.9))}}
+.nav-controls{display:flex;align-items:center;gap:.55rem}
+.btn-theme{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text2);font-size:.9rem;transition:all .3s}
+.btn-theme:hover{border-color:var(--neon);color:var(--neon);box-shadow:var(--glow-sm)}
+.btn-lang{display:flex;align-items:center;gap:.4rem;background:var(--card);border:1px solid var(--border);color:var(--text2);padding:.42rem .95rem;border-radius:50px;font-size:.8rem;font-weight:700;letter-spacing:.5px;transition:all .3s}
+.btn-lang:hover{border-color:var(--neon);color:var(--neon-soft);box-shadow:var(--glow-sm)}
+.btn-tg{display:flex;align-items:center;gap:.5rem;background:rgba(41,170,225,.12);border:1px solid rgba(41,170,225,.3);color:#29aae1;padding:.42rem 1.15rem;border-radius:50px;font-size:.82rem;font-weight:700;transition:all .3s}
+.btn-tg:hover{background:rgba(41,170,225,.22);box-shadow:0 0 20px rgba(41,170,225,.3)}
+
+/* HERO */
+.hero{padding:9rem 0 6rem;text-align:center;position:relative}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:280px;height:1px;background:linear-gradient(90deg,transparent,var(--neon),transparent);animation:shimmerLine 3s ease-in-out infinite}
+@keyframes shimmerLine{0%,100%{opacity:.4;width:180px}50%{opacity:1;width:380px}}
+.hero-badge{display:inline-flex;align-items:center;gap:.55rem;background:rgba(176,38,255,.08);border:1px solid rgba(176,38,255,.25);border-radius:50px;padding:.38rem 1.2rem;font-size:.73rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--neon-soft);margin-bottom:2.2rem;animation:fadeUp .7s ease both}
+[data-theme="light"] .hero-badge{background:rgba(140,20,220,.06);border-color:rgba(140,20,220,.2)}
+.hero-dot{width:7px;height:7px;background:var(--neon);border-radius:50%;box-shadow:0 0 8px var(--neon);animation:blink 1.8s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+.hero-title{font-family:var(--font-display);font-size:clamp(2.6rem,7.5vw,5.2rem);font-weight:800;line-height:1.06;margin-bottom:1.4rem;animation:fadeUp .85s ease .1s both;letter-spacing:-1px}
+.hero-title .grad{background:linear-gradient(135deg,var(--neon-soft) 0%,var(--neon) 50%,#5500ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;display:inline-block}
+.hero-title .grad::after{content:attr(data-text);position:absolute;top:0;left:0;background:linear-gradient(135deg,#ff26b0,#ff0066);-webkit-background-clip:text;-webkit-text-fill-color:transparent;clip-path:polygon(0 30%,100% 30%,100% 50%,0 50%);opacity:0;animation:glitch 6s infinite}
+@keyframes glitch{0%,90%,100%{opacity:0;transform:translateX(0)}91%{opacity:.45;transform:translateX(-3px)}92%{opacity:.45;transform:translateX(3px)}93%{opacity:0}}
+.hero-sub{font-size:clamp(.95rem,2vw,1.12rem);color:var(--muted);max-width:600px;margin:0 auto 2.8rem;line-height:1.9;animation:fadeUp .85s ease .22s both;font-weight:400}
+.neo-badge{display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.28);border-radius:10px;padding:.55rem 1.5rem;margin-bottom:3rem;animation:fadeUp .85s ease .3s both;position:relative;overflow:hidden}
+.neo-badge::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,215,0,.12),transparent);animation:sweep 3.5s ease-in-out infinite}
+@keyframes sweep{0%{left:-100%}100%{left:200%}}
+.neo-badge-text{font-family:var(--font-display);font-size:1rem;font-weight:800;letter-spacing:2.5px;background:linear-gradient(135deg,#FFD700,#FFA500,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:goldPulse 2s ease-in-out infinite}
+.neo-badge-sub{font-size:.72rem;color:rgba(255,215,0,.65);letter-spacing:1px}
+.hero-stats{display:flex;justify-content:center;gap:clamp(2rem,5vw,5.5rem);flex-wrap:wrap;animation:fadeUp .85s ease .38s both}
+.hstat{text-align:center;position:relative}
+.hstat::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:24px;height:2px;background:var(--neon);border-radius:1px;opacity:.5}
+.hstat-n{font-family:var(--font-display);font-size:clamp(1.6rem,3.5vw,2.3rem);font-weight:800;background:linear-gradient(135deg,var(--text),var(--neon-soft));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hstat-l{font-size:.72rem;color:var(--muted);letter-spacing:1px;margin-top:.35rem}
+.hero-cta{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:3.2rem;animation:fadeUp .85s ease .48s both}
+.btn-primary{display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,var(--neon),var(--neon2));color:#fff;padding:.9rem 2.2rem;border-radius:50px;font-size:.95rem;font-weight:700;letter-spacing:.5px;box-shadow:0 0 28px rgba(176,38,255,.4);transition:all .3s;border:none;cursor:pointer;position:relative;overflow:hidden}
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12),transparent);opacity:0;transition:.3s}
+.btn-primary:hover::before{opacity:1}
+.btn-primary:hover{box-shadow:var(--glow-md);transform:translateY(-3px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:.6rem;background:var(--card);border:1.5px solid var(--border2);color:var(--neon-soft);padding:.9rem 2.2rem;border-radius:50px;font-size:.95rem;font-weight:700;transition:all .3s;cursor:pointer}
+.btn-ghost:hover{border-color:var(--neon);box-shadow:var(--glow-sm);transform:translateY(-3px);background:var(--card-hov)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+
+/* UTILS */
+.sec-eyebrow{font-size:.68rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--neon);margin-bottom:.65rem;display:block}
+.sec-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:.75rem;line-height:1.15;letter-spacing:-.5px}
+.sec-sub{color:var(--muted);font-size:.95rem;line-height:1.85}
+.sec-head{margin-bottom:3.5rem}
+.hr-neon{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:0}
+
+/* FEATURES */
+#features{background:var(--bg2);transition:background .4s}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.3rem}
+.feat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.9rem 1.6rem;transition:all .38s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--neon),transparent);opacity:0;transition:opacity .38s}
+.feat-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(176,38,255,.06),transparent 65%);opacity:0;transition:opacity .38s}
+.feat-card:hover{border-color:var(--border2);transform:translateY(-7px);box-shadow:0 22px 55px rgba(176,38,255,.12)}
+.feat-card:hover::before,.feat-card:hover::after{opacity:1}
+[data-theme="light"] .feat-card{box-shadow:0 2px 16px rgba(120,30,200,.06)}
+[data-theme="light"] .feat-card:hover{box-shadow:0 18px 44px rgba(120,30,200,.12)}
+.feat-icon{font-size:2rem;margin-bottom:1.1rem;display:block}
+.feat-title{font-size:1rem;font-weight:700;margin-bottom:.5rem;color:var(--text)}
+.feat-desc{font-size:.84rem;color:var(--muted);line-height:1.75}
+
+/* PRICING */
+#pricing{background:var(--bg);transition:background .4s}
+.pricing-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.1rem}
+@media(max-width:1040px){.pricing-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:720px){.pricing-grid{grid-template-columns:1fr;max-width:340px;margin:0 auto}}
+.plan{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:1.9rem 1.3rem;text-align:center;position:relative;overflow:hidden;display:flex;flex-direction:column;transition:all .38s cubic-bezier(.4,0,.2,1)}
+.plan:hover{transform:translateY(-9px);box-shadow:0 28px 60px rgba(176,38,255,.14);border-color:var(--border2)}
+[data-theme="light"] .plan{box-shadow:0 2px 20px rgba(120,30,200,.06)}
+[data-theme="light"] .plan:hover{box-shadow:0 22px 50px rgba(120,30,200,.12)}
+.plan.popular{border-color:var(--neon);background:linear-gradient(160deg,var(--card) 0%,rgba(176,38,255,.05) 100%);box-shadow:0 0 0 1px rgba(176,38,255,.18),0 0 45px rgba(176,38,255,.08)}
+.plan.popular:hover{box-shadow:0 0 0 1px var(--neon),var(--glow-md)}
+.plan.gold{border-color:rgba(255,215,0,.35);background:linear-gradient(160deg,var(--card) 0%,rgba(255,165,0,.04) 100%);box-shadow:0 0 0 1px rgba(255,215,0,.12),0 0 35px rgba(255,165,0,.07)}
+.plan.gold:hover{box-shadow:0 0 0 1px rgba(255,215,0,.45),var(--gold-glow)}
+.plan.trial{border-color:rgba(255,140,0,.3)}
+.plan.trial:hover{box-shadow:0 0 32px rgba(255,140,0,.14)}
+.plan-badge{position:absolute;top:0;left:50%;transform:translateX(-50%);padding:.3rem 1rem;border-radius:0 0 11px 11px;font-size:.62rem;font-weight:800;letter-spacing:1px;white-space:nowrap}
+.badge-popular{background:linear-gradient(135deg,var(--neon),var(--neon2));color:#fff}
+.badge-gold{background:linear-gradient(135deg,#b08800,#FFD700);color:#000}
+.badge-trial{background:rgba(255,140,0,.2);color:var(--orange);border:1px solid rgba(255,140,0,.3)}
+.plan-name{font-size:.68rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1.1rem}
+.plan-cur{font-size:.9rem;color:var(--muted);vertical-align:top;margin-top:.6rem;display:inline-block}
+.plan-price{font-family:var(--font-display);font-size:2.8rem;font-weight:800;display:inline-block;line-height:1;color:var(--text)}
+.popular .plan-price{background:linear-gradient(135deg,var(--text),var(--neon-soft));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.gold .plan-price{background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 8px rgba(255,215,0,.35))}
+.plan-period{font-size:.75rem;color:var(--muted);margin:.35rem 0 1.3rem}
+.plan-hr{border:none;border-top:1px solid var(--border);margin-bottom:1.2rem}
+.plan-feats{list-style:none;text-align:right;margin-bottom:1.5rem;flex:1}
+[data-lang="en"] .plan-feats{text-align:left}
+.plan-feats li{display:flex;align-items:flex-start;gap:.45rem;font-size:.78rem;color:var(--muted);margin-bottom:.52rem}
+.plan-feats li i{color:var(--neon);font-size:.62rem;margin-top:.28rem;flex-shrink:0}
+.trial-limit{display:inline-flex;align-items:center;gap:.35rem;background:rgba(255,140,0,.08);border:1px solid rgba(255,140,0,.22);color:var(--orange);font-size:.65rem;font-weight:700;padding:.28rem .7rem;border-radius:20px;margin-bottom:.9rem;letter-spacing:.5px}
+.btn-order{display:flex;align-items:center;justify-content:center;gap:.55rem;width:100%;padding:.82rem 1rem;border-radius:50px;font-size:.85rem;font-weight:700;cursor:pointer;border:none;transition:all .3s;font-family:inherit;letter-spacing:.5px}
+.btn-order-neon{background:linear-gradient(135deg,var(--neon),var(--neon2));color:#fff;box-shadow:0 0 20px rgba(176,38,255,.3)}
+.btn-order-neon:hover{box-shadow:var(--glow-md);transform:translateY(-2px)}
+.btn-order-outline{background:transparent;color:var(--neon-soft);border:1.5px solid var(--border2)}
+.btn-order-outline:hover{border-color:var(--neon);box-shadow:var(--glow-sm);transform:translateY(-2px);background:var(--card-hov)}
+.btn-order-gold{background:transparent;color:var(--gold);border:1.5px solid rgba(255,215,0,.35)}
+.btn-order-gold:hover{border-color:var(--gold);box-shadow:var(--gold-glow);transform:translateY(-2px)}
+.btn-order-trial{background:transparent;color:var(--orange);border:1.5px solid rgba(255,140,0,.3)}
+.btn-order-trial:hover{border-color:var(--orange);box-shadow:0 0 20px rgba(255,140,0,.22);transform:translateY(-2px)}
+
+/* CONTACT */
+#contact{background:var(--bg2);transition:background .4s}
+.soc-btn{display:flex;align-items:center;gap:.65rem;padding:.75rem 1.7rem;border-radius:50px;font-size:.9rem;font-weight:700;transition:all .3s;text-decoration:none}
+.soc-tg{background:rgba(41,170,225,.1);border:1px solid rgba(41,170,225,.3);color:#29aae1}
+.soc-tg:hover{background:rgba(41,170,225,.2);box-shadow:0 0 22px rgba(41,170,225,.3)}
+.social-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:2.8rem 0;text-align:center;transition:background .4s,border-color .4s}
+.foot-logo{font-family:var(--font-display);font-size:1.35rem;font-weight:800;letter-spacing:3px;background:linear-gradient(135deg,var(--text),var(--neon));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
+footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
+
+/* FLOAT */
+.float-btn{position:fixed;bottom:1.5rem;left:1.5rem;z-index:500;display:flex;align-items:center;gap:.55rem;background:linear-gradient(135deg,var(--neon),var(--neon2));color:#fff;padding:.68rem 1.4rem;border-radius:50px;font-size:.82rem;font-weight:700;text-decoration:none;box-shadow:var(--glow-sm);cursor:pointer;animation:floatAnim 3s ease-in-out infinite;transition:box-shadow .3s}
+.float-btn:hover{box-shadow:var(--glow-md)}
+[data-lang="en"] .float-btn{left:auto;right:1.5rem}
+@keyframes floatAnim{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+.rv1{transition-delay:.08s}.rv2{transition-delay:.17s}.rv3{transition-delay:.26s}.rv4{transition-delay:.35s}.rv5{transition-delay:.44s}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:900;background:rgba(5,5,15,.88);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+[data-theme="light"] .modal-overlay{background:rgba(30,10,60,.5)}
+.modal-overlay.open{opacity:1;visibility:visible}
+.modal-box{background:var(--card);border:1px solid var(--border2);border-radius:26px;max-width:500px;width:100%;padding:2.4rem 2.2rem;position:relative;box-shadow:0 0 70px rgba(176,38,255,.18),0 35px 90px rgba(0,0,0,.5);transform:translateY(32px) scale(.97);transition:transform .38s cubic-bezier(.4,0,.2,1)}
+[data-theme="light"] .modal-box{box-shadow:0 0 50px rgba(120,30,200,.14),0 30px 70px rgba(80,30,160,.08)}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;top:1rem;left:1rem;background:var(--bg2);border:1px solid var(--border);color:var(--muted);width:34px;height:34px;border-radius:50%;font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s}
+.modal-close:hover{background:rgba(176,38,255,.15);color:var(--text);border-color:var(--border2)}
+.modal-neo-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.3);border-radius:9px;padding:.42rem 1.1rem;margin-bottom:1.3rem}
+.modal-neo-txt{font-family:var(--font-display);font-size:.85rem;font-weight:800;letter-spacing:2px;background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:goldPulse 2s ease-in-out infinite}
+.modal-title{font-family:var(--font-display);font-size:1.55rem;font-weight:800;margin-bottom:.5rem;line-height:1.2;color:var(--text);letter-spacing:-.3px}
+.modal-plan-name{color:var(--neon-soft);font-size:.9rem;font-weight:700;margin-bottom:1.5rem}
+.server-info{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.3rem 1.4rem;margin-bottom:1.5rem}
+.server-info-title{font-size:.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--neon);margin-bottom:1rem;display:flex;align-items:center;gap:.4rem}
+.server-feats{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.sf-item{display:flex;align-items:center;gap:.45rem;font-size:.8rem;color:var(--text2)}
+.sf-item i{color:var(--green);font-size:.68rem;flex-shrink:0}
+.modal-notice{background:var(--bg2);border:1px solid var(--border);border-radius:13px;padding:1.05rem 1.15rem;margin-bottom:1.6rem;display:flex;align-items:flex-start;gap:.75rem;font-size:.82rem;color:var(--muted);line-height:1.7}
+.modal-notice i{color:var(--neon-soft);font-size:1.05rem;flex-shrink:0;margin-top:.05rem}
+.modal-notice strong{color:var(--text)}
+.modal-cta{display:flex;align-items:center;justify-content:center;gap:.65rem;width:100%;padding:1.05rem 1.5rem;border-radius:50px;background:linear-gradient(135deg,var(--neon),var(--neon2));color:#fff;font-size:.97rem;font-weight:800;letter-spacing:.5px;border:none;cursor:pointer;box-shadow:0 0 28px rgba(176,38,255,.4);transition:all .3s;text-decoration:none;font-family:inherit}
+.modal-cta:hover{box-shadow:var(--glow-md);transform:translateY(-2px)}
+.modal-cta-sub{text-align:center;margin-top:.9rem;font-size:.74rem;color:var(--muted)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero{padding:5.5rem 0 4rem}
+  .feat-grid{grid-template-columns:1fr 1fr}
+  .server-feats{grid-template-columns:1fr}
+  .modal-box{padding:2rem 1.5rem}
+  .btn-tg span{display:none}
+}
+@media(max-width:480px){.feat-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="bg-canvas"></div>
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+<div class="bg-orb orb3"></div>
+<canvas id="particles"></canvas>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="wrap nav-inner">
+    <div class="logo" onclick="document.querySelector('.hero').scrollIntoView({behavior:'smooth'})">
+      <div class="logo-icon">V</div>
+      <div>
+        <span class="logo-text">VYNEX</span>
+        <span class="logo-server">✦ NEO 4K PRO SERVER ✦</span>
+      </div>
+    </div>
+    <div class="nav-controls">
+      <button class="btn-theme" id="themeBtn" onclick="toggleTheme()">
+        <i class="fas fa-sun" id="themeIcon"></i>
+      </button>
+      <button class="btn-lang" onclick="toggleLang()">
+        <i class="fas fa-globe"></i>
+        <span id="langTxt">EN</span>
+      </button>
+      <a href="https://t.me/vynex_IPTV_bot" target="_blank" class="btn-tg">
+        <i class="fab fa-telegram"></i>
+        <span class="t" data-ar="تواصل" data-en="Contact">تواصل</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-badge">
+      <span class="hero-dot"></span>
+      <span class="t" data-ar="أفضل سيرفر IPTV في المنطقة" data-en="Best IPTV Server in the Region">أفضل سيرفر IPTV في المنطقة</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="grad" data-text="VYNEX">VYNEX</span><br>
+      <span class="t" data-ar="عالم الترفيه بين يديك" data-en="Entertainment at Your Fingertips">عالم الترفيه بين يديك</span>
+    </h1>
+    <p class="hero-sub t" data-ar="أفلام، مسلسلات، رياضة، قنوات 4K بجودة لا مثيل لها. سيرفر NEO 4K PRO بأعلى استقرار واحترافية." data-en="Movies, series, sports, and 4K channels with unmatched quality. NEO 4K PRO Server with maximum stability.">أفلام، مسلسلات، رياضة، قنوات 4K بجودة لا مثيل لها. سيرفر NEO 4K PRO بأعلى استقرار واحترافية.</p>
+    <div class="neo-badge">
+      <div>
+        <div class="neo-badge-text">✦ NEO 4K PRO SERVER ✦</div>
+        <div class="neo-badge-sub t" data-ar="سيرفر الجيل القادم" data-en="Next Generation Server">سيرفر الجيل القادم</div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-n">+10K</div><div class="hstat-l t" data-ar="قناة" data-en="Channels">قناة</div></div>
+      <div class="hstat"><div class="hstat-n">+50K</div><div class="hstat-l t" data-ar="فيلم ومسلسل" data-en="Movies & Series">فيلم ومسلسل</div></div>
+      <div class="hstat"><div class="hstat-n">4K</div><div class="hstat-l t" data-ar="جودة الصورة" data-en="Picture Quality">جودة الصورة</div></div>
+      <div class="hstat"><div class="hstat-n">99.9%</div><div class="hstat-l t" data-ar="وقت تشغيل" data-en="Uptime">وقت تشغيل</div></div>
+    </div>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="openModal('الاشتراك في VYNEX','Subscribe to VYNEX')">
+        <i class="fab fa-telegram"></i>
+        <span class="t" data-ar="اشترك الآن عبر البوت" data-en="Subscribe via Bot">اشترك الآن عبر البوت</span>
+      </button>
+      <button class="btn-ghost" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
+        <i class="fas fa-tags"></i>
+        <span class="t" data-ar="استعرض الباقات" data-en="View Plans">استعرض الباقات</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="hr-neon"></div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-eyebrow">✦ VYNEX NEO 4K PRO</span>
+      <h2 class="sec-title t" data-ar="لماذا VYNEX؟" data-en="Why Choose VYNEX?">لماذا VYNEX؟</h2>
+      <p class="sec-sub t" data-ar="تقنية متقدمة، محتوى لا نهاية له، واستقرار لا مثيل له على سيرفر NEO 4K PRO" data-en="Advanced tech, endless content, unmatched stability on NEO 4K PRO server">تقنية متقدمة، محتوى لا نهاية له، واستقرار لا مثيل له على سيرفر NEO 4K PRO</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card rv rv1"><span class="feat-icon">📡</span><div class="feat-title t" data-ar="أكثر من 10,000 قناة" data-en="10,000+ Channels">أكثر من 10,000 قناة</div><p class="feat-desc t" data-ar="قنوات عربية، أوروبية، أمريكية وعالمية بدون انقطاع" data-en="Arabic, European, American & global channels with zero interruption">قنوات عربية، أوروبية، أمريكية وعالمية بدون انقطاع</p></div>
+      <div class="feat-card rv rv2"><span class="feat-icon">🎬</span><div class="feat-title t" data-ar="جودة 4K Ultra HD" data-en="4K Ultra HD Quality">جودة 4K Ultra HD</div><p class="feat-desc t" data-ar="صورة بلورية عبر سيرفر NEO 4K PRO المتطور بدون تقطع" data-en="Crystal-clear picture via NEO 4K PRO server with zero buffering">صورة بلورية عبر سيرفر NEO 4K PRO المتطور بدون تقطع</p></div>
+      <div class="feat-card rv rv3"><span class="feat-icon">📱</span><div class="feat-title t" data-ar="مشاهدة على جميع الأجهزة" data-en="All Devices Supported">مشاهدة على جميع الأجهزة</div><p class="feat-desc t" data-ar="Android، iOS، Smart TV، PC وأكثر — في أي مكان" data-en="Android, iOS, Smart TV, PC and more — anywhere you go">Android، iOS، Smart TV، PC وأكثر — في أي مكان</p></div>
+      <div class="feat-card rv rv4"><span class="feat-icon">⚽</span><div class="feat-title t" data-ar="رياضة بث مباشر" data-en="Live Sports">رياضة بث مباشر</div><p class="feat-desc t" data-ar="جميع الدوريات العالمية والبطولات الكبرى بجودة HD" data-en="All world leagues & major tournaments in HD quality">جميع الدوريات العالمية والبطولات الكبرى بجودة HD</p></div>
+      <div class="feat-card rv rv5"><span class="feat-icon">⚡</span><div class="feat-title t" data-ar="تفعيل فوري بالبوت" data-en="Instant Bot Activation">تفعيل فوري بالبوت</div><p class="feat-desc t" data-ar="اشترك وتفعّل خدمتك تلقائياً عبر بوت تيليغرام" data-en="Subscribe & activate instantly via Telegram bot">اشترك وتفعّل خدمتك تلقائياً عبر بوت تيليغرام</p></div>
+      <div class="feat-card rv rv1"><span class="feat-icon">🛡️</span><div class="feat-title t" data-ar="دعم فني 24/7" data-en="24/7 Tech Support">دعم فني 24/7</div><p class="feat-desc t" data-ar="فريق دعم متاح دائماً لمساعدتك في أي وقت" data-en="Our team is always available whenever you need help">فريق دعم متاح دائماً لمساعدتك في أي وقت</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="hr-neon"></div>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head rv" style="text-align:center;">
+      <span class="sec-eyebrow">💎 PLANS</span>
+      <h2 class="sec-title t" data-ar="اختر باقتك" data-en="Choose Your Plan">اختر باقتك</h2>
+      <p class="sec-sub t" style="margin:0 auto;" data-ar="جميع الباقات تشمل سيرفر NEO 4K PRO • تفعيل فوري عبر البوت" data-en="All plans include NEO 4K PRO server • Instant bot activation">جميع الباقات تشمل سيرفر NEO 4K PRO • تفعيل فوري عبر البوت</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="plan trial rv rv1">
+        <div class="plan-badge badge-trial">⚡ <span class="t" data-ar="تجربة" data-en="Trial">تجربة</span></div>
+        <div class="plan-name t" style="margin-top:1.4rem;" data-ar="24 ساعة" data-en="24 Hours">24 ساعة</div>
+        <div><span class="plan-cur">$</span><span class="plan-price" style="color:var(--orange)">2</span></div>
+        <div class="plan-period t" data-ar="ليوم واحد" data-en="For one day">ليوم واحد</div>
+        <div class="trial-limit"><i class="fas fa-bolt"></i><span class="t" data-ar="10 كودات فقط يومياً" data-en="Only 10 daily codes">10 كودات فقط يومياً</span></div>
+        <hr class="plan-hr">
+        <ul class="plan-feats">
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="سيرفر NEO 4K PRO" data-en="NEO 4K PRO Server">سيرفر NEO 4K PRO</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="جميع القنوات" data-en="All Channels">جميع القنوات</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم فني" data-en="Tech Support">دعم فني</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="تفعيل فوري" data-en="Instant Activation">تفعيل فوري</span></li>
+        </ul>
+        <button class="btn-order btn-order-trial" onclick="openModal('تجربة 24 ساعة — 2$','24-Hour Trial — $2')">
+          <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
+        </button>
+      </div>
+      <div class="plan rv rv2">
+        <div class="plan-name t" data-ar="شهر واحد" data-en="1 Month">شهر واحد</div>
+        <div><span class="plan-cur">$</span><span class="plan-price">6.99</span></div>
+        <div class="plan-period t" data-ar="30 يوم" data-en="30 days">30 يوم</div>
+        <hr class="plan-hr">
+        <ul class="plan-feats">
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="سيرفر NEO 4K PRO" data-en="NEO 4K PRO Server">سيرفر NEO 4K PRO</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="آلاف القنوات" data-en="Thousands of Channels">آلاف القنوات</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="أفلام ومسلسلات" data-en="Movies & Series">أفلام ومسلسلات</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="رياضة بث مباشر" data-en="Live Sports">رياضة بث مباشر</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم فني" data-en="Support">دعم فني</span></li>
+        </ul>
+        <button class="btn-order btn-order-outline" onclick="openModal('شهر واحد — 6.99$','1 Month — $6.99')">
+          <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
+        </button>
+      </div>
+      <div class="plan popular rv rv3">
+        <div class="plan-badge badge-popular">⭐ <span class="t" data-ar="الأكثر طلباً" data-en="Most Popular">الأكثر طلباً</span></div>
+        <div class="plan-name t" style="margin-top:1.4rem;" data-ar="3 أشهر" data-en="3 Months">3 أشهر</div>
+        <div><span class="plan-cur">$</span><span class="plan-price">14.99</span></div>
+        <div class="plan-period t" data-ar="3 أشهر • وفّر 30%" data-en="3 months • Save 30%">3 أشهر • وفّر 30%</div>
+        <hr class="plan-hr">
+        <ul class="plan-feats">
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="سيرفر NEO 4K PRO" data-en="NEO 4K PRO Server">سيرفر NEO 4K PRO</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="آلاف القنوات" data-en="Thousands of Channels">آلاف القنوات</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="أفلام ومسلسلات" data-en="Movies & Series">أفلام ومسلسلات</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="رياضة بث مباشر" data-en="Live Sports">رياضة بث مباشر</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم متواصل 24/7" data-en="24/7 Support">دعم متواصل 24/7</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="توفير 30%" data-en="Save 30%">توفير 30%</span></li>
+        </ul>
+        <button class="btn-order btn-order-neon" onclick="openModal('3 أشهر — 14.99$','3 Months — $14.99')">
+          <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
+        </button>
+      </div>
+      <div class="plan rv rv4">
+        <div class="plan-name t" data-ar="6 أشهر" data-en="6 Months">6 أشهر</div>
+        <div><span class="plan-cur">$</span><span class="plan-price">22.99</span></div>
+        <div class="plan-period t" data-ar="6 أشهر • وفّر 50%" data-en="6 months • Save 50%">6 أشهر • وفّر 50%</div>
+        <hr class="plan-hr">
+        <ul class="plan-feats">
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="سيرفر NEO 4K PRO" data-en="NEO 4K PRO Server">سيرفر NEO 4K PRO</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="آلاف القنوات" data-en="Thousands of Channels">آلاف القنوات</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="أفلام ومسلسلات" data-en="Movies & Series">أفلام ومسلسلات</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="رياضة بث مباشر" data-en="Live Sports">رياضة بث مباشر</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم متواصل 24/7" data-en="24/7 Support">دعم متواصل 24/7</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="توفير 50%" data-en="Save 50%">توفير 50%</span></li>
+        </ul>
+        <button class="btn-order btn-order-outline" onclick="openModal('6 أشهر — 22.99$','6 Months — $22.99')">
+          <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
+        </button>
+      </div>
+      <div class="plan gold rv rv5">
+        <div class="plan-badge badge-gold">🏆 <span class="t" data-ar="أفضل عرض" data-en="Best Value">أفضل عرض</span></div>
+        <div class="plan-name t" style="margin-top:1.4rem;" data-ar="سنة كاملة" data-en="Full Year">سنة كاملة</div>
+        <div><span class="plan-cur">$</span><span class="plan-price">35.99</span></div>
+        <div class="plan-period t" data-ar="12 شهر • وفّر 60%" data-en="12 months • Save 60%">12 شهر • وفّر 60%</div>
+        <hr class="plan-hr">
+        <ul class="plan-feats">
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="سيرفر NEO 4K PRO" data-en="NEO 4K PRO Server">سيرفر NEO 4K PRO</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="آلاف القنوات" data-en="Thousands of Channels">آلاف القنوات</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="أفلام ومسلسلات" data-en="Movies & Series">أفلام ومسلسلات</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="رياضة بث مباشر" data-en="Live Sports">رياضة بث مباشر</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم VIP 24/7" data-en="VIP Support 24/7">دعم VIP 24/7</span></li>
+          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="توفير 60%" data-en="Save 60%">توفير 60%</span></li>
+        </ul>
+        <button class="btn-order btn-order-gold" onclick="openModal('سنة كاملة — 35.99$','Full Year — $35.99')">
+          <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr-neon"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap" style="text-align:center;">
+    <div class="sec-head rv">
+      <span class="sec-eyebrow">📲 <span class="t" data-ar="تواصل معنا" data-en="Get In Touch">تواصل معنا</span></span>
+      <h2 class="sec-title t" data-ar="نحن هنا لمساعدتك" data-en="We're Here to Help">نحن هنا لمساعدتك</h2>
+      <p class="sec-sub t" data-ar="للاشتراك أو الاستفسار تواصل معنا مباشرة عبر بوت تيليغرام" data-en="For subscriptions or inquiries, reach us via our official Telegram bot">للاشتراك أو الاستفسار تواصل معنا مباشرة عبر بوت تيليغرام</p>
+    </div>
+    <div class="social-row">
+      <a href="https://t.me/vynex_IPTV_bot" target="_blank" class="soc-btn soc-tg rv rv1">
+        <i class="fab fa-telegram" style="font-size:1.15rem;"></i>
+        <span class="t" data-ar="بوت تيليغرام VYNEX" data-en="VYNEX Telegram Bot">بوت تيليغرام VYNEX</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-logo">VYNEX IPTV</div>
+    <p>✦ NEO 4K PRO SERVER ✦</p>
+    <p style="margin-top:.45rem;">© 2025 VYNEX IPTV — <span class="t" data-ar="جميع الحقوق محفوظة" data-en="All Rights Reserved">جميع الحقوق محفوظة</span></p>
+  </div>
+</footer>
+
+<!-- FLOAT -->
+<a href="https://t.me/vynex_IPTV_bot" target="_blank" class="float-btn">
+  <i class="fab fa-telegram"></i>
+  <span class="t" data-ar="البوت الرسمي" data-en="Official Bot">البوت الرسمي</span>
+</a>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    <div class="modal-neo-badge"><span class="modal-neo-txt">✦ NEO 4K PRO SERVER ✦</span></div>
+    <h2 class="modal-title t" data-ar="ماذا ستحصل عليه؟" data-en="What You'll Get">ماذا ستحصل عليه؟</h2>
+    <div class="modal-plan-name" id="modalPlanName"></div>
+    <div class="server-info">
+      <div class="server-info-title">
+        <i class="fas fa-server"></i>
+        <span class="t" data-ar="مزايا سيرفر NEO 4K PRO" data-en="NEO 4K PRO Server Features">مزايا سيرفر NEO 4K PRO</span>
+      </div>
+      <div class="server-feats">
+        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="جودة 4K Ultra HD" data-en="4K Ultra HD Quality">جودة 4K Ultra HD</span></div>
+        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="+10,000 قناة" data-en="10,000+ Channels">+10,000 قناة</span></div>
+        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="استقرار 99.9%" data-en="99.9% Uptime">استقرار 99.9%</span></div>
+        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="+50,000 فيلم" data-en="50,000+ Movies">+50,000 فيلم</span></div>
+        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="رياضة مباشرة" data-en="Live Sports">رياضة مباشرة</span></div>
+        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="تفعيل فوري" data-en="Instant Activation">تفعيل فوري</span></div>
+        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم فني 24/7" data-en="24/7 Support">دعم فني 24/7</span></div>
+        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="جميع الأجهزة" data-en="All Devices">جميع الأجهزة</span></div>
+      </div>
+    </div>
+    <div class="modal-notice">
+      <i class="fab fa-telegram"></i>
+      <div>
+        <strong class="t" data-ar="كيف يتم الطلب؟" data-en="How does ordering work?">كيف يتم الطلب؟</strong><br>
+        <span class="t" data-ar="عند الضغط على اطلب الآن ستنتقل مباشرةً إلى بوت تيليغرام الرسمي لإتمام طلبك. العملية سريعة وآمنة!" data-en="Pressing Order Now takes you directly to our official Telegram bot. Fast & secure!">عند الضغط على اطلب الآن ستنتقل مباشرةً إلى بوت تيليغرام الرسمي لإتمام طلبك. العملية سريعة وآمنة!</span>
+      </div>
+    </div>
+    <a href="https://t.me/vynex_IPTV_bot" target="_blank" class="modal-cta" onclick="closeModal()">
+      <i class="fab fa-telegram"></i>
+      <span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
+    </a>
+    <div class="modal-cta-sub"><i class="fab fa-telegram"></i> @vynex_IPTV_bot</div>
+  </div>
+</div>
+
+<script>
+/* ── PARTICLES ── */
+(function(){
+  const c = document.getElementById('particles');
+  const ctx = c.getContext('2d');
+  let W, H, pts = [];
+  function resize(){ W = c.width = innerWidth; H = c.height = innerHeight; }
+  function mkPt(){ return {x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,r:Math.random()*1.4+.4,o:Math.random()*.45+.1}; }
+  function init(){ resize(); pts = Array.from({length:85},mkPt); }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const light = document.documentElement.getAttribute('data-theme')==='light';
+    const col = light ? '110,20,190' : '176,38,255';
+    pts.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;
+      if(p.y<0||p.y>H)p.vy*=-1;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${col},${p.o})`; ctx.fill();
+    });
+    for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.sqrt(dx*dx+dy*dy);
+      if(d<130){ ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y); ctx.strokeStyle=`rgba(${col},${.11*(1-d/130)})`; ctx.lineWidth=.5; ctx.stroke(); }
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);
+  init(); draw();
+})();
+
+/* ── NAVBAR ── */
+window.addEventListener('scroll',()=>{ document.getElementById('navbar').classList.toggle('scrolled',scrollY>30); });
+
+/* ── REVEAL ── */
+const obs = new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);} }); },{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+/* ── THEME ── */
+let isDark = true;
+function toggleTheme(){
+  isDark = !isDark;
+  const t = isDark ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('themeIcon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+}
+
+/* ── LANGUAGE ── */
+let lang = 'ar';
+function toggleLang(){
+  lang = lang === 'ar' ? 'en' : 'ar';
+  const html = document.documentElement;
+  html.setAttribute('data-lang', lang);
+  html.setAttribute('lang', lang);
+  html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+  document.getElementById('langTxt').textContent = lang === 'ar' ? 'EN' : 'AR';
+  document.querySelectorAll('.t').forEach(el=>{ const v = el.getAttribute('data-'+lang); if(v) el.textContent = v; });
+  document.title = lang === 'ar' ? 'VYNEX IPTV — عالم الترفيه بين يديك' : 'VYNEX IPTV — Entertainment at Your Fingertips';
+}
+
+/* ── MODAL ── */
+function openModal(ar, en){
+  document.getElementById('modalPlanName').textContent = '🛒 ' + (lang==='ar'?ar:en);
+  document.querySelectorAll('#modalOverlay .t').forEach(el=>{ const v=el.getAttribute('data-'+lang); if(v) el.textContent=v; });
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+function handleOverlayClick(e){ if(e.target===document.getElementById('modalOverlay')) closeModal(); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>
