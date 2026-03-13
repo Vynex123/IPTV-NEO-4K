@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="dark" data-lang="ar">
+<html lang="en" dir="ltr" data-theme="dark" data-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -544,7 +544,7 @@ function toggleTheme(){
 }
 
 /* ── LANGUAGE ── */
-let lang = 'ar';
+let lang = 'en';
 function toggleLang(){
   lang = lang === 'ar' ? 'en' : 'ar';
   const html = document.documentElement;
@@ -555,15 +555,21 @@ function toggleLang(){
   document.querySelectorAll('.t').forEach(el=>{ const v = el.getAttribute('data-'+lang); if(v) el.textContent = v; });
   document.title = lang === 'ar' ? 'VYNEX IPTV — عالم الترفيه بين يديك' : 'VYNEX IPTV — Entertainment at Your Fingertips';
 }
+// تطبيق اللغة الإنجليزية عند التحميل
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.querySelectorAll('.t').forEach(el=>{ const v = el.getAttribute('data-en'); if(v) el.textContent = v; });
+  document.getElementById('langTxt').textContent = 'AR';
+  document.title = 'VYNEX IPTV — Entertainment at Your Fingertips';
+});
 
 /* ── MODAL ── */
 function openModal(ar, en, planId){
   document.getElementById('modalPlanName').textContent = '🛒 ' + (lang==='ar'?ar:en);
   document.querySelectorAll('#modalOverlay .t').forEach(el=>{ const v=el.getAttribute('data-'+lang); if(v) el.textContent=v; });
-  // ✅ تحديث رابط البوت بالباقة المختارة
+  // ✅ تمرير الباقة واللغة للبوت
   const botBase = 'https://t.me/vynex_IPTV_bot';
   const ctaBtn = document.getElementById('modalCta');
-  ctaBtn.href = planId ? botBase + '?start=plan_' + planId : botBase;
+  ctaBtn.href = planId ? botBase + '?start=plan_' + planId + '_' + lang : botBase;
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
