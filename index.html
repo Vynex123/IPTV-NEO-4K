@@ -256,7 +256,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
       </button>
       <button class="btn-lang" onclick="toggleLang()">
         <i class="fas fa-globe"></i>
-        <span id="langTxt">EN</span>
+        <span id="langTxt">AR</span>
       </button>
       <a href="https://t.me/vynex_IPTV_bot" target="_blank" class="btn-tg">
         <i class="fab fa-telegram"></i>
@@ -291,7 +291,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
       <div class="hstat"><div class="hstat-n">99.9%</div><div class="hstat-l t" data-ar="وقت تشغيل" data-en="Uptime">وقت تشغيل</div></div>
     </div>
     <div class="hero-cta">
-      <button class="btn-primary" onclick="openModal('الاشتراك في VYNEX','Subscribe to VYNEX')">
+      <button class="btn-primary" onclick="openModal('الاشتراك في VYNEX','Subscribe to VYNEX','1month')">
         <i class="fab fa-telegram"></i>
         <span class="t" data-ar="اشترك الآن عبر البوت" data-en="Subscribe via Bot">اشترك الآن عبر البوت</span>
       </button>
@@ -460,39 +460,80 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
 </a>
 
 <!-- MODAL -->
+<style>
+.form-step{display:none}.form-step.active{display:block}
+.order-form-field{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;color:var(--text);font-family:inherit;font-size:.88rem;margin-bottom:.85rem;outline:none;transition:border-color .25s;box-sizing:border-box}
+.order-form-field:focus{border-color:var(--neon)}
+.order-form-field::placeholder{color:var(--muted)}
+.form-label{font-size:.75rem;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-bottom:.3rem;display:block}
+.step-indicator{display:flex;justify-content:center;gap:.5rem;margin-bottom:1.4rem}
+.step-dot{width:8px;height:8px;border-radius:50%;background:var(--border2);transition:background .3s}
+.step-dot.active{background:var(--neon);box-shadow:0 0 8px var(--neon)}
+.modal-cta-outline{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:.9rem;border-radius:50px;background:transparent;color:var(--neon-soft);border:1.5px solid var(--border2);font-size:.92rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:.6rem;transition:all .3s}
+.modal-cta-outline:hover{border-color:var(--neon);box-shadow:var(--glow-sm)}
+.copy-box{background:var(--bg2);border:1px dashed var(--border2);border-radius:12px;padding:1rem;margin-bottom:1rem;font-size:.82rem;color:var(--text2);line-height:1.8}
+</style>
 <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
-  <div class="modal-box">
+  <div class="modal-box" style="max-height:90vh;overflow-y:auto;">
     <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
     <div class="modal-neo-badge"><span class="modal-neo-txt">✦ NEO 4K PRO SERVER ✦</span></div>
-    <h2 class="modal-title t" data-ar="ماذا ستحصل عليه؟" data-en="What You'll Get">ماذا ستحصل عليه؟</h2>
-    <div class="modal-plan-name" id="modalPlanName"></div>
-    <div class="server-info">
-      <div class="server-info-title">
-        <i class="fas fa-server"></i>
-        <span class="t" data-ar="مزايا سيرفر NEO 4K PRO" data-en="NEO 4K PRO Server Features">مزايا سيرفر NEO 4K PRO</span>
-      </div>
-      <div class="server-feats">
-        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="جودة 4K Ultra HD" data-en="4K Ultra HD Quality">جودة 4K Ultra HD</span></div>
-        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="+10,000 قناة" data-en="10,000+ Channels">+10,000 قناة</span></div>
-        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="استقرار 99.9%" data-en="99.9% Uptime">استقرار 99.9%</span></div>
-        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="+50,000 فيلم" data-en="50,000+ Movies">+50,000 فيلم</span></div>
-        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="رياضة مباشرة" data-en="Live Sports">رياضة مباشرة</span></div>
-        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="تفعيل فوري" data-en="Instant Activation">تفعيل فوري</span></div>
-        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم فني 24/7" data-en="24/7 Support">دعم فني 24/7</span></div>
-        <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="جميع الأجهزة" data-en="All Devices">جميع الأجهزة</span></div>
-      </div>
+    <div class="step-indicator">
+      <div class="step-dot active" id="dot1"></div>
+      <div class="step-dot" id="dot2"></div>
+      <div class="step-dot" id="dot3"></div>
     </div>
-    <div class="modal-notice">
-      <i class="fab fa-telegram"></i>
-      <div>
-        <strong class="t" data-ar="كيف يتم الطلب؟" data-en="How does ordering work?">كيف يتم الطلب؟</strong><br>
-        <span class="t" data-ar="عند الضغط على اطلب الآن ستنتقل مباشرةً إلى بوت تيليغرام الرسمي لإتمام طلبك. العملية سريعة وآمنة!" data-en="Pressing Order Now takes you directly to our official Telegram bot. Fast & secure!">عند الضغط على اطلب الآن ستنتقل مباشرةً إلى بوت تيليغرام الرسمي لإتمام طلبك. العملية سريعة وآمنة!</span>
+    <!-- Step 1 -->
+    <div class="form-step active" id="step1">
+      <h2 class="modal-title t" data-ar="الباقة المختارة" data-en="Selected Plan">الباقة المختارة</h2>
+      <div class="modal-plan-name" id="modalPlanName"></div>
+      <div class="server-info" style="margin-bottom:1rem;">
+        <div class="server-feats">
+          <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="جودة 4K Ultra HD" data-en="4K Ultra HD">جودة 4K Ultra HD</span></div>
+          <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="+10,000 قناة" data-en="10,000+ Channels">+10,000 قناة</span></div>
+          <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="استقرار 99.9%" data-en="99.9% Uptime">استقرار 99.9%</span></div>
+          <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="+50,000 فيلم" data-en="50,000+ Movies">+50,000 فيلم</span></div>
+          <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="رياضة مباشرة" data-en="Live Sports">رياضة مباشرة</span></div>
+          <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="تفعيل فوري" data-en="Instant Activation">تفعيل فوري</span></div>
+        </div>
       </div>
+      <button class="modal-cta" onclick="goStep(2)">
+        <i class="fas fa-pen"></i>
+        <span class="t" data-ar="أكمل بيانات الطلب" data-en="Fill Order Details">أكمل بيانات الطلب</span>
+      </button>
     </div>
-    <a href="https://t.me/vynex_IPTV_bot" target="_blank" class="modal-cta" id="modalCta" onclick="closeModal()">
-      <i class="fab fa-telegram"></i>
-      <span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
-    </a>
+    <!-- Step 2 -->
+    <div class="form-step" id="step2">
+      <h2 class="modal-title t" data-ar="بيانات الطلب" data-en="Order Details">بيانات الطلب</h2>
+      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem;" class="t" data-ar="أدخل بياناتك لإرسالها للبوت مباشرة" data-en="Enter your info to send directly to the bot">أدخل بياناتك لإرسالها للبوت مباشرة</p>
+      <label class="form-label t" data-ar="الاسم الكامل *" data-en="Full Name *">الاسم الكامل *</label>
+      <input class="order-form-field" id="f_name" type="text" placeholder="Ahmed Ali">
+      <label class="form-label t" data-ar="البريد الإلكتروني *" data-en="Email *">البريد الإلكتروني *</label>
+      <input class="order-form-field" id="f_email" type="email" placeholder="example@gmail.com">
+      <label class="form-label t" data-ar="الدولة" data-en="Country">الدولة</label>
+      <input class="order-form-field" id="f_country" type="text" placeholder="Algeria">
+      <label class="form-label t" data-ar="نوع الجهاز" data-en="Device Type">نوع الجهاز</label>
+      <input class="order-form-field" id="f_device" type="text" placeholder="Android, Smart TV, iPhone...">
+      <button class="modal-cta" onclick="goStep3()">
+        <i class="fab fa-telegram"></i>
+        <span class="t" data-ar="إرسال للبوت" data-en="Send to Bot">إرسال للبوت</span>
+      </button>
+      <button class="modal-cta-outline" onclick="goStep(1)">
+        <span class="t" data-ar="🔙 رجوع" data-en="🔙 Back">🔙 رجوع</span>
+      </button>
+    </div>
+    <!-- Step 3 -->
+    <div class="form-step" id="step3">
+      <h2 class="modal-title" style="color:var(--green)">✅ <span class="t" data-ar="طلبك جاهز!" data-en="Order Ready!">طلبك جاهز!</span></h2>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:.8rem;" class="t" data-ar="اضغط الزر لفتح البوت وإتمام طلبك:" data-en="Press the button to open bot and complete your order:">اضغط الزر لفتح البوت وإتمام طلبك:</p>
+      <div class="copy-box" id="orderSummaryBox"></div>
+      <a id="finalBotLink" href="#" target="_blank" class="modal-cta" onclick="closeModal()">
+        <i class="fab fa-telegram"></i>
+        <span class="t" data-ar="فتح البوت وإتمام الطلب" data-en="Open Bot & Complete Order">فتح البوت وإتمام الطلب</span>
+      </a>
+      <button class="modal-cta-outline" onclick="goStep(2)">
+        <span class="t" data-ar="✏️ تعديل البيانات" data-en="✏️ Edit Info">✏️ تعديل البيانات</span>
+      </button>
+    </div>
     <div class="modal-cta-sub"><i class="fab fa-telegram"></i> @vynex_IPTV_bot</div>
   </div>
 </div>
@@ -527,6 +568,12 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
   init(); draw();
 })();
 
+/* Apply EN on load */
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.t').forEach(el=>{ const v=el.getAttribute('data-en'); if(v) el.textContent=v; });
+  document.title='VYNEX IPTV — Entertainment at Your Fingertips';
+});
+
 /* ── NAVBAR ── */
 window.addEventListener('scroll',()=>{ document.getElementById('navbar').classList.toggle('scrolled',scrollY>30); });
 
@@ -555,24 +602,50 @@ function toggleLang(){
   document.querySelectorAll('.t').forEach(el=>{ const v = el.getAttribute('data-'+lang); if(v) el.textContent = v; });
   document.title = lang === 'ar' ? 'VYNEX IPTV — عالم الترفيه بين يديك' : 'VYNEX IPTV — Entertainment at Your Fingertips';
 }
-// تطبيق اللغة الإنجليزية عند التحميل
-document.addEventListener('DOMContentLoaded', ()=>{
-  document.querySelectorAll('.t').forEach(el=>{ const v = el.getAttribute('data-en'); if(v) el.textContent = v; });
-  document.getElementById('langTxt').textContent = 'AR';
-  document.title = 'VYNEX IPTV — Entertainment at Your Fingertips';
-});
 
-/* ── MODAL ── */
+/* ── MODAL & FORM ── */
+let currentPlanId = '';
+let currentPlanLabel = '';
+
 function openModal(ar, en, planId){
-  document.getElementById('modalPlanName').textContent = '🛒 ' + (lang==='ar'?ar:en);
+  currentPlanId = planId || '';
+  currentPlanLabel = (lang==='ar'?ar:en);
+  document.getElementById('modalPlanName').textContent = '🛒 ' + currentPlanLabel;
   document.querySelectorAll('#modalOverlay .t').forEach(el=>{ const v=el.getAttribute('data-'+lang); if(v) el.textContent=v; });
-  // ✅ تمرير الباقة واللغة للبوت
-  const botBase = 'https://t.me/vynex_IPTV_bot';
-  const ctaBtn = document.getElementById('modalCta');
-  ctaBtn.href = planId ? botBase + '?start=plan_' + planId + '_' + lang : botBase;
+  goStep(1);
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
+
+function goStep(n){
+  [1,2,3].forEach(i=>{
+    document.getElementById('step'+i).classList.toggle('active', i===n);
+    document.getElementById('dot'+i).classList.toggle('active', i<=n);
+  });
+}
+
+function goStep3(){
+  const name    = document.getElementById('f_name').value.trim();
+  const email   = document.getElementById('f_email').value.trim();
+  const country = document.getElementById('f_country').value.trim();
+  const device  = document.getElementById('f_device').value.trim();
+  if(!name || !email){ alert(lang==='ar'?'الاسم والبريد مطلوبان':'Name and Email are required'); return; }
+
+  const orderData = { plan: currentPlanId, lang: lang, name, email, country, device };
+  const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(orderData)))).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
+  
+  const botLink = 'https://t.me/vynex_IPTV_bot?start=order_' + encoded;
+  document.getElementById('finalBotLink').href = botLink;
+
+  const box = document.getElementById('orderSummaryBox');
+  if(lang==='ar'){
+    box.innerHTML = '<strong>📦 ' + currentPlanLabel + '</strong><br>👤 ' + name + '<br>📧 ' + email + (country?'<br>🌍 '+country:'') + (device?'<br>📱 '+device:'');
+  } else {
+    box.innerHTML = '<strong>📦 ' + currentPlanLabel + '</strong><br>👤 ' + name + '<br>📧 ' + email + (country?'<br>🌍 '+country:'') + (device?'<br>📱 '+device:'');
+  }
+  goStep(3);
+}
+
 function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
 function handleOverlayClick(e){ if(e.target===document.getElementById('modalOverlay')) closeModal(); }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
