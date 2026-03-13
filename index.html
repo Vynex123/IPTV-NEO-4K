@@ -348,7 +348,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
           <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم فني" data-en="Tech Support">دعم فني</span></li>
           <li><i class="fas fa-check-circle"></i><span class="t" data-ar="تفعيل فوري" data-en="Instant Activation">تفعيل فوري</span></li>
         </ul>
-        <button class="btn-order btn-order-trial" onclick="openModal('تجربة 24 ساعة — 2$','24-Hour Trial — $2')">
+        <button class="btn-order btn-order-trial" onclick="openModal('تجربة 24 ساعة — 2$','24-Hour Trial — $2','trial')">
           <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
         </button>
       </div>
@@ -364,7 +364,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
           <li><i class="fas fa-check-circle"></i><span class="t" data-ar="رياضة بث مباشر" data-en="Live Sports">رياضة بث مباشر</span></li>
           <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم فني" data-en="Support">دعم فني</span></li>
         </ul>
-        <button class="btn-order btn-order-outline" onclick="openModal('شهر واحد — 6.99$','1 Month — $6.99')">
+        <button class="btn-order btn-order-outline" onclick="openModal('شهر واحد — 6.99$','1 Month — $6.99','1month')">
           <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
         </button>
       </div>
@@ -382,7 +382,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
           <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم متواصل 24/7" data-en="24/7 Support">دعم متواصل 24/7</span></li>
           <li><i class="fas fa-check-circle"></i><span class="t" data-ar="توفير 30%" data-en="Save 30%">توفير 30%</span></li>
         </ul>
-        <button class="btn-order btn-order-neon" onclick="openModal('3 أشهر — 14.99$','3 Months — $14.99')">
+        <button class="btn-order btn-order-neon" onclick="openModal('3 أشهر — 14.99$','3 Months — $14.99','3months')">
           <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
         </button>
       </div>
@@ -399,7 +399,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
           <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم متواصل 24/7" data-en="24/7 Support">دعم متواصل 24/7</span></li>
           <li><i class="fas fa-check-circle"></i><span class="t" data-ar="توفير 50%" data-en="Save 50%">توفير 50%</span></li>
         </ul>
-        <button class="btn-order btn-order-outline" onclick="openModal('6 أشهر — 22.99$','6 Months — $22.99')">
+        <button class="btn-order btn-order-outline" onclick="openModal('6 أشهر — 22.99$','6 Months — $22.99','6months')">
           <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
         </button>
       </div>
@@ -417,7 +417,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
           <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم VIP 24/7" data-en="VIP Support 24/7">دعم VIP 24/7</span></li>
           <li><i class="fas fa-check-circle"></i><span class="t" data-ar="توفير 60%" data-en="Save 60%">توفير 60%</span></li>
         </ul>
-        <button class="btn-order btn-order-gold" onclick="openModal('سنة كاملة — 35.99$','Full Year — $35.99')">
+        <button class="btn-order btn-order-gold" onclick="openModal('سنة كاملة — 35.99$','Full Year — $35.99','1year')">
           <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
         </button>
       </div>
@@ -489,7 +489,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
         <span class="t" data-ar="عند الضغط على اطلب الآن ستنتقل مباشرةً إلى بوت تيليغرام الرسمي لإتمام طلبك. العملية سريعة وآمنة!" data-en="Pressing Order Now takes you directly to our official Telegram bot. Fast & secure!">عند الضغط على اطلب الآن ستنتقل مباشرةً إلى بوت تيليغرام الرسمي لإتمام طلبك. العملية سريعة وآمنة!</span>
       </div>
     </div>
-    <a href="https://t.me/vynex_IPTV_bot" target="_blank" class="modal-cta" onclick="closeModal()">
+    <a href="https://t.me/vynex_IPTV_bot" target="_blank" class="modal-cta" id="modalCta" onclick="closeModal()">
       <i class="fab fa-telegram"></i>
       <span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
     </a>
@@ -557,9 +557,13 @@ function toggleLang(){
 }
 
 /* ── MODAL ── */
-function openModal(ar, en){
+function openModal(ar, en, planId){
   document.getElementById('modalPlanName').textContent = '🛒 ' + (lang==='ar'?ar:en);
   document.querySelectorAll('#modalOverlay .t').forEach(el=>{ const v=el.getAttribute('data-'+lang); if(v) el.textContent=v; });
+  // ✅ تحديث رابط البوت بالباقة المختارة
+  const botBase = 'https://t.me/vynex_IPTV_bot';
+  const ctaBtn = document.getElementById('modalCta');
+  ctaBtn.href = planId ? botBase + '?start=plan_' + planId : botBase;
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
