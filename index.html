@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="dark" data-lang="en">
+<html lang="ar" dir="rtl" data-theme="dark" data-lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -132,6 +132,22 @@ section{padding:5.5rem 0}
 .feat-title{font-size:1rem;font-weight:700;margin-bottom:.5rem;color:var(--text)}
 .feat-desc{font-size:.84rem;color:var(--muted);line-height:1.75}
 
+/* FAQ SECTION */
+#faq{background:var(--bg);transition:background .4s}
+.faq-grid{display:flex;flex-direction:column;gap:1rem}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .3s}
+.faq-item:hover{border-color:var(--border2);box-shadow:var(--glow-sm)}
+.faq-question{padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:700;font-size:1rem;color:var(--text);transition:background .3s}
+.faq-question i{color:var(--neon-soft);transition:transform .3s}
+.faq-item.active .faq-question i{transform:rotate(180deg)}
+.faq-answer{padding:0 1.5rem 1.5rem 1.5rem;color:var(--text2);line-height:1.8;font-size:.9rem}
+.faq-answer a{color:var(--neon-soft);text-decoration:underline}
+.faq-answer ul, .faq-answer ol{margin-right:1.2rem;margin-top:.5rem}
+.faq-answer li{margin-bottom:.3rem}
+.faq-note{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.2rem;margin-top:2rem;font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.faq-note i{color:var(--neon);font-size:1.2rem}
+@media(max-width:600px){.faq-question{padding:1rem;font-size:.9rem}.faq-answer{padding:0 1rem 1rem 1rem}}
+
 /* PRICING */
 #pricing{background:var(--bg);transition:background .4s}
 .pricing-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.1rem}
@@ -256,9 +272,9 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
       </button>
       <button class="btn-lang" onclick="toggleLang()">
         <i class="fas fa-globe"></i>
-        <span id="langTxt">AR</span>
+        <span id="langTxt">EN</span>
       </button>
-      <a href="https://t.me/vynex_IPTV_bot" target="_blank" class="btn-tg">
+      <a href="https://t.me/IPTV_NEO4K_BOT" target="_blank" class="btn-tg">
         <i class="fab fa-telegram"></i>
         <span class="t" data-ar="تواصل" data-en="Contact">تواصل</span>
       </a>
@@ -285,7 +301,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
       </div>
     </div>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-n">+10K</div><div class="hstat-l t" data-ar="قناة" data-en="Channels">قناة</div></div>
+      <div class="hstat"><div class="hstat-n">+20K</div><div class="hstat-l t" data-ar="قناة" data-en="Channels">قناة</div></div>
       <div class="hstat"><div class="hstat-n">+50K</div><div class="hstat-l t" data-ar="فيلم ومسلسل" data-en="Movies & Series">فيلم ومسلسل</div></div>
       <div class="hstat"><div class="hstat-n">4K</div><div class="hstat-l t" data-ar="جودة الصورة" data-en="Picture Quality">جودة الصورة</div></div>
       <div class="hstat"><div class="hstat-n">99.9%</div><div class="hstat-l t" data-ar="وقت تشغيل" data-en="Uptime">وقت تشغيل</div></div>
@@ -314,12 +330,231 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
       <p class="sec-sub t" data-ar="تقنية متقدمة، محتوى لا نهاية له، واستقرار لا مثيل له على سيرفر NEO 4K PRO" data-en="Advanced tech, endless content, unmatched stability on NEO 4K PRO server">تقنية متقدمة، محتوى لا نهاية له، واستقرار لا مثيل له على سيرفر NEO 4K PRO</p>
     </div>
     <div class="feat-grid">
-      <div class="feat-card rv rv1"><span class="feat-icon">📡</span><div class="feat-title t" data-ar="أكثر من 10,000 قناة" data-en="10,000+ Channels">أكثر من 10,000 قناة</div><p class="feat-desc t" data-ar="قنوات عربية، أوروبية، أمريكية وعالمية بدون انقطاع" data-en="Arabic, European, American & global channels with zero interruption">قنوات عربية، أوروبية، أمريكية وعالمية بدون انقطاع</p></div>
+      <div class="feat-card rv rv1"><span class="feat-icon">📡</span><div class="feat-title t" data-ar="أكثر من 20,000 قناة" data-en="20,000+ Channels">أكثر من 20,000 قناة</div><p class="feat-desc t" data-ar="قنوات عربية، أوروبية، أمريكية وعالمية بدون انقطاع" data-en="Arabic, European, American & global channels with zero interruption">قنوات عربية، أوروبية، أمريكية وعالمية بدون انقطاع</p></div>
       <div class="feat-card rv rv2"><span class="feat-icon">🎬</span><div class="feat-title t" data-ar="جودة 4K Ultra HD" data-en="4K Ultra HD Quality">جودة 4K Ultra HD</div><p class="feat-desc t" data-ar="صورة بلورية عبر سيرفر NEO 4K PRO المتطور بدون تقطع" data-en="Crystal-clear picture via NEO 4K PRO server with zero buffering">صورة بلورية عبر سيرفر NEO 4K PRO المتطور بدون تقطع</p></div>
       <div class="feat-card rv rv3"><span class="feat-icon">📱</span><div class="feat-title t" data-ar="مشاهدة على جميع الأجهزة" data-en="All Devices Supported">مشاهدة على جميع الأجهزة</div><p class="feat-desc t" data-ar="Android، iOS، Smart TV، PC وأكثر — في أي مكان" data-en="Android, iOS, Smart TV, PC and more — anywhere you go">Android، iOS، Smart TV، PC وأكثر — في أي مكان</p></div>
       <div class="feat-card rv rv4"><span class="feat-icon">⚽</span><div class="feat-title t" data-ar="رياضة بث مباشر" data-en="Live Sports">رياضة بث مباشر</div><p class="feat-desc t" data-ar="جميع الدوريات العالمية والبطولات الكبرى بجودة HD" data-en="All world leagues & major tournaments in HD quality">جميع الدوريات العالمية والبطولات الكبرى بجودة HD</p></div>
       <div class="feat-card rv rv5"><span class="feat-icon">⚡</span><div class="feat-title t" data-ar="تفعيل فوري بالبوت" data-en="Instant Bot Activation">تفعيل فوري بالبوت</div><p class="feat-desc t" data-ar="اشترك وتفعّل خدمتك تلقائياً عبر بوت تيليغرام" data-en="Subscribe & activate instantly via Telegram bot">اشترك وتفعّل خدمتك تلقائياً عبر بوت تيليغرام</p></div>
       <div class="feat-card rv rv1"><span class="feat-icon">🛡️</span><div class="feat-title t" data-ar="دعم فني 24/7" data-en="24/7 Tech Support">دعم فني 24/7</div><p class="feat-desc t" data-ar="فريق دعم متاح دائماً لمساعدتك في أي وقت" data-en="Our team is always available whenever you need help">فريق دعم متاح دائماً لمساعدتك في أي وقت</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="hr-neon"></div>
+
+<!-- FAQ SECTION (NEW) -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head rv" style="text-align:center;">
+      <span class="sec-eyebrow">❓ FAQ</span>
+      <h2 class="sec-title t" data-ar="الأسئلة الشائعة" data-en="Frequently Asked Questions">الأسئلة الشائعة</h2>
+      <p class="sec-sub t" style="margin:0 auto;" data-ar="كل ما تريد معرفته عن سيرفر NEO 4K PRO وطريقة العمل" data-en="Everything you need to know about NEO 4K PRO server and how it works">كل ما تريد معرفته عن سيرفر NEO 4K PRO وطريقة العمل</p>
+    </div>
+
+    <div class="faq-grid">
+      <!-- 1. ما هو NEO 4K Pro بالضبط؟ -->
+      <div class="faq-item rv rv1">
+        <div class="faq-question">
+          <span class="t" data-ar="📌 ما هو NEO 4K Pro بالضبط؟" data-en="📌 What exactly is NEO 4K Pro?">📌 ما هو NEO 4K Pro بالضبط؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="NEO 4K Pro هو عبارة عن سيرفر IPTV احترافي. ببساطة، هو ليس تطبيقًا بحد ذاته، بل هو المصدر الذي يأتي منه المحتوى. أنت بحاجة إلى مشغل (مثل TiviMate، IBO Player، أو Smart IPTV) وتفعيل اشتراك لدى موزع معتمد للدخول إلى محتوى هذا السيرفر ومشاهدته." data-en="NEO 4K Pro is a professional IPTV server. Simply put, it is not an application itself, but the source from which the content comes. You need a player (such as TiviMate, IBO Player, or Smart IPTV) and an activation subscription from an authorized reseller to access and watch this server's content.">NEO 4K Pro هو عبارة عن سيرفر IPTV احترافي. ببساطة، هو ليس تطبيقًا بحد ذاته، بل هو المصدر الذي يأتي منه المحتوى. أنت بحاجة إلى مشغل (مثل TiviMate، IBO Player، أو Smart IPTV) وتفعيل اشتراك لدى موزع معتمد للدخول إلى محتوى هذا السيرفر ومشاهدته.</span>
+        </div>
+      </div>
+
+      <!-- 2. المواصفات التقنية -->
+      <div class="faq-item rv rv2">
+        <div class="faq-question">
+          <span class="t" data-ar="📡 المواصفات التقنية: عدد القنوات، جودة البث" data-en="📡 Technical specs: number of channels, streaming quality">📡 المواصفات التقنية: عدد القنوات، جودة البث</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="عدد القنوات: يقدم السيرفر أكثر من 20,000 قناة حية من مختلف أنحاء العالم (العربية، الأوروبية، الآسيوية، الأمريكية).<br>جودة البث: 4K للقنوات الرياضية والأفلام، FHD (1080p) لمعظم القنوات الرئيسية، HD (720p) لباقي القنوات. يتميز السيرفر بثبات الصورة في الجودة العالية دون تقطيع ملحوظ." data-en="Channels: The server offers over 20,000 live channels from around the world (Arabic, European, Asian, American).<br>Quality: 4K for sports channels and movies, FHD (1080p) for most main channels, HD (720p) for others. The server is characterized by stable high-quality picture without noticeable buffering.">عدد القنوات: يقدم السيرفر أكثر من 20,000 قناة حية من مختلف أنحاء العالم (العربية، الأوروبية، الآسيوية، الأمريكية).<br>جودة البث: 4K للقنوات الرياضية والأفلام، FHD (1080p) لمعظم القنوات الرئيسية، HD (720p) لباقي القنوات. يتميز السيرفر بثبات الصورة في الجودة العالية دون تقطيع ملحوظ.</span>
+        </div>
+      </div>
+
+      <!-- 3. المحتوى -->
+      <div class="faq-item rv rv3">
+        <div class="faq-question">
+          <span class="t" data-ar="🎬 المحتوى: هل يشمل أفلام/مسلسلات/رياضة فقط؟" data-en="🎬 Content: Does it include movies/series/sports only?">🎬 المحتوى: هل يشمل أفلام/مسلسلات/رياضة فقط؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="لا، المحتوى شامل جدًا ويتضمن: قنوات تلفزيونية (أخبار، أفلام، مسلسلات، أطفال، وثائقيات)، الرياضة (جميع البطولات عبر قنوات beIN Sports، SSC، Sky Sports)، والأفلام والمسلسلات (VOD) مع مكتبة ضخمة تحتوي على آلاف الأفلام والمسلسلات الأجنبية والعربية والتركية والهندية، ويتم تحديثها باستمرار." data-en="No, the content is very comprehensive and includes: TV channels (news, movies, series, kids, documentaries), sports (all tournaments via beIN Sports, SSC, Sky Sports), and movies & series (VOD) with a huge library containing thousands of foreign, Arabic, Turkish, and Indian movies and series, constantly updated.">لا، المحتوى شامل جدًا ويتضمن: قنوات تلفزيونية (أخبار، أفلام، مسلسلات، أطفال، وثائقيات)، الرياضة (جميع البطولات عبر قنوات beIN Sports، SSC، Sky Sports)، والأفلام والمسلسلات (VOD) مع مكتبة ضخمة تحتوي على آلاف الأفلام والمسلسلات الأجنبية والعربية والتركية والهندية، ويتم تحديثها باستمرار.</span>
+        </div>
+      </div>
+
+      <!-- 4. السيرفرات الاحتياطية -->
+      <div class="faq-item rv rv4">
+        <div class="faq-question">
+          <span class="t" data-ar="🛡️ السيرفرات: هل هو سيرفر واحد أم عدة سيرفرات احتياطية؟" data-en="🛡️ Servers: Is it one server or multiple backup servers?">🛡️ السيرفرات: هل هو سيرفر واحد أم عدة سيرفرات احتياطية؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="غالبًا ما يعتمد نظام سيرفرات متعددة (Multi-CDN). هذا يعني أن المحتوى لا يأتي من مصدر واحد. إذا تعطل سيرفر أو حدثت مشكلة، يقوم النظام تلقائيًا بتحويلك إلى سيرفر آخر احتياطي لضمان استمرارية البث. هذا هو السر وراء شهرة السيرفرات الاحترافية مثل NEO." data-en="It often relies on a multi-server system (Multi-CDN). This means content does not come from a single source. If a server fails or there is an issue, the system automatically switches you to another backup server to ensure uninterrupted streaming. This is the secret behind the fame of professional servers like NEO.">غالبًا ما يعتمد نظام سيرفرات متعددة (Multi-CDN). هذا يعني أن المحتوى لا يأتي من مصدر واحد. إذا تعطل سيرفر أو حدثت مشكلة، يقوم النظام تلقائيًا بتحويلك إلى سيرفر آخر احتياطي لضمان استمرارية البث. هذا هو السر وراء شهرة السيرفرات الاحترافية مثل NEO.</span>
+        </div>
+      </div>
+
+      <!-- 5. الاستقرار -->
+      <div class="faq-item rv rv5">
+        <div class="faq-question">
+          <span class="t" data-ar="📈 الاستقرار: نسبة التشغيل (Uptime)؟" data-en="📈 Stability: Uptime percentage?">📈 الاستقرار: نسبة التشغيل (Uptime)؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="بناءً على سمعة هذا النوع من السيرفرات المدفوعة والاحترافية، فإنها تدّعي عادةً أن نسبة تشغيلها تصل إلى 99.9%. عمليًا، يعتبر NEO 4K Pro من السيرفرات الأكثر استقرارًا في السوق، خصوصًا في أوقات الأحداث الرياضية الكبرى." data-en="Based on the reputation of this type of paid and professional servers, they usually claim an uptime of up to 99.9%. In practice, NEO 4K Pro is considered one of the most stable servers on the market, especially during major sporting events.">بناءً على سمعة هذا النوع من السيرفرات المدفوعة والاحترافية، فإنها تدّعي عادةً أن نسبة تشغيلها تصل إلى 99.9%. عمليًا، يعتبر NEO 4K Pro من السيرفرات الأكثر استقرارًا في السوق، خصوصًا في أوقات الأحداث الرياضية الكبرى.</span>
+        </div>
+      </div>
+
+      <!-- 6. كيف أشترك؟ -->
+      <div class="faq-item rv rv1">
+        <div class="faq-question">
+          <span class="t" data-ar="💳 كيف أشترك؟" data-en="💳 How do I subscribe?">💳 كيف أشترك؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="عملية الاشتراك لدينا بسيطة وسريعة: 1) تصفح موقعنا واختر الباقة المناسبة لك. 2) بعد اختيار الباقة، سيتم تحويلك تلقائيًا إلى بوت التليغرام الخاص بنا لتأكيد الطلب. 3) في البوت، ستختار طريقة الدفع المناسبة. 4) سيقوم أحد المشرفين بالرد عليك فورًا لمتابعة عملية الدفع والتأكد من اكتمالها. 5) بعد تأكيد الدفع، ستصلك فورًا بيانات الدخول (يوزر نيم باسمك، كلمة سر، وروابط التفعيل) بالإضافة إلى رابط تحميل التطبيقات." data-en="Our subscription process is simple and fast: 1) Browse our website and choose the appropriate plan. 2) After selecting the plan, you will be automatically redirected to our Telegram bot to confirm the order. 3) In the bot, you will choose the appropriate payment method. 4) One of the admins will reply to you immediately to follow up on the payment process and confirm completion. 5) After payment confirmation, you will immediately receive login details (username, password, activation links) in addition to the app download link.">عملية الاشتراك لدينا بسيطة وسريعة: 1) تصفح موقعنا واختر الباقة المناسبة لك. 2) بعد اختيار الباقة، سيتم تحويلك تلقائيًا إلى بوت التليغرام الخاص بنا لتأكيد الطلب. 3) في البوت، ستختار طريقة الدفع المناسبة. 4) سيقوم أحد المشرفين بالرد عليك فورًا لمتابعة عملية الدفع والتأكد من اكتمالها. 5) بعد تأكيد الدفع، ستصلك فورًا بيانات الدخول (يوزر نيم باسمك، كلمة سر، وروابط التفعيل) بالإضافة إلى رابط تحميل التطبيقات.</span>
+        </div>
+      </div>
+
+      <!-- 7. كيف أفعّل الاشتراك على جهازي؟ -->
+      <div class="faq-item rv rv2">
+        <div class="faq-question">
+          <span class="t" data-ar="📱 كيف أفعّل الاشتراك على جهازي؟" data-en="📱 How do I activate the subscription on my device?">📱 كيف أفعّل الاشتراك على جهازي؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="بعد الشراء، ستصلك بيانات تحتوي على: اسم المستخدم (USERNAME)، كلمة السر (PASSWORD)، روابط التفعيل (URL). قم بتنزيل أحد التطبيقات المدعومة من موقعنا (أو استخدم أي مشغل IPTV مثل TiviMate، IBO Player، IPTV Smarters) وأدخل البيانات المستلمة. يمكنك تحميل تطبيقات NEO 4K Pro الموصى بها من الرابط التالي: <a href='https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/' target='_blank'>https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/</a>" data-en="After purchase, you will receive data containing: USERNAME, PASSWORD, activation URLs (URL). Download one of the supported apps from our site (or use any IPTV player like TiviMate, IBO Player, IPTV Smarters) and enter the received data. You can download the recommended NEO 4K Pro apps from the following link: <a href='https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/' target='_blank'>https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/</a>">بعد الشراء، ستصلك بيانات تحتوي على: اسم المستخدم (USERNAME)، كلمة السر (PASSWORD)، روابط التفعيل (URL). قم بتنزيل أحد التطبيقات المدعومة من موقعنا (أو استخدم أي مشغل IPTV مثل TiviMate، IBO Player، IPTV Smarters) وأدخل البيانات المستلمة. يمكنك تحميل تطبيقات NEO 4K Pro الموصى بها من الرابط التالي: <a href='https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/' target='_blank'>https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/</a></span>
+        </div>
+      </div>
+
+      <!-- 8. ما الفرق بين الباقات؟ -->
+      <div class="faq-item rv rv3">
+        <div class="faq-question">
+          <span class="t" data-ar="📦 ما الفرق بين الباقات؟" data-en="📦 What is the difference between plans?">📦 ما الفرق بين الباقات؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="نقدم باقات مرنة تناسب احتياجك: شهر واحد (30 يومًا)، 3 أشهر (توفير أكبر)، 6 أشهر (نصف سنة من المتعة)، عام كامل (أفضل قيمة بأقل تكلفة شهرية). جميع الباقات تشمل نفس الجودة (حتى 4K) وعدد القنوات والمكتبة الضخمة (VOD)، والفرق فقط في المدة." data-en="We offer flexible plans to suit your needs: 1 month (30 days), 3 months (more savings), 6 months (half a year of fun), full year (best value at the lowest monthly cost). All plans include the same quality (up to 4K), number of channels, and huge library (VOD), the only difference is the duration.">نقدم باقات مرنة تناسب احتياجك: شهر واحد (30 يومًا)، 3 أشهر (توفير أكبر)، 6 أشهر (نصف سنة من المتعة)، عام كامل (أفضل قيمة بأقل تكلفة شهرية). جميع الباقات تشمل نفس الجودة (حتى 4K) وعدد القنوات والمكتبة الضخمة (VOD)، والفرق فقط في المدة.</span>
+        </div>
+      </div>
+
+      <!-- 9. هل يعمل على Smart TV؟ -->
+      <div class="faq-item rv rv4">
+        <div class="faq-question">
+          <span class="t" data-ar="📺 هل يعمل على Smart TV؟" data-en="📺 Does it work on Smart TV?">📺 هل يعمل على Smart TV؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="نعم، يعمل على جميع الأجهزة الذكية: أندرويد TV / Google TV (مثل Sony، Philips، أو أجهزة مثل Mi Box وChromecast with Google TV)، تلفزيونات سامسونج وLG الذكية عبر تطبيقات مثل Smart IPTV أو SS IPTV، أجهزة الأيفون والآيباد عبر تطبيقات مثل GSE Smart IPTV، الحاسوب عبر برامج مثل VLC أو MyIPTV Player. لمشاهدة سهلة، ننصح باستخدام تطبيقات NEO 4K Pro المتاحة على رابط التحميل أعلاه." data-en="Yes, it works on all smart devices: Android TV / Google TV (like Sony, Philips, or devices like Mi Box and Chromecast with Google TV), Samsung and LG smart TVs via apps like Smart IPTV or SS IPTV, iPhone and iPad via apps like GSE Smart IPTV, computers via programs like VLC or MyIPTV Player. For easy viewing, we recommend using the NEO 4K Pro apps available at the download link above.">نعم، يعمل على جميع الأجهزة الذكية: أندرويد TV / Google TV (مثل Sony، Philips، أو أجهزة مثل Mi Box وChromecast with Google TV)، تلفزيونات سامسونج وLG الذكية عبر تطبيقات مثل Smart IPTV أو SS IPTV، أجهزة الأيفون والآيباد عبر تطبيقات مثل GSE Smart IPTV، الحاسوب عبر برامج مثل VLC أو MyIPTV Player. لمشاهدة سهلة، ننصح باستخدام تطبيقات NEO 4K Pro المتاحة على رابط التحميل أعلاه.</span>
+        </div>
+      </div>
+
+      <!-- 10. هل يوجد تجربة مجانية؟ -->
+      <div class="faq-item rv rv5">
+        <div class="faq-question">
+          <span class="t" data-ar="🆓 هل يوجد تجربة مجانية؟" data-en="🆓 Is there a free trial?">🆓 هل يوجد تجربة مجانية؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="نعم، نقدم لك تجربة مدفوعة مخفضة: يمكنك تجربة الخدمة لمدة محدودة مقابل 2 دولار فقط. الميزة الرائعة: إذا قررت الاشتراك بعد التجربة، فإننا نخصم قيمة الـ 2 دولار من سعر الباقة التي تختارها! 😍 جرب الخدمة أولاً، واستمتع بالجودة، ثم اكمل معنا واسترد قيمة التجربة كخصم." data-en="Yes, we offer a discounted paid trial: you can try the service for a limited time for only $2. The great feature: if you decide to subscribe after the trial, we deduct the $2 from the price of the plan you choose! 😍 Try the service first, enjoy the quality, then continue with us and get the trial value as a discount.">نعم، نقدم لك تجربة مدفوعة مخفضة: يمكنك تجربة الخدمة لمدة محدودة مقابل 2 دولار فقط. الميزة الرائعة: إذا قررت الاشتراك بعد التجربة، فإننا نخصم قيمة الـ 2 دولار من سعر الباقة التي تختارها! 😍 جرب الخدمة أولاً، واستمتع بالجودة، ثم اكمل معنا واسترد قيمة التجربة كخصم.</span>
+        </div>
+      </div>
+
+      <!-- 11. كيف أجدد الاشتراك؟ -->
+      <div class="faq-item rv rv1">
+        <div class="faq-question">
+          <span class="t" data-ar="🔄 كيف أجدد الاشتراك؟" data-en="🔄 How do I renew my subscription?">🔄 كيف أجدد الاشتراك؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="عملية التجديد سهلة جدًا: تواصل معنا عبر بوت التليغرام (نفس القناة التي اشتريت منها). أخبرنا برغبتك في التجديد، وسنقوم بإرسال عرض التجديد مع أي عروض خاصة. قم بالدفع، وسيتم تمديد اشتراكك فورًا مع الحفاظ على بياناتك القديمة." data-en="The renewal process is very easy: contact us via the Telegram bot (the same channel you purchased from). Tell us you want to renew, and we will send you the renewal offer with any special offers. Make the payment, and your subscription will be extended immediately while keeping your old data.">عملية التجديد سهلة جدًا: تواصل معنا عبر بوت التليغرام (نفس القناة التي اشتريت منها). أخبرنا برغبتك في التجديد، وسنقوم بإرسال عرض التجديد مع أي عروض خاصة. قم بالدفع، وسيتم تمديد اشتراكك فورًا مع الحفاظ على بياناتك القديمة.</span>
+        </div>
+      </div>
+
+      <!-- 12. ما هو تطبيق NEO 4K Pro؟ -->
+      <div class="faq-item rv rv2">
+        <div class="faq-question">
+          <span class="t" data-ar="📲 ما هو تطبيق NEO 4K Pro؟" data-en="📲 What is the NEO 4K Pro app?">📲 ما هو تطبيق NEO 4K Pro؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="تطبيق NEO 4K Pro هو مشغل IPTV مخصص وسهل الاستخدام، صمم خصيصًا للعمل مع سيرفر NEO 4K Pro. يوفر واجهة بسيطة، تشغيل سلس، ودعم للبث المباشر والمكتبة (VOD). يمكنك تحميله مباشرة من موقعنا: <a href='https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/' target='_blank'>رابط التحميل</a>" data-en="The NEO 4K Pro app is a dedicated and easy-to-use IPTV player, designed specifically to work with the NEO 4K Pro server. It provides a simple interface, smooth playback, and support for live streaming and library (VOD). You can download it directly from our site: <a href='https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/' target='_blank'>Download link</a>">تطبيق NEO 4K Pro هو مشغل IPTV مخصص وسهل الاستخدام، صمم خصيصًا للعمل مع سيرفر NEO 4K Pro. يوفر واجهة بسيطة، تشغيل سلس، ودعم للبث المباشر والمكتبة (VOD). يمكنك تحميله مباشرة من موقعنا: <a href='https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/' target='_blank'>رابط التحميل</a></span>
+        </div>
+      </div>
+
+      <!-- 13. هل يدعم VPN؟ -->
+      <div class="faq-item rv rv3">
+        <div class="faq-question">
+          <span class="t" data-ar="🔒 هل يدعم VPN؟" data-en="🔒 Does it support VPN?">🔒 هل يدعم VPN؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="نعم، السيرفر متوافق مع جميع خدمات VPN. إذا كنت تواجه مشكلة في الاتصال أو إذا كان مزود الإنترنت لديك يحجب خدمات IPTV، ننصح باستخدام VPN موثوق لتجاوز أي قيود." data-en="Yes, the server is compatible with all VPN services. If you are having connection issues or if your internet provider blocks IPTV services, we recommend using a reliable VPN to bypass any restrictions.">نعم، السيرفر متوافق مع جميع خدمات VPN. إذا كنت تواجه مشكلة في الاتصال أو إذا كان مزود الإنترنت لديك يحجب خدمات IPTV، ننصح باستخدام VPN موثوق لتجاوز أي قيود.</span>
+        </div>
+      </div>
+
+      <!-- 14. لماذا القناة لا تعمل؟ -->
+      <div class="faq-item rv rv4">
+        <div class="faq-question">
+          <span class="t" data-ar="🛠️ لماذا القناة لا تعمل؟ (مشاكل تقنية)" data-en="🛠️ Why is the channel not working? (Technical issues)">🛠️ لماذا القناة لا تعمل؟ (مشاكل تقنية)</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="قد تحدث بعض المشاكل التقنية أحيانًا، وإليك الحلول السريعة: 1) تأكد من اتصالك بالإنترنت – جرب فتح موقع آخر. 2) أعد تشغيل التطبيق والجهاز – غالبًا ما يحل المشكلة. 3) جرب قناة أخرى – إذا كانت المشكلة في قناة واحدة فقط، فقد تكون مشكلة مؤقتة من المصدر. 4) استخدم VPN – قد يكون مزود الخدمة يحجب البث. 5) تواصل معنا – إذا استمرت المشكلة، نحن هنا للمساعدة." data-en="Sometimes technical issues may occur, here are quick solutions: 1) Check your internet connection – try opening another site. 2) Restart the app and device – often solves the problem. 3) Try another channel – if the problem is with only one channel, it might be a temporary issue from the source. 4) Use a VPN – your service provider might be blocking the stream. 5) Contact us – if the problem persists, we are here to help.">قد تحدث بعض المشاكل التقنية أحيانًا، وإليك الحلول السريعة: 1) تأكد من اتصالك بالإنترنت – جرب فتح موقع آخر. 2) أعد تشغيل التطبيق والجهاز – غالبًا ما يحل المشكلة. 3) جرب قناة أخرى – إذا كانت المشكلة في قناة واحدة فقط، فقد تكون مشكلة مؤقتة من المصدر. 4) استخدم VPN – قد يكون مزود الخدمة يحجب البث. 5) تواصل معنا – إذا استمرت المشكلة، نحن هنا للمساعدة.</span>
+        </div>
+      </div>
+
+      <!-- 15. كيف أتواصل مع الدعم الفني؟ -->
+      <div class="faq-item rv rv5">
+        <div class="faq-question">
+          <span class="t" data-ar="📞 كيف أتواصل مع الدعم الفني؟" data-en="📞 How do I contact technical support?">📞 كيف أتواصل مع الدعم الفني؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="أسهل طريقة للتواصل هي عبر بوت التليغرام الذي تم تحويلك إليه عند الطلب، أو عبر مراسلة أحد المشرفين مباشرة. نضمن الرد السريع على استفساراتك وحل أي مشكلة تقنية تواجهها." data-en="The easiest way to contact is via the Telegram bot you were redirected to when ordering, or by directly messaging one of the admins. We guarantee a quick response to your inquiries and solving any technical problem you face.">أسهل طريقة للتواصل هي عبر بوت التليغرام الذي تم تحويلك إليه عند الطلب، أو عبر مراسلة أحد المشرفين مباشرة. نضمن الرد السريع على استفساراتك وحل أي مشكلة تقنية تواجهها.</span>
+        </div>
+      </div>
+
+      <!-- 16. هل يمكنني استخدام الاشتراك على أكثر من جهاز؟ -->
+      <div class="faq-item rv rv1">
+        <div class="faq-question">
+          <span class="t" data-ar="👥 هل يمكنني استخدام الاشتراك على أكثر من جهاز؟" data-en="👥 Can I use the subscription on more than one device?">👥 هل يمكنني استخدام الاشتراك على أكثر من جهاز؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="نعم، حسب الباقة التي تختارها: الباقات العادية تدعم جهازًا واحدًا في نفس الوقت. إذا كنت بحاجة لأكثر من جهاز، يمكنك طلب باقة متعددة الأجهزة (العائلية) – تواصل معنا لتفاصيل الأسعار." data-en="Yes, depending on the plan you choose: regular plans support one device at a time. If you need more than one device, you can request a multi-device (family) plan – contact us for pricing details.">نعم، حسب الباقة التي تختارها: الباقات العادية تدعم جهازًا واحدًا في نفس الوقت. إذا كنت بحاجة لأكثر من جهاز، يمكنك طلب باقة متعددة الأجهزة (العائلية) – تواصل معنا لتفاصيل الأسعار.</span>
+        </div>
+      </div>
+
+      <!-- 17. ما هي طرق الدفع المتوفرة؟ -->
+      <div class="faq-item rv rv2">
+        <div class="faq-question">
+          <span class="t" data-ar="💰 ما هي طرق الدفع المتوفرة؟" data-en="💰 What payment methods are available?">💰 ما هي طرق الدفع المتوفرة؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="نوفر عدة طرق دفع مريحة وآمنة: RedotPay (محفظة إلكترونية عالمية)، PayPal (للمستخدمين الدوليين)، Binance (الدفع بعملة USDT أو غيرها عبر منصة بينانس)، CCP (للجزائريين) – حساب بريد الجزائر للحوالات المحلية. بعد اختيار الباقة، سيتم توجيهك إلى البوت حيث يمكنك اختيار الأنسب لك." data-en="We provide several convenient and secure payment methods: RedotPay (global e-wallet), PayPal (for international users), Binance (pay with USDT or other currencies via Binance), CCP (for Algerians) – Algeria Post account for local transfers. After choosing the plan, you will be directed to the bot where you can choose the most suitable one.">نوفر عدة طرق دفع مريحة وآمنة: RedotPay (محفظة إلكترونية عالمية)، PayPal (للمستخدمين الدوليين)، Binance (الدفع بعملة USDT أو غيرها عبر منصة بينانس)، CCP (للجزائريين) – حساب بريد الجزائر للحوالات المحلية. بعد اختيار الباقة، سيتم توجيهك إلى البوت حيث يمكنك اختيار الأنسب لك.</span>
+        </div>
+      </div>
+
+      <!-- 18. مدة التفعيل -->
+      <div class="faq-item rv rv3">
+        <div class="faq-question">
+          <span class="t" data-ar="⏱️ كم مدة التفعيل بعد الدفع؟" data-en="⏱️ How long does activation take after payment?">⏱️ كم مدة التفعيل بعد الدفع؟</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <span class="t" data-ar="نحرص على أن يكون التفعيل فوريًا أو في أسرع وقت ممكن. بمجرد إتمام الزبون عملية الدفع وإرسال الإشعار، يقوم المشرف بمراجعته وتأكيده، ثم يتم إرسال بيانات التفعيل عبر البوت. الحد الأقصى للانتظار هو 5 دقائق فقط ⏳، ونحن نعمل دائمًا على تقليل هذه المدة. في الغالب، يتم التفعيل خلال دقائق معدودة." data-en="We ensure activation is immediate or as fast as possible. Once the customer completes the payment and sends the notification, the admin reviews and confirms it, then the activation details are sent via the bot. The maximum waiting time is only 5 minutes ⏳, and we are always working to reduce this time. Mostly, activation happens within minutes.">نحرص على أن يكون التفعيل فوريًا أو في أسرع وقت ممكن. بمجرد إتمام الزبون عملية الدفع وإرسال الإشعار، يقوم المشرف بمراجعته وتأكيده، ثم يتم إرسال بيانات التفعيل عبر البوت. الحد الأقصى للانتظار هو 5 دقائق فقط ⏳، ونحن نعمل دائمًا على تقليل هذه المدة. في الغالب، يتم التفعيل خلال دقائق معدودة.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ملاحظة إضافية -->
+    <div class="faq-note rv rv4">
+      <i class="fas fa-info-circle"></i>
+      <span class="t" data-ar="لمزيد من الاستفسارات، تواصل معنا عبر البوت الرسمي @IPTV_NEO4K_BOT" data-en="For further inquiries, contact us via the official bot @IPTV_NEO4K_BOT">لمزيد من الاستفسارات، تواصل معنا عبر البوت الرسمي @IPTV_NEO4K_BOT</span>
     </div>
   </div>
 </section>
@@ -340,7 +575,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
         <div class="plan-name t" style="margin-top:1.4rem;" data-ar="24 ساعة" data-en="24 Hours">24 ساعة</div>
         <div><span class="plan-cur">$</span><span class="plan-price" style="color:var(--orange)">2</span></div>
         <div class="plan-period t" data-ar="ليوم واحد" data-en="For one day">ليوم واحد</div>
-        <div class="trial-limit"><i class="fas fa-bolt"></i><span class="t" data-ar="10 كودات فقط يومياً" data-en="Only 10 daily codes">10 كودات فقط يومياً</span></div>
+        <div class="trial-limit"><i class="fas fa-bolt"></i><span class="t" data-ar="خصم القيمة عند الاشتراك" data-en="Value deducted upon subscription">خصم القيمة عند الاشتراك</span></div>
         <hr class="plan-hr">
         <ul class="plan-feats">
           <li><i class="fas fa-check-circle"></i><span class="t" data-ar="سيرفر NEO 4K PRO" data-en="NEO 4K PRO Server">سيرفر NEO 4K PRO</span></li>
@@ -436,7 +671,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
       <p class="sec-sub t" data-ar="للاشتراك أو الاستفسار تواصل معنا مباشرة عبر بوت تيليغرام" data-en="For subscriptions or inquiries, reach us via our official Telegram bot">للاشتراك أو الاستفسار تواصل معنا مباشرة عبر بوت تيليغرام</p>
     </div>
     <div class="social-row">
-      <a href="https://t.me/vynex_IPTV_bot" target="_blank" class="soc-btn soc-tg rv rv1">
+      <a href="https://t.me/IPTV_NEO4K_BOT" target="_blank" class="soc-btn soc-tg rv rv1">
         <i class="fab fa-telegram" style="font-size:1.15rem;"></i>
         <span class="t" data-ar="بوت تيليغرام VYNEX" data-en="VYNEX Telegram Bot">بوت تيليغرام VYNEX</span>
       </a>
@@ -454,7 +689,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
 </footer>
 
 <!-- FLOAT -->
-<a href="https://t.me/vynex_IPTV_bot" target="_blank" class="float-btn">
+<a href="https://t.me/IPTV_NEO4K_BOT" target="_blank" class="float-btn">
   <i class="fab fa-telegram"></i>
   <span class="t" data-ar="البوت الرسمي" data-en="Official Bot">البوت الرسمي</span>
 </a>
@@ -489,7 +724,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
       <div class="server-info" style="margin-bottom:1rem;">
         <div class="server-feats">
           <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="جودة 4K Ultra HD" data-en="4K Ultra HD">جودة 4K Ultra HD</span></div>
-          <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="+10,000 قناة" data-en="10,000+ Channels">+10,000 قناة</span></div>
+          <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="+20,000 قناة" data-en="20,000+ Channels">+20,000 قناة</span></div>
           <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="استقرار 99.9%" data-en="99.9% Uptime">استقرار 99.9%</span></div>
           <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="+50,000 فيلم" data-en="50,000+ Movies">+50,000 فيلم</span></div>
           <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="رياضة مباشرة" data-en="Live Sports">رياضة مباشرة</span></div>
@@ -534,7 +769,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
         <span class="t" data-ar="✏️ تعديل البيانات" data-en="✏️ Edit Info">✏️ تعديل البيانات</span>
       </button>
     </div>
-    <div class="modal-cta-sub"><i class="fab fa-telegram"></i> @vynex_IPTV_bot</div>
+    <div class="modal-cta-sub"><i class="fab fa-telegram"></i> @IPTV_NEO4K_BOT</div>
   </div>
 </div>
 
@@ -568,20 +803,30 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
   init(); draw();
 })();
 
-/* Apply EN on load */
-document.addEventListener('DOMContentLoaded',()=>{
-  document.querySelectorAll('.t').forEach(el=>{ const v=el.getAttribute('data-en'); if(v) el.textContent=v; });
-  document.title='VYNEX IPTV — Entertainment at Your Fingertips';
+/* FAQ Accordion */
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const item = this.parentNode;
+    item.classList.toggle('active');
+    const answer = item.querySelector('.faq-answer');
+    if (item.classList.contains('active')) {
+      answer.style.display = 'block';
+    } else {
+      answer.style.display = 'none';
+    }
+  });
 });
+// Initially hide all answers
+document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
 
-/* ── NAVBAR ── */
+/* NAVBAR */
 window.addEventListener('scroll',()=>{ document.getElementById('navbar').classList.toggle('scrolled',scrollY>30); });
 
-/* ── REVEAL ── */
+/* REVEAL */
 const obs = new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);} }); },{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
-/* ── THEME ── */
+/* THEME */
 let isDark = true;
 function toggleTheme(){
   isDark = !isDark;
@@ -590,8 +835,8 @@ function toggleTheme(){
   document.getElementById('themeIcon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
 }
 
-/* ── LANGUAGE ── */
-let lang = 'en';
+/* LANGUAGE */
+let lang = 'ar';
 function toggleLang(){
   lang = lang === 'ar' ? 'en' : 'ar';
   const html = document.documentElement;
@@ -603,7 +848,7 @@ function toggleLang(){
   document.title = lang === 'ar' ? 'VYNEX IPTV — عالم الترفيه بين يديك' : 'VYNEX IPTV — Entertainment at Your Fingertips';
 }
 
-/* ── MODAL & FORM ── */
+/* MODAL & FORM */
 let currentPlanId = '';
 let currentPlanLabel = '';
 
@@ -634,7 +879,7 @@ function goStep3(){
   const orderData = { plan: currentPlanId, lang: lang, name, email, country, device };
   const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(orderData)))).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
   
-  const botLink = 'https://t.me/vynex_IPTV_bot?start=order_' + encoded;
+  const botLink = 'https://t.me/IPTV_NEO4K_BOT?start=order_' + encoded;
   document.getElementById('finalBotLink').href = botLink;
 
   const box = document.getElementById('orderSummaryBox');
