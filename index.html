@@ -1,899 +1,480 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="dark" data-lang="ar">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VYNEX IPTV — عالم الترفيه بين يديك</title>
-<meta name="description" content="VYNEX IPTV — NEO 4K PRO Server">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root {
-  --neon:#B026FF; --neon2:#7B00CC; --neon-soft:#D070FF;
-  --gold:#FFD700; --gold2:#FFA500; --green:#00E599; --orange:#FF8C00;
-  --radius:16px;
-  --bg:#07070f; --bg2:#0c0c1a; --bg3:#101020;
-  --card:#0f0f1e; --card-hov:#141430;
-  --border:rgba(176,38,255,.2); --border2:rgba(176,38,255,.5);
-  --text:#eeeeff; --text2:#c5c5dd; --muted:#6868a0;
-  --navbar-bg:rgba(7,7,15,.88); --grid-line:rgba(176,38,255,.03);
-  --glow-sm:0 0 10px rgba(176,38,255,.5),0 0 22px rgba(176,38,255,.22);
-  --glow-md:0 0 16px rgba(176,38,255,.7),0 0 44px rgba(176,38,255,.3),0 0 90px rgba(176,38,255,.1);
-  --gold-glow:0 0 10px rgba(255,215,0,.55),0 0 28px rgba(255,165,0,.28);
-  --font-ar:'Tajawal',sans-serif; --font-en:'Outfit',sans-serif;
-  --font-display:'Space Grotesk','Outfit',sans-serif;
-}
-[data-theme="light"] {
-  --bg:#f2f0ff; --bg2:#e8e4fd; --bg3:#ded9fc;
-  --card:#ffffff; --card-hov:#f0ecff;
-  --border:rgba(120,30,200,.14); --border2:rgba(120,30,200,.38);
-  --text:#1a1030; --text2:#3d2f60; --muted:#7a68a8;
-  --navbar-bg:rgba(242,240,255,.92); --grid-line:rgba(120,30,200,.04);
-  --neon:#8010cc; --neon2:#5500aa; --neon-soft:#9933dd;
-  --glow-sm:0 4px 18px rgba(120,30,200,.18),0 2px 8px rgba(120,30,200,.1);
-  --glow-md:0 6px 30px rgba(120,30,200,.28),0 12px 50px rgba(120,30,200,.14);
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:var(--font-ar);background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;transition:background .4s,color .4s}
-[data-lang="en"] body{font-family:var(--font-en)}
-[data-lang="en"] .logo-text,[data-lang="en"] .sec-title,[data-lang="en"] h1,[data-lang="en"] .plan-price,[data-lang="en"] .hstat-n,[data-lang="en"] .modal-title{font-family:var(--font-display)}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--neon2);border-radius:4px}
-a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:pointer;border:none;background:none}
-section{padding:5.5rem 0}
+<!-- في نهاية BODY، أضف هذا قبل </body> -->
 
-/* BG */
-.bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:60px 60px;transition:background .4s}
-.bg-orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
-.orb1{width:750px;height:750px;background:radial-gradient(circle,rgba(176,38,255,.09),transparent 70%);top:-280px;right:-200px;animation:orbDrift 16s ease-in-out infinite}
-.orb2{width:550px;height:550px;background:radial-gradient(circle,rgba(100,0,180,.08),transparent 70%);bottom:-180px;left:-150px;animation:orbDrift 20s ease-in-out infinite reverse}
-.orb3{width:400px;height:400px;background:radial-gradient(circle,rgba(176,38,255,.05),transparent 70%);top:45%;left:50%;transform:translate(-50%,-50%);animation:orbPulse 8s ease-in-out infinite}
-[data-theme="light"] .orb1{background:radial-gradient(circle,rgba(140,20,230,.06),transparent 70%)}
-[data-theme="light"] .orb2{background:radial-gradient(circle,rgba(100,0,180,.04),transparent 70%)}
-[data-theme="light"] .orb3{background:radial-gradient(circle,rgba(140,20,230,.03),transparent 70%)}
-@keyframes orbDrift{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-30px)}}
-@keyframes orbPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.5}50%{transform:translate(-50%,-50%) scale(1.5);opacity:1}}
-#particles{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.45}
-[data-theme="light"] #particles{opacity:.2}
-.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 1.5rem}
-
-/* NAVBAR */
-.navbar{position:sticky;top:0;z-index:300;padding:.85rem 0;background:var(--navbar-bg);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);transition:box-shadow .3s,background .4s,border-color .4s}
-.navbar.scrolled{box-shadow:0 4px 32px rgba(176,38,255,.1)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.logo{display:flex;align-items:center;gap:.75rem;cursor:pointer;user-select:none}
-.logo-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--neon),var(--neon2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.5rem;font-weight:900;color:#fff;box-shadow:var(--glow-sm);flex-shrink:0;transition:box-shadow .3s}
-.logo:hover .logo-icon{box-shadow:var(--glow-md)}
-.logo-text{font-family:var(--font-display);font-size:1.7rem;font-weight:800;letter-spacing:3px;background:linear-gradient(135deg,var(--text) 0%,var(--neon-soft) 55%,var(--neon) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.logo-server{font-size:.58rem;font-weight:700;letter-spacing:1.8px;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;line-height:1;animation:goldPulse 2.5s ease-in-out infinite}
-@keyframes goldPulse{0%,100%{filter:drop-shadow(0 0 5px rgba(255,215,0,.4))}50%{filter:drop-shadow(0 0 14px rgba(255,215,0,.9))}}
-.nav-controls{display:flex;align-items:center;gap:.55rem}
-.btn-theme{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text2);font-size:.9rem;transition:all .3s}
-.btn-theme:hover{border-color:var(--neon);color:var(--neon);box-shadow:var(--glow-sm)}
-.btn-lang{display:flex;align-items:center;gap:.4rem;background:var(--card);border:1px solid var(--border);color:var(--text2);padding:.42rem .95rem;border-radius:50px;font-size:.8rem;font-weight:700;letter-spacing:.5px;transition:all .3s}
-.btn-lang:hover{border-color:var(--neon);color:var(--neon-soft);box-shadow:var(--glow-sm)}
-.btn-tg{display:flex;align-items:center;gap:.5rem;background:rgba(41,170,225,.12);border:1px solid rgba(41,170,225,.3);color:#29aae1;padding:.42rem 1.15rem;border-radius:50px;font-size:.82rem;font-weight:700;transition:all .3s}
-.btn-tg:hover{background:rgba(41,170,225,.22);box-shadow:0 0 20px rgba(41,170,225,.3)}
-
-/* HERO */
-.hero{padding:9rem 0 6rem;text-align:center;position:relative}
-.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:280px;height:1px;background:linear-gradient(90deg,transparent,var(--neon),transparent);animation:shimmerLine 3s ease-in-out infinite}
-@keyframes shimmerLine{0%,100%{opacity:.4;width:180px}50%{opacity:1;width:380px}}
-.hero-badge{display:inline-flex;align-items:center;gap:.55rem;background:rgba(176,38,255,.08);border:1px solid rgba(176,38,255,.25);border-radius:50px;padding:.38rem 1.2rem;font-size:.73rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--neon-soft);margin-bottom:2.2rem;animation:fadeUp .7s ease both}
-[data-theme="light"] .hero-badge{background:rgba(140,20,220,.06);border-color:rgba(140,20,220,.2)}
-.hero-dot{width:7px;height:7px;background:var(--neon);border-radius:50%;box-shadow:0 0 8px var(--neon);animation:blink 1.8s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
-.hero-title{font-family:var(--font-display);font-size:clamp(2.6rem,7.5vw,5.2rem);font-weight:800;line-height:1.06;margin-bottom:1.4rem;animation:fadeUp .85s ease .1s both;letter-spacing:-1px}
-.hero-title .grad{background:linear-gradient(135deg,var(--neon-soft) 0%,var(--neon) 50%,#5500ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;display:inline-block}
-.hero-title .grad::after{content:attr(data-text);position:absolute;top:0;left:0;background:linear-gradient(135deg,#ff26b0,#ff0066);-webkit-background-clip:text;-webkit-text-fill-color:transparent;clip-path:polygon(0 30%,100% 30%,100% 50%,0 50%);opacity:0;animation:glitch 6s infinite}
-@keyframes glitch{0%,90%,100%{opacity:0;transform:translateX(0)}91%{opacity:.45;transform:translateX(-3px)}92%{opacity:.45;transform:translateX(3px)}93%{opacity:0}}
-.hero-sub{font-size:clamp(.95rem,2vw,1.12rem);color:var(--muted);max-width:600px;margin:0 auto 2.8rem;line-height:1.9;animation:fadeUp .85s ease .22s both;font-weight:400}
-.neo-badge{display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.28);border-radius:10px;padding:.55rem 1.5rem;margin-bottom:3rem;animation:fadeUp .85s ease .3s both;position:relative;overflow:hidden}
-.neo-badge::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,215,0,.12),transparent);animation:sweep 3.5s ease-in-out infinite}
-@keyframes sweep{0%{left:-100%}100%{left:200%}}
-.neo-badge-text{font-family:var(--font-display);font-size:1rem;font-weight:800;letter-spacing:2.5px;background:linear-gradient(135deg,#FFD700,#FFA500,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:goldPulse 2s ease-in-out infinite}
-.neo-badge-sub{font-size:.72rem;color:rgba(255,215,0,.65);letter-spacing:1px}
-.hero-stats{display:flex;justify-content:center;gap:clamp(2rem,5vw,5.5rem);flex-wrap:wrap;animation:fadeUp .85s ease .38s both}
-.hstat{text-align:center;position:relative}
-.hstat::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:24px;height:2px;background:var(--neon);border-radius:1px;opacity:.5}
-.hstat-n{font-family:var(--font-display);font-size:clamp(1.6rem,3.5vw,2.3rem);font-weight:800;background:linear-gradient(135deg,var(--text),var(--neon-soft));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hstat-l{font-size:.72rem;color:var(--muted);letter-spacing:1px;margin-top:.35rem}
-.hero-cta{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:3.2rem;animation:fadeUp .85s ease .48s both}
-.btn-primary{display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,var(--neon),var(--neon2));color:#fff;padding:.9rem 2.2rem;border-radius:50px;font-size:.95rem;font-weight:700;letter-spacing:.5px;box-shadow:0 0 28px rgba(176,38,255,.4);transition:all .3s;border:none;cursor:pointer;position:relative;overflow:hidden}
-.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12),transparent);opacity:0;transition:.3s}
-.btn-primary:hover::before{opacity:1}
-.btn-primary:hover{box-shadow:var(--glow-md);transform:translateY(-3px)}
-.btn-ghost{display:inline-flex;align-items:center;gap:.6rem;background:var(--card);border:1.5px solid var(--border2);color:var(--neon-soft);padding:.9rem 2.2rem;border-radius:50px;font-size:.95rem;font-weight:700;transition:all .3s;cursor:pointer}
-.btn-ghost:hover{border-color:var(--neon);box-shadow:var(--glow-sm);transform:translateY(-3px);background:var(--card-hov)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
-
-/* UTILS */
-.sec-eyebrow{font-size:.68rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--neon);margin-bottom:.65rem;display:block}
-.sec-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:.75rem;line-height:1.15;letter-spacing:-.5px}
-.sec-sub{color:var(--muted);font-size:.95rem;line-height:1.85}
-.sec-head{margin-bottom:3.5rem}
-.hr-neon{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:0}
-
-/* FEATURES */
-#features{background:var(--bg2);transition:background .4s}
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.3rem}
-.feat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.9rem 1.6rem;transition:all .38s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
-.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--neon),transparent);opacity:0;transition:opacity .38s}
-.feat-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(176,38,255,.06),transparent 65%);opacity:0;transition:opacity .38s}
-.feat-card:hover{border-color:var(--border2);transform:translateY(-7px);box-shadow:0 22px 55px rgba(176,38,255,.12)}
-.feat-card:hover::before,.feat-card:hover::after{opacity:1}
-[data-theme="light"] .feat-card{box-shadow:0 2px 16px rgba(120,30,200,.06)}
-[data-theme="light"] .feat-card:hover{box-shadow:0 18px 44px rgba(120,30,200,.12)}
-.feat-icon{font-size:2rem;margin-bottom:1.1rem;display:block}
-.feat-title{font-size:1rem;font-weight:700;margin-bottom:.5rem;color:var(--text)}
-.feat-desc{font-size:.84rem;color:var(--muted);line-height:1.75}
-
-/* FAQ SECTION */
-#faq{background:var(--bg);transition:background .4s}
-.faq-grid{display:flex;flex-direction:column;gap:1rem}
-.faq-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .3s}
-.faq-item:hover{border-color:var(--border2);box-shadow:var(--glow-sm)}
-.faq-question{padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:700;font-size:1rem;color:var(--text);transition:background .3s}
-.faq-question i{color:var(--neon-soft);transition:transform .3s}
-.faq-item.active .faq-question i{transform:rotate(180deg)}
-.faq-answer{padding:0 1.5rem 1.5rem 1.5rem;color:var(--text2);line-height:1.8;font-size:.9rem}
-.faq-answer a{color:var(--neon-soft);text-decoration:underline}
-.faq-answer ul, .faq-answer ol{margin-right:1.2rem;margin-top:.5rem}
-.faq-answer li{margin-bottom:.3rem}
-.faq-note{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.2rem;margin-top:2rem;font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
-.faq-note i{color:var(--neon);font-size:1.2rem}
-@media(max-width:600px){.faq-question{padding:1rem;font-size:.9rem}.faq-answer{padding:0 1rem 1rem 1rem}}
-
-/* PRICING */
-#pricing{background:var(--bg);transition:background .4s}
-.pricing-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.1rem}
-@media(max-width:1040px){.pricing-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:720px){.pricing-grid{grid-template-columns:1fr;max-width:340px;margin:0 auto}}
-.plan{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:1.9rem 1.3rem;text-align:center;position:relative;overflow:hidden;display:flex;flex-direction:column;transition:all .38s cubic-bezier(.4,0,.2,1)}
-.plan:hover{transform:translateY(-9px);box-shadow:0 28px 60px rgba(176,38,255,.14);border-color:var(--border2)}
-[data-theme="light"] .plan{box-shadow:0 2px 20px rgba(120,30,200,.06)}
-[data-theme="light"] .plan:hover{box-shadow:0 22px 50px rgba(120,30,200,.12)}
-.plan.popular{border-color:var(--neon);background:linear-gradient(160deg,var(--card) 0%,rgba(176,38,255,.05) 100%);box-shadow:0 0 0 1px rgba(176,38,255,.18),0 0 45px rgba(176,38,255,.08)}
-.plan.popular:hover{box-shadow:0 0 0 1px var(--neon),var(--glow-md)}
-.plan.gold{border-color:rgba(255,215,0,.35);background:linear-gradient(160deg,var(--card) 0%,rgba(255,165,0,.04) 100%);box-shadow:0 0 0 1px rgba(255,215,0,.12),0 0 35px rgba(255,165,0,.07)}
-.plan.gold:hover{box-shadow:0 0 0 1px rgba(255,215,0,.45),var(--gold-glow)}
-.plan.trial{border-color:rgba(255,140,0,.3)}
-.plan.trial:hover{box-shadow:0 0 32px rgba(255,140,0,.14)}
-.plan-badge{position:absolute;top:0;left:50%;transform:translateX(-50%);padding:.3rem 1rem;border-radius:0 0 11px 11px;font-size:.62rem;font-weight:800;letter-spacing:1px;white-space:nowrap}
-.badge-popular{background:linear-gradient(135deg,var(--neon),var(--neon2));color:#fff}
-.badge-gold{background:linear-gradient(135deg,#b08800,#FFD700);color:#000}
-.badge-trial{background:rgba(255,140,0,.2);color:var(--orange);border:1px solid rgba(255,140,0,.3)}
-.plan-name{font-size:.68rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1.1rem}
-.plan-cur{font-size:.9rem;color:var(--muted);vertical-align:top;margin-top:.6rem;display:inline-block}
-.plan-price{font-family:var(--font-display);font-size:2.8rem;font-weight:800;display:inline-block;line-height:1;color:var(--text)}
-.popular .plan-price{background:linear-gradient(135deg,var(--text),var(--neon-soft));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.gold .plan-price{background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 8px rgba(255,215,0,.35))}
-.plan-period{font-size:.75rem;color:var(--muted);margin:.35rem 0 1.3rem}
-.plan-hr{border:none;border-top:1px solid var(--border);margin-bottom:1.2rem}
-.plan-feats{list-style:none;text-align:right;margin-bottom:1.5rem;flex:1}
-[data-lang="en"] .plan-feats{text-align:left}
-.plan-feats li{display:flex;align-items:flex-start;gap:.45rem;font-size:.78rem;color:var(--muted);margin-bottom:.52rem}
-.plan-feats li i{color:var(--neon);font-size:.62rem;margin-top:.28rem;flex-shrink:0}
-.trial-limit{display:inline-flex;align-items:center;gap:.35rem;background:rgba(255,140,0,.08);border:1px solid rgba(255,140,0,.22);color:var(--orange);font-size:.65rem;font-weight:700;padding:.28rem .7rem;border-radius:20px;margin-bottom:.9rem;letter-spacing:.5px}
-.btn-order{display:flex;align-items:center;justify-content:center;gap:.55rem;width:100%;padding:.82rem 1rem;border-radius:50px;font-size:.85rem;font-weight:700;cursor:pointer;border:none;transition:all .3s;font-family:inherit;letter-spacing:.5px}
-.btn-order-neon{background:linear-gradient(135deg,var(--neon),var(--neon2));color:#fff;box-shadow:0 0 20px rgba(176,38,255,.3)}
-.btn-order-neon:hover{box-shadow:var(--glow-md);transform:translateY(-2px)}
-.btn-order-outline{background:transparent;color:var(--neon-soft);border:1.5px solid var(--border2)}
-.btn-order-outline:hover{border-color:var(--neon);box-shadow:var(--glow-sm);transform:translateY(-2px);background:var(--card-hov)}
-.btn-order-gold{background:transparent;color:var(--gold);border:1.5px solid rgba(255,215,0,.35)}
-.btn-order-gold:hover{border-color:var(--gold);box-shadow:var(--gold-glow);transform:translateY(-2px)}
-.btn-order-trial{background:transparent;color:var(--orange);border:1.5px solid rgba(255,140,0,.3)}
-.btn-order-trial:hover{border-color:var(--orange);box-shadow:0 0 20px rgba(255,140,0,.22);transform:translateY(-2px)}
-
-/* CONTACT */
-#contact{background:var(--bg2);transition:background .4s}
-.soc-btn{display:flex;align-items:center;gap:.65rem;padding:.75rem 1.7rem;border-radius:50px;font-size:.9rem;font-weight:700;transition:all .3s;text-decoration:none}
-.soc-tg{background:rgba(41,170,225,.1);border:1px solid rgba(41,170,225,.3);color:#29aae1}
-.soc-tg:hover{background:rgba(41,170,225,.2);box-shadow:0 0 22px rgba(41,170,225,.3)}
-.social-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:2rem}
-
-/* FOOTER */
-footer{background:var(--bg);border-top:1px solid var(--border);padding:2.8rem 0;text-align:center;transition:background .4s,border-color .4s}
-.foot-logo{font-family:var(--font-display);font-size:1.35rem;font-weight:800;letter-spacing:3px;background:linear-gradient(135deg,var(--text),var(--neon));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
-footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
-
-/* FLOAT */
-.float-btn{position:fixed;bottom:1.5rem;left:1.5rem;z-index:500;display:flex;align-items:center;gap:.55rem;background:linear-gradient(135deg,var(--neon),var(--neon2));color:#fff;padding:.68rem 1.4rem;border-radius:50px;font-size:.82rem;font-weight:700;text-decoration:none;box-shadow:var(--glow-sm);cursor:pointer;animation:floatAnim 3s ease-in-out infinite;transition:box-shadow .3s}
-.float-btn:hover{box-shadow:var(--glow-md)}
-[data-lang="en"] .float-btn{left:auto;right:1.5rem}
-@keyframes floatAnim{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-
-/* REVEAL */
-.rv{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
-.rv.in{opacity:1;transform:translateY(0)}
-.rv1{transition-delay:.08s}.rv2{transition-delay:.17s}.rv3{transition-delay:.26s}.rv4{transition-delay:.35s}.rv5{transition-delay:.44s}
-
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;z-index:900;background:rgba(5,5,15,.88);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
-[data-theme="light"] .modal-overlay{background:rgba(30,10,60,.5)}
-.modal-overlay.open{opacity:1;visibility:visible}
-.modal-box{background:var(--card);border:1px solid var(--border2);border-radius:26px;max-width:500px;width:100%;padding:2.4rem 2.2rem;position:relative;box-shadow:0 0 70px rgba(176,38,255,.18),0 35px 90px rgba(0,0,0,.5);transform:translateY(32px) scale(.97);transition:transform .38s cubic-bezier(.4,0,.2,1)}
-[data-theme="light"] .modal-box{box-shadow:0 0 50px rgba(120,30,200,.14),0 30px 70px rgba(80,30,160,.08)}
-.modal-overlay.open .modal-box{transform:translateY(0) scale(1)}
-.modal-close{position:absolute;top:1rem;left:1rem;background:var(--bg2);border:1px solid var(--border);color:var(--muted);width:34px;height:34px;border-radius:50%;font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s}
-.modal-close:hover{background:rgba(176,38,255,.15);color:var(--text);border-color:var(--border2)}
-.modal-neo-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.3);border-radius:9px;padding:.42rem 1.1rem;margin-bottom:1.3rem}
-.modal-neo-txt{font-family:var(--font-display);font-size:.85rem;font-weight:800;letter-spacing:2px;background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:goldPulse 2s ease-in-out infinite}
-.modal-title{font-family:var(--font-display);font-size:1.55rem;font-weight:800;margin-bottom:.5rem;line-height:1.2;color:var(--text);letter-spacing:-.3px}
-.modal-plan-name{color:var(--neon-soft);font-size:.9rem;font-weight:700;margin-bottom:1.5rem}
-.server-info{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.3rem 1.4rem;margin-bottom:1.5rem}
-.server-info-title{font-size:.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--neon);margin-bottom:1rem;display:flex;align-items:center;gap:.4rem}
-.server-feats{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
-.sf-item{display:flex;align-items:center;gap:.45rem;font-size:.8rem;color:var(--text2)}
-.sf-item i{color:var(--green);font-size:.68rem;flex-shrink:0}
-.modal-notice{background:var(--bg2);border:1px solid var(--border);border-radius:13px;padding:1.05rem 1.15rem;margin-bottom:1.6rem;display:flex;align-items:flex-start;gap:.75rem;font-size:.82rem;color:var(--muted);line-height:1.7}
-.modal-notice i{color:var(--neon-soft);font-size:1.05rem;flex-shrink:0;margin-top:.05rem}
-.modal-notice strong{color:var(--text)}
-.modal-cta{display:flex;align-items:center;justify-content:center;gap:.65rem;width:100%;padding:1.05rem 1.5rem;border-radius:50px;background:linear-gradient(135deg,var(--neon),var(--neon2));color:#fff;font-size:.97rem;font-weight:800;letter-spacing:.5px;border:none;cursor:pointer;box-shadow:0 0 28px rgba(176,38,255,.4);transition:all .3s;text-decoration:none;font-family:inherit}
-.modal-cta:hover{box-shadow:var(--glow-md);transform:translateY(-2px)}
-.modal-cta-sub{text-align:center;margin-top:.9rem;font-size:.74rem;color:var(--muted)}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .hero{padding:5.5rem 0 4rem}
-  .feat-grid{grid-template-columns:1fr 1fr}
-  .server-feats{grid-template-columns:1fr}
-  .modal-box{padding:2rem 1.5rem}
-  .btn-tg span{display:none}
-}
-@media(max-width:480px){.feat-grid{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
-
-<div class="bg-canvas"></div>
-<div class="bg-orb orb1"></div>
-<div class="bg-orb orb2"></div>
-<div class="bg-orb orb3"></div>
-<canvas id="particles"></canvas>
-
-<!-- NAVBAR -->
-<nav class="navbar" id="navbar">
-  <div class="wrap nav-inner">
-    <div class="logo" onclick="document.querySelector('.hero').scrollIntoView({behavior:'smooth'})">
-      <div class="logo-icon">V</div>
-      <div>
-        <span class="logo-text">VYNEX</span>
-        <span class="logo-server">✦ NEO 4K PRO SERVER ✦</span>
-      </div>
-    </div>
-    <div class="nav-controls">
-      <button class="btn-theme" id="themeBtn" onclick="toggleTheme()">
-        <i class="fas fa-sun" id="themeIcon"></i>
-      </button>
-      <button class="btn-lang" onclick="toggleLang()">
-        <i class="fas fa-globe"></i>
-        <span id="langTxt">EN</span>
-      </button>
-      <a href="https://t.me/IPTV_NEO4K_BOT" target="_blank" class="btn-tg">
-        <i class="fab fa-telegram"></i>
-        <span class="t" data-ar="تواصل" data-en="Contact">تواصل</span>
-      </a>
-    </div>
+<!-- Admin Login Overlay -->
+<div class="admin-login-overlay" id="adminLoginOverlay">
+  <div class="admin-box">
+    <h2>🔐 Admin Access</h2>
+    <p>Enter your admin code to access the dashboard</p>
+    <input type="password" class="admin-code-input" id="adminCodeInput" placeholder="••••••••" maxlength="10">
+    <button class="admin-btn" onclick="checkAdminCode()">Access Dashboard</button>
+    <div class="admin-error" id="adminError">Invalid code!</div>
   </div>
-</nav>
+</div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-badge">
-      <span class="hero-dot"></span>
-      <span class="t" data-ar="أفضل سيرفر IPTV في المنطقة" data-en="Best IPTV Server in the Region">أفضل سيرفر IPTV في المنطقة</span>
-    </div>
-    <h1 class="hero-title">
-      <span class="grad" data-text="VYNEX">VYNEX</span><br>
-      <span class="t" data-ar="عالم الترفيه بين يديك" data-en="Entertainment at Your Fingertips">عالم الترفيه بين يديك</span>
-    </h1>
-    <p class="hero-sub t" data-ar="أفلام، مسلسلات، رياضة، قنوات 4K بجودة لا مثيل لها. سيرفر NEO 4K PRO بأعلى استقرار واحترافية." data-en="Movies, series, sports, and 4K channels with unmatched quality. NEO 4K PRO Server with maximum stability.">أفلام، مسلسلات، رياضة، قنوات 4K بجودة لا مثيل لها. سيرفر NEO 4K PRO بأعلى استقرار واحترافية.</p>
-    <div class="neo-badge">
-      <div>
-        <div class="neo-badge-text">✦ NEO 4K PRO SERVER ✦</div>
-        <div class="neo-badge-sub t" data-ar="سيرفر الجيل القادم" data-en="Next Generation Server">سيرفر الجيل القادم</div>
-      </div>
-    </div>
-    <div class="hero-stats">
-      <div class="hstat"><div class="hstat-n">+20K</div><div class="hstat-l t" data-ar="قناة" data-en="Channels">قناة</div></div>
-      <div class="hstat"><div class="hstat-n">+50K</div><div class="hstat-l t" data-ar="فيلم ومسلسل" data-en="Movies & Series">فيلم ومسلسل</div></div>
-      <div class="hstat"><div class="hstat-n">4K</div><div class="hstat-l t" data-ar="جودة الصورة" data-en="Picture Quality">جودة الصورة</div></div>
-      <div class="hstat"><div class="hstat-n">99.9%</div><div class="hstat-l t" data-ar="وقت تشغيل" data-en="Uptime">وقت تشغيل</div></div>
-    </div>
-    <div class="hero-cta">
-      <button class="btn-primary" onclick="openModal('الاشتراك في VYNEX','Subscribe to VYNEX','1month')">
-        <i class="fab fa-telegram"></i>
-        <span class="t" data-ar="اشترك الآن عبر البوت" data-en="Subscribe via Bot">اشترك الآن عبر البوت</span>
-      </button>
-      <button class="btn-ghost" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
-        <i class="fas fa-tags"></i>
-        <span class="t" data-ar="استعرض الباقات" data-en="View Plans">استعرض الباقات</span>
-      </button>
-    </div>
+<!-- Admin Panel Overlay -->
+<div class="admin-panel-overlay" id="adminPanelOverlay">
+  <div class="admin-header">
+    <div class="admin-title">📊 VYNEX Admin Dashboard</div>
+    <button class="admin-close" onclick="closeAdminPanel()"><i class="fas fa-times"></i></button>
   </div>
-</section>
-
-<div class="hr-neon"></div>
-
-<!-- FEATURES -->
-<section id="features">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <span class="sec-eyebrow">✦ VYNEX NEO 4K PRO</span>
-      <h2 class="sec-title t" data-ar="لماذا VYNEX؟" data-en="Why Choose VYNEX?">لماذا VYNEX؟</h2>
-      <p class="sec-sub t" data-ar="تقنية متقدمة، محتوى لا نهاية له، واستقرار لا مثيل له على سيرفر NEO 4K PRO" data-en="Advanced tech, endless content, unmatched stability on NEO 4K PRO server">تقنية متقدمة، محتوى لا نهاية له، واستقرار لا مثيل له على سيرفر NEO 4K PRO</p>
-    </div>
-    <div class="feat-grid">
-      <div class="feat-card rv rv1"><span class="feat-icon">📡</span><div class="feat-title t" data-ar="أكثر من 20,000 قناة" data-en="20,000+ Channels">أكثر من 20,000 قناة</div><p class="feat-desc t" data-ar="قنوات عربية، أوروبية، أمريكية وعالمية بدون انقطاع" data-en="Arabic, European, American & global channels with zero interruption">قنوات عربية، أوروبية، أمريكية وعالمية بدون انقطاع</p></div>
-      <div class="feat-card rv rv2"><span class="feat-icon">🎬</span><div class="feat-title t" data-ar="جودة 4K Ultra HD" data-en="4K Ultra HD Quality">جودة 4K Ultra HD</div><p class="feat-desc t" data-ar="صورة بلورية عبر سيرفر NEO 4K PRO المتطور بدون تقطع" data-en="Crystal-clear picture via NEO 4K PRO server with zero buffering">صورة بلورية عبر سيرفر NEO 4K PRO المتطور بدون تقطع</p></div>
-      <div class="feat-card rv rv3"><span class="feat-icon">📱</span><div class="feat-title t" data-ar="مشاهدة على جميع الأجهزة" data-en="All Devices Supported">مشاهدة على جميع الأجهزة</div><p class="feat-desc t" data-ar="Android، iOS، Smart TV، PC وأكثر — في أي مكان" data-en="Android, iOS, Smart TV, PC and more — anywhere you go">Android، iOS، Smart TV، PC وأكثر — في أي مكان</p></div>
-      <div class="feat-card rv rv4"><span class="feat-icon">⚽</span><div class="feat-title t" data-ar="رياضة بث مباشر" data-en="Live Sports">رياضة بث مباشر</div><p class="feat-desc t" data-ar="جميع الدوريات العالمية والبطولات الكبرى بجودة HD" data-en="All world leagues & major tournaments in HD quality">جميع الدوريات العالمية والبطولات الكبرى بجودة HD</p></div>
-      <div class="feat-card rv rv5"><span class="feat-icon">⚡</span><div class="feat-title t" data-ar="تفعيل فوري بالبوت" data-en="Instant Bot Activation">تفعيل فوري بالبوت</div><p class="feat-desc t" data-ar="اشترك وتفعّل خدمتك تلقائياً عبر بوت تيليغرام" data-en="Subscribe & activate instantly via Telegram bot">اشترك وتفعّل خدمتك تلقائياً عبر بوت تيليغرام</p></div>
-      <div class="feat-card rv rv1"><span class="feat-icon">🛡️</span><div class="feat-title t" data-ar="دعم فني 24/7" data-en="24/7 Tech Support">دعم فني 24/7</div><p class="feat-desc t" data-ar="فريق دعم متاح دائماً لمساعدتك في أي وقت" data-en="Our team is always available whenever you need help">فريق دعم متاح دائماً لمساعدتك في أي وقت</p></div>
-    </div>
-  </div>
-</section>
-
-<div class="hr-neon"></div>
-
-<!-- FAQ SECTION (NEW) -->
-<section id="faq">
-  <div class="wrap">
-    <div class="sec-head rv" style="text-align:center;">
-      <span class="sec-eyebrow">❓ FAQ</span>
-      <h2 class="sec-title t" data-ar="الأسئلة الشائعة" data-en="Frequently Asked Questions">الأسئلة الشائعة</h2>
-      <p class="sec-sub t" style="margin:0 auto;" data-ar="كل ما تريد معرفته عن سيرفر NEO 4K PRO وطريقة العمل" data-en="Everything you need to know about NEO 4K PRO server and how it works">كل ما تريد معرفته عن سيرفر NEO 4K PRO وطريقة العمل</p>
-    </div>
-
-    <div class="faq-grid">
-      <!-- 1. ما هو NEO 4K Pro بالضبط؟ -->
-      <div class="faq-item rv rv1">
-        <div class="faq-question">
-          <span class="t" data-ar="📌 ما هو NEO 4K Pro بالضبط؟" data-en="📌 What exactly is NEO 4K Pro?">📌 ما هو NEO 4K Pro بالضبط؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="NEO 4K Pro هو عبارة عن سيرفر IPTV احترافي. ببساطة، هو ليس تطبيقًا بحد ذاته، بل هو المصدر الذي يأتي منه المحتوى. أنت بحاجة إلى مشغل (مثل TiviMate، IBO Player، أو Smart IPTV) وتفعيل اشتراك لدى موزع معتمد للدخول إلى محتوى هذا السيرفر ومشاهدته." data-en="NEO 4K Pro is a professional IPTV server. Simply put, it is not an application itself, but the source from which the content comes. You need a player (such as TiviMate, IBO Player, or Smart IPTV) and an activation subscription from an authorized reseller to access and watch this server's content.">NEO 4K Pro هو عبارة عن سيرفر IPTV احترافي. ببساطة، هو ليس تطبيقًا بحد ذاته، بل هو المصدر الذي يأتي منه المحتوى. أنت بحاجة إلى مشغل (مثل TiviMate، IBO Player، أو Smart IPTV) وتفعيل اشتراك لدى موزع معتمد للدخول إلى محتوى هذا السيرفر ومشاهدته.</span>
-        </div>
+  <div class="admin-container">
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" id="statNew">0</div>
+        <div class="stat-label">New Orders</div>
       </div>
-
-      <!-- 2. المواصفات التقنية -->
-      <div class="faq-item rv rv2">
-        <div class="faq-question">
-          <span class="t" data-ar="📡 المواصفات التقنية: عدد القنوات، جودة البث" data-en="📡 Technical specs: number of channels, streaming quality">📡 المواصفات التقنية: عدد القنوات، جودة البث</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="عدد القنوات: يقدم السيرفر أكثر من 20,000 قناة حية من مختلف أنحاء العالم (العربية، الأوروبية، الآسيوية، الأمريكية).<br>جودة البث: 4K للقنوات الرياضية والأفلام، FHD (1080p) لمعظم القنوات الرئيسية، HD (720p) لباقي القنوات. يتميز السيرفر بثبات الصورة في الجودة العالية دون تقطيع ملحوظ." data-en="Channels: The server offers over 20,000 live channels from around the world (Arabic, European, Asian, American).<br>Quality: 4K for sports channels and movies, FHD (1080p) for most main channels, HD (720p) for others. The server is characterized by stable high-quality picture without noticeable buffering.">عدد القنوات: يقدم السيرفر أكثر من 20,000 قناة حية من مختلف أنحاء العالم (العربية، الأوروبية، الآسيوية، الأمريكية).<br>جودة البث: 4K للقنوات الرياضية والأفلام، FHD (1080p) لمعظم القنوات الرئيسية، HD (720p) لباقي القنوات. يتميز السيرفر بثبات الصورة في الجودة العالية دون تقطيع ملحوظ.</span>
-        </div>
+      <div class="stat-card">
+        <div class="stat-number" id="statProgress">0</div>
+        <div class="stat-label">In Progress</div>
       </div>
-
-      <!-- 3. المحتوى -->
-      <div class="faq-item rv rv3">
-        <div class="faq-question">
-          <span class="t" data-ar="🎬 المحتوى: هل يشمل أفلام/مسلسلات/رياضة فقط؟" data-en="🎬 Content: Does it include movies/series/sports only?">🎬 المحتوى: هل يشمل أفلام/مسلسلات/رياضة فقط؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="لا، المحتوى شامل جدًا ويتضمن: قنوات تلفزيونية (أخبار، أفلام، مسلسلات، أطفال، وثائقيات)، الرياضة (جميع البطولات عبر قنوات beIN Sports، SSC، Sky Sports)، والأفلام والمسلسلات (VOD) مع مكتبة ضخمة تحتوي على آلاف الأفلام والمسلسلات الأجنبية والعربية والتركية والهندية، ويتم تحديثها باستمرار." data-en="No, the content is very comprehensive and includes: TV channels (news, movies, series, kids, documentaries), sports (all tournaments via beIN Sports, SSC, Sky Sports), and movies & series (VOD) with a huge library containing thousands of foreign, Arabic, Turkish, and Indian movies and series, constantly updated.">لا، المحتوى شامل جدًا ويتضمن: قنوات تلفزيونية (أخبار، أفلام، مسلسلات، أطفال، وثائقيات)، الرياضة (جميع البطولات عبر قنوات beIN Sports، SSC، Sky Sports)، والأفلام والمسلسلات (VOD) مع مكتبة ضخمة تحتوي على آلاف الأفلام والمسلسلات الأجنبية والعربية والتركية والهندية، ويتم تحديثها باستمرار.</span>
-        </div>
+      <div class="stat-card">
+        <div class="stat-number" id="statCompleted">0</div>
+        <div class="stat-label">Completed</div>
       </div>
-
-      <!-- 4. السيرفرات الاحتياطية -->
-      <div class="faq-item rv rv4">
-        <div class="faq-question">
-          <span class="t" data-ar="🛡️ السيرفرات: هل هو سيرفر واحد أم عدة سيرفرات احتياطية؟" data-en="🛡️ Servers: Is it one server or multiple backup servers?">🛡️ السيرفرات: هل هو سيرفر واحد أم عدة سيرفرات احتياطية؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="غالبًا ما يعتمد نظام سيرفرات متعددة (Multi-CDN). هذا يعني أن المحتوى لا يأتي من مصدر واحد. إذا تعطل سيرفر أو حدثت مشكلة، يقوم النظام تلقائيًا بتحويلك إلى سيرفر آخر احتياطي لضمان استمرارية البث. هذا هو السر وراء شهرة السيرفرات الاحترافية مثل NEO." data-en="It often relies on a multi-server system (Multi-CDN). This means content does not come from a single source. If a server fails or there is an issue, the system automatically switches you to another backup server to ensure uninterrupted streaming. This is the secret behind the fame of professional servers like NEO.">غالبًا ما يعتمد نظام سيرفرات متعددة (Multi-CDN). هذا يعني أن المحتوى لا يأتي من مصدر واحد. إذا تعطل سيرفر أو حدثت مشكلة، يقوم النظام تلقائيًا بتحويلك إلى سيرفر آخر احتياطي لضمان استمرارية البث. هذا هو السر وراء شهرة السيرفرات الاحترافية مثل NEO.</span>
-        </div>
-      </div>
-
-      <!-- 5. الاستقرار -->
-      <div class="faq-item rv rv5">
-        <div class="faq-question">
-          <span class="t" data-ar="📈 الاستقرار: نسبة التشغيل (Uptime)؟" data-en="📈 Stability: Uptime percentage?">📈 الاستقرار: نسبة التشغيل (Uptime)؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="بناءً على سمعة هذا النوع من السيرفرات المدفوعة والاحترافية، فإنها تدّعي عادةً أن نسبة تشغيلها تصل إلى 99.9%. عمليًا، يعتبر NEO 4K Pro من السيرفرات الأكثر استقرارًا في السوق، خصوصًا في أوقات الأحداث الرياضية الكبرى." data-en="Based on the reputation of this type of paid and professional servers, they usually claim an uptime of up to 99.9%. In practice, NEO 4K Pro is considered one of the most stable servers on the market, especially during major sporting events.">بناءً على سمعة هذا النوع من السيرفرات المدفوعة والاحترافية، فإنها تدّعي عادةً أن نسبة تشغيلها تصل إلى 99.9%. عمليًا، يعتبر NEO 4K Pro من السيرفرات الأكثر استقرارًا في السوق، خصوصًا في أوقات الأحداث الرياضية الكبرى.</span>
-        </div>
-      </div>
-
-      <!-- 6. كيف أشترك؟ -->
-      <div class="faq-item rv rv1">
-        <div class="faq-question">
-          <span class="t" data-ar="💳 كيف أشترك؟" data-en="💳 How do I subscribe?">💳 كيف أشترك؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="عملية الاشتراك لدينا بسيطة وسريعة: 1) تصفح موقعنا واختر الباقة المناسبة لك. 2) بعد اختيار الباقة، سيتم تحويلك تلقائيًا إلى بوت التليغرام الخاص بنا لتأكيد الطلب. 3) في البوت، ستختار طريقة الدفع المناسبة. 4) سيقوم أحد المشرفين بالرد عليك فورًا لمتابعة عملية الدفع والتأكد من اكتمالها. 5) بعد تأكيد الدفع، ستصلك فورًا بيانات الدخول (يوزر نيم باسمك، كلمة سر، وروابط التفعيل) بالإضافة إلى رابط تحميل التطبيقات." data-en="Our subscription process is simple and fast: 1) Browse our website and choose the appropriate plan. 2) After selecting the plan, you will be automatically redirected to our Telegram bot to confirm the order. 3) In the bot, you will choose the appropriate payment method. 4) One of the admins will reply to you immediately to follow up on the payment process and confirm completion. 5) After payment confirmation, you will immediately receive login details (username, password, activation links) in addition to the app download link.">عملية الاشتراك لدينا بسيطة وسريعة: 1) تصفح موقعنا واختر الباقة المناسبة لك. 2) بعد اختيار الباقة، سيتم تحويلك تلقائيًا إلى بوت التليغرام الخاص بنا لتأكيد الطلب. 3) في البوت، ستختار طريقة الدفع المناسبة. 4) سيقوم أحد المشرفين بالرد عليك فورًا لمتابعة عملية الدفع والتأكد من اكتمالها. 5) بعد تأكيد الدفع، ستصلك فورًا بيانات الدخول (يوزر نيم باسمك، كلمة سر، وروابط التفعيل) بالإضافة إلى رابط تحميل التطبيقات.</span>
-        </div>
-      </div>
-
-      <!-- 7. كيف أفعّل الاشتراك على جهازي؟ -->
-      <div class="faq-item rv rv2">
-        <div class="faq-question">
-          <span class="t" data-ar="📱 كيف أفعّل الاشتراك على جهازي؟" data-en="📱 How do I activate the subscription on my device?">📱 كيف أفعّل الاشتراك على جهازي؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="بعد الشراء، ستصلك بيانات تحتوي على: اسم المستخدم (USERNAME)، كلمة السر (PASSWORD)، روابط التفعيل (URL). قم بتنزيل أحد التطبيقات المدعومة من موقعنا (أو استخدم أي مشغل IPTV مثل TiviMate، IBO Player، IPTV Smarters) وأدخل البيانات المستلمة. يمكنك تحميل تطبيقات NEO 4K Pro الموصى بها من الرابط التالي: <a href='https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/' target='_blank'>https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/</a>" data-en="After purchase, you will receive data containing: USERNAME, PASSWORD, activation URLs (URL). Download one of the supported apps from our site (or use any IPTV player like TiviMate, IBO Player, IPTV Smarters) and enter the received data. You can download the recommended NEO 4K Pro apps from the following link: <a href='https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/' target='_blank'>https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/</a>">بعد الشراء، ستصلك بيانات تحتوي على: اسم المستخدم (USERNAME)، كلمة السر (PASSWORD)، روابط التفعيل (URL). قم بتنزيل أحد التطبيقات المدعومة من موقعنا (أو استخدم أي مشغل IPTV مثل TiviMate، IBO Player، IPTV Smarters) وأدخل البيانات المستلمة. يمكنك تحميل تطبيقات NEO 4K Pro الموصى بها من الرابط التالي: <a href='https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/' target='_blank'>https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/</a></span>
-        </div>
-      </div>
-
-      <!-- 8. ما الفرق بين الباقات؟ -->
-      <div class="faq-item rv rv3">
-        <div class="faq-question">
-          <span class="t" data-ar="📦 ما الفرق بين الباقات؟" data-en="📦 What is the difference between plans?">📦 ما الفرق بين الباقات؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="نقدم باقات مرنة تناسب احتياجك: شهر واحد (30 يومًا)، 3 أشهر (توفير أكبر)، 6 أشهر (نصف سنة من المتعة)، عام كامل (أفضل قيمة بأقل تكلفة شهرية). جميع الباقات تشمل نفس الجودة (حتى 4K) وعدد القنوات والمكتبة الضخمة (VOD)، والفرق فقط في المدة." data-en="We offer flexible plans to suit your needs: 1 month (30 days), 3 months (more savings), 6 months (half a year of fun), full year (best value at the lowest monthly cost). All plans include the same quality (up to 4K), number of channels, and huge library (VOD), the only difference is the duration.">نقدم باقات مرنة تناسب احتياجك: شهر واحد (30 يومًا)، 3 أشهر (توفير أكبر)، 6 أشهر (نصف سنة من المتعة)، عام كامل (أفضل قيمة بأقل تكلفة شهرية). جميع الباقات تشمل نفس الجودة (حتى 4K) وعدد القنوات والمكتبة الضخمة (VOD)، والفرق فقط في المدة.</span>
-        </div>
-      </div>
-
-      <!-- 9. هل يعمل على Smart TV؟ -->
-      <div class="faq-item rv rv4">
-        <div class="faq-question">
-          <span class="t" data-ar="📺 هل يعمل على Smart TV؟" data-en="📺 Does it work on Smart TV?">📺 هل يعمل على Smart TV؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="نعم، يعمل على جميع الأجهزة الذكية: أندرويد TV / Google TV (مثل Sony، Philips، أو أجهزة مثل Mi Box وChromecast with Google TV)، تلفزيونات سامسونج وLG الذكية عبر تطبيقات مثل Smart IPTV أو SS IPTV، أجهزة الأيفون والآيباد عبر تطبيقات مثل GSE Smart IPTV، الحاسوب عبر برامج مثل VLC أو MyIPTV Player. لمشاهدة سهلة، ننصح باستخدام تطبيقات NEO 4K Pro المتاحة على رابط التحميل أعلاه." data-en="Yes, it works on all smart devices: Android TV / Google TV (like Sony, Philips, or devices like Mi Box and Chromecast with Google TV), Samsung and LG smart TVs via apps like Smart IPTV or SS IPTV, iPhone and iPad via apps like GSE Smart IPTV, computers via programs like VLC or MyIPTV Player. For easy viewing, we recommend using the NEO 4K Pro apps available at the download link above.">نعم، يعمل على جميع الأجهزة الذكية: أندرويد TV / Google TV (مثل Sony، Philips، أو أجهزة مثل Mi Box وChromecast with Google TV)، تلفزيونات سامسونج وLG الذكية عبر تطبيقات مثل Smart IPTV أو SS IPTV، أجهزة الأيفون والآيباد عبر تطبيقات مثل GSE Smart IPTV، الحاسوب عبر برامج مثل VLC أو MyIPTV Player. لمشاهدة سهلة، ننصح باستخدام تطبيقات NEO 4K Pro المتاحة على رابط التحميل أعلاه.</span>
-        </div>
-      </div>
-
-      <!-- 10. هل يوجد تجربة مجانية؟ -->
-      <div class="faq-item rv rv5">
-        <div class="faq-question">
-          <span class="t" data-ar="🆓 هل يوجد تجربة مجانية؟" data-en="🆓 Is there a free trial?">🆓 هل يوجد تجربة مجانية؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="نعم، نقدم لك تجربة مدفوعة مخفضة: يمكنك تجربة الخدمة لمدة محدودة مقابل 2 دولار فقط. الميزة الرائعة: إذا قررت الاشتراك بعد التجربة، فإننا نخصم قيمة الـ 2 دولار من سعر الباقة التي تختارها! 😍 جرب الخدمة أولاً، واستمتع بالجودة، ثم اكمل معنا واسترد قيمة التجربة كخصم." data-en="Yes, we offer a discounted paid trial: you can try the service for a limited time for only $2. The great feature: if you decide to subscribe after the trial, we deduct the $2 from the price of the plan you choose! 😍 Try the service first, enjoy the quality, then continue with us and get the trial value as a discount.">نعم، نقدم لك تجربة مدفوعة مخفضة: يمكنك تجربة الخدمة لمدة محدودة مقابل 2 دولار فقط. الميزة الرائعة: إذا قررت الاشتراك بعد التجربة، فإننا نخصم قيمة الـ 2 دولار من سعر الباقة التي تختارها! 😍 جرب الخدمة أولاً، واستمتع بالجودة، ثم اكمل معنا واسترد قيمة التجربة كخصم.</span>
-        </div>
-      </div>
-
-      <!-- 11. كيف أجدد الاشتراك؟ -->
-      <div class="faq-item rv rv1">
-        <div class="faq-question">
-          <span class="t" data-ar="🔄 كيف أجدد الاشتراك؟" data-en="🔄 How do I renew my subscription?">🔄 كيف أجدد الاشتراك؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="عملية التجديد سهلة جدًا: تواصل معنا عبر بوت التليغرام (نفس القناة التي اشتريت منها). أخبرنا برغبتك في التجديد، وسنقوم بإرسال عرض التجديد مع أي عروض خاصة. قم بالدفع، وسيتم تمديد اشتراكك فورًا مع الحفاظ على بياناتك القديمة." data-en="The renewal process is very easy: contact us via the Telegram bot (the same channel you purchased from). Tell us you want to renew, and we will send you the renewal offer with any special offers. Make the payment, and your subscription will be extended immediately while keeping your old data.">عملية التجديد سهلة جدًا: تواصل معنا عبر بوت التليغرام (نفس القناة التي اشتريت منها). أخبرنا برغبتك في التجديد، وسنقوم بإرسال عرض التجديد مع أي عروض خاصة. قم بالدفع، وسيتم تمديد اشتراكك فورًا مع الحفاظ على بياناتك القديمة.</span>
-        </div>
-      </div>
-
-      <!-- 12. ما هو تطبيق NEO 4K Pro؟ -->
-      <div class="faq-item rv rv2">
-        <div class="faq-question">
-          <span class="t" data-ar="📲 ما هو تطبيق NEO 4K Pro؟" data-en="📲 What is the NEO 4K Pro app?">📲 ما هو تطبيق NEO 4K Pro؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="تطبيق NEO 4K Pro هو مشغل IPTV مخصص وسهل الاستخدام، صمم خصيصًا للعمل مع سيرفر NEO 4K Pro. يوفر واجهة بسيطة، تشغيل سلس، ودعم للبث المباشر والمكتبة (VOD). يمكنك تحميله مباشرة من موقعنا: <a href='https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/' target='_blank'>رابط التحميل</a>" data-en="The NEO 4K Pro app is a dedicated and easy-to-use IPTV player, designed specifically to work with the NEO 4K Pro server. It provides a simple interface, smooth playback, and support for live streaming and library (VOD). You can download it directly from our site: <a href='https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/' target='_blank'>Download link</a>">تطبيق NEO 4K Pro هو مشغل IPTV مخصص وسهل الاستخدام، صمم خصيصًا للعمل مع سيرفر NEO 4K Pro. يوفر واجهة بسيطة، تشغيل سلس، ودعم للبث المباشر والمكتبة (VOD). يمكنك تحميله مباشرة من موقعنا: <a href='https://neo4kpro.app/neo-4k-pro-iptv-player-downloads-2/' target='_blank'>رابط التحميل</a></span>
-        </div>
-      </div>
-
-      <!-- 13. هل يدعم VPN؟ -->
-      <div class="faq-item rv rv3">
-        <div class="faq-question">
-          <span class="t" data-ar="🔒 هل يدعم VPN؟" data-en="🔒 Does it support VPN?">🔒 هل يدعم VPN؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="نعم، السيرفر متوافق مع جميع خدمات VPN. إذا كنت تواجه مشكلة في الاتصال أو إذا كان مزود الإنترنت لديك يحجب خدمات IPTV، ننصح باستخدام VPN موثوق لتجاوز أي قيود." data-en="Yes, the server is compatible with all VPN services. If you are having connection issues or if your internet provider blocks IPTV services, we recommend using a reliable VPN to bypass any restrictions.">نعم، السيرفر متوافق مع جميع خدمات VPN. إذا كنت تواجه مشكلة في الاتصال أو إذا كان مزود الإنترنت لديك يحجب خدمات IPTV، ننصح باستخدام VPN موثوق لتجاوز أي قيود.</span>
-        </div>
-      </div>
-
-      <!-- 14. لماذا القناة لا تعمل؟ -->
-      <div class="faq-item rv rv4">
-        <div class="faq-question">
-          <span class="t" data-ar="🛠️ لماذا القناة لا تعمل؟ (مشاكل تقنية)" data-en="🛠️ Why is the channel not working? (Technical issues)">🛠️ لماذا القناة لا تعمل؟ (مشاكل تقنية)</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="قد تحدث بعض المشاكل التقنية أحيانًا، وإليك الحلول السريعة: 1) تأكد من اتصالك بالإنترنت – جرب فتح موقع آخر. 2) أعد تشغيل التطبيق والجهاز – غالبًا ما يحل المشكلة. 3) جرب قناة أخرى – إذا كانت المشكلة في قناة واحدة فقط، فقد تكون مشكلة مؤقتة من المصدر. 4) استخدم VPN – قد يكون مزود الخدمة يحجب البث. 5) تواصل معنا – إذا استمرت المشكلة، نحن هنا للمساعدة." data-en="Sometimes technical issues may occur, here are quick solutions: 1) Check your internet connection – try opening another site. 2) Restart the app and device – often solves the problem. 3) Try another channel – if the problem is with only one channel, it might be a temporary issue from the source. 4) Use a VPN – your service provider might be blocking the stream. 5) Contact us – if the problem persists, we are here to help.">قد تحدث بعض المشاكل التقنية أحيانًا، وإليك الحلول السريعة: 1) تأكد من اتصالك بالإنترنت – جرب فتح موقع آخر. 2) أعد تشغيل التطبيق والجهاز – غالبًا ما يحل المشكلة. 3) جرب قناة أخرى – إذا كانت المشكلة في قناة واحدة فقط، فقد تكون مشكلة مؤقتة من المصدر. 4) استخدم VPN – قد يكون مزود الخدمة يحجب البث. 5) تواصل معنا – إذا استمرت المشكلة، نحن هنا للمساعدة.</span>
-        </div>
-      </div>
-
-      <!-- 15. كيف أتواصل مع الدعم الفني؟ -->
-      <div class="faq-item rv rv5">
-        <div class="faq-question">
-          <span class="t" data-ar="📞 كيف أتواصل مع الدعم الفني؟" data-en="📞 How do I contact technical support?">📞 كيف أتواصل مع الدعم الفني؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="أسهل طريقة للتواصل هي عبر بوت التليغرام الذي تم تحويلك إليه عند الطلب، أو عبر مراسلة أحد المشرفين مباشرة. نضمن الرد السريع على استفساراتك وحل أي مشكلة تقنية تواجهها." data-en="The easiest way to contact is via the Telegram bot you were redirected to when ordering, or by directly messaging one of the admins. We guarantee a quick response to your inquiries and solving any technical problem you face.">أسهل طريقة للتواصل هي عبر بوت التليغرام الذي تم تحويلك إليه عند الطلب، أو عبر مراسلة أحد المشرفين مباشرة. نضمن الرد السريع على استفساراتك وحل أي مشكلة تقنية تواجهها.</span>
-        </div>
-      </div>
-
-      <!-- 16. هل يمكنني استخدام الاشتراك على أكثر من جهاز؟ -->
-      <div class="faq-item rv rv1">
-        <div class="faq-question">
-          <span class="t" data-ar="👥 هل يمكنني استخدام الاشتراك على أكثر من جهاز؟" data-en="👥 Can I use the subscription on more than one device?">👥 هل يمكنني استخدام الاشتراك على أكثر من جهاز؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="نعم، حسب الباقة التي تختارها: الباقات العادية تدعم جهازًا واحدًا في نفس الوقت. إذا كنت بحاجة لأكثر من جهاز، يمكنك طلب باقة متعددة الأجهزة (العائلية) – تواصل معنا لتفاصيل الأسعار." data-en="Yes, depending on the plan you choose: regular plans support one device at a time. If you need more than one device, you can request a multi-device (family) plan – contact us for pricing details.">نعم، حسب الباقة التي تختارها: الباقات العادية تدعم جهازًا واحدًا في نفس الوقت. إذا كنت بحاجة لأكثر من جهاز، يمكنك طلب باقة متعددة الأجهزة (العائلية) – تواصل معنا لتفاصيل الأسعار.</span>
-        </div>
-      </div>
-
-      <!-- 17. ما هي طرق الدفع المتوفرة؟ -->
-      <div class="faq-item rv rv2">
-        <div class="faq-question">
-          <span class="t" data-ar="💰 ما هي طرق الدفع المتوفرة؟" data-en="💰 What payment methods are available?">💰 ما هي طرق الدفع المتوفرة؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="نوفر عدة طرق دفع مريحة وآمنة: RedotPay (محفظة إلكترونية عالمية)، PayPal (للمستخدمين الدوليين)، Binance (الدفع بعملة USDT أو غيرها عبر منصة بينانس)، CCP (للجزائريين) – حساب بريد الجزائر للحوالات المحلية. بعد اختيار الباقة، سيتم توجيهك إلى البوت حيث يمكنك اختيار الأنسب لك." data-en="We provide several convenient and secure payment methods: RedotPay (global e-wallet), PayPal (for international users), Binance (pay with USDT or other currencies via Binance), CCP (for Algerians) – Algeria Post account for local transfers. After choosing the plan, you will be directed to the bot where you can choose the most suitable one.">نوفر عدة طرق دفع مريحة وآمنة: RedotPay (محفظة إلكترونية عالمية)، PayPal (للمستخدمين الدوليين)، Binance (الدفع بعملة USDT أو غيرها عبر منصة بينانس)، CCP (للجزائريين) – حساب بريد الجزائر للحوالات المحلية. بعد اختيار الباقة، سيتم توجيهك إلى البوت حيث يمكنك اختيار الأنسب لك.</span>
-        </div>
-      </div>
-
-      <!-- 18. مدة التفعيل -->
-      <div class="faq-item rv rv3">
-        <div class="faq-question">
-          <span class="t" data-ar="⏱️ كم مدة التفعيل بعد الدفع؟" data-en="⏱️ How long does activation take after payment?">⏱️ كم مدة التفعيل بعد الدفع؟</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <span class="t" data-ar="نحرص على أن يكون التفعيل فوريًا أو في أسرع وقت ممكن. بمجرد إتمام الزبون عملية الدفع وإرسال الإشعار، يقوم المشرف بمراجعته وتأكيده، ثم يتم إرسال بيانات التفعيل عبر البوت. الحد الأقصى للانتظار هو 5 دقائق فقط ⏳، ونحن نعمل دائمًا على تقليل هذه المدة. في الغالب، يتم التفعيل خلال دقائق معدودة." data-en="We ensure activation is immediate or as fast as possible. Once the customer completes the payment and sends the notification, the admin reviews and confirms it, then the activation details are sent via the bot. The maximum waiting time is only 5 minutes ⏳, and we are always working to reduce this time. Mostly, activation happens within minutes.">نحرص على أن يكون التفعيل فوريًا أو في أسرع وقت ممكن. بمجرد إتمام الزبون عملية الدفع وإرسال الإشعار، يقوم المشرف بمراجعته وتأكيده، ثم يتم إرسال بيانات التفعيل عبر البوت. الحد الأقصى للانتظار هو 5 دقائق فقط ⏳، ونحن نعمل دائمًا على تقليل هذه المدة. في الغالب، يتم التفعيل خلال دقائق معدودة.</span>
-        </div>
+      <div class="stat-card">
+        <div class="stat-number" id="statTotal">0</div>
+        <div class="stat-label">Total Orders</div>
       </div>
     </div>
-
-    <!-- ملاحظة إضافية -->
-    <div class="faq-note rv rv4">
-      <i class="fas fa-info-circle"></i>
-      <span class="t" data-ar="لمزيد من الاستفسارات، تواصل معنا عبر البوت الرسمي @IPTV_NEO4K_BOT" data-en="For further inquiries, contact us via the official bot @IPTV_NEO4K_BOT">لمزيد من الاستفسارات، تواصل معنا عبر البوت الرسمي @IPTV_NEO4K_BOT</span>
+    
+    <!-- Search -->
+    <input type="text" class="order-search" id="orderSearch" placeholder="🔍 Search by ticket number..." onkeyup="searchOrders()">
+    
+    <!-- Tabs -->
+    <div class="admin-tabs">
+      <div class="admin-tab active" onclick="filterOrders('all')">All <span class="count" id="tabAll">0</span></div>
+      <div class="admin-tab" onclick="filterOrders('new')">🔴 New <span class="count" id="tabNew">0</span></div>
+      <div class="admin-tab" onclick="filterOrders('progress')">🟡 In Progress <span class="count" id="tabProgress">0</span></div>
+      <div class="admin-tab" onclick="filterOrders('completed')">🟢 Completed <span class="count" id="tabCompleted">0</span></div>
     </div>
-  </div>
-</section>
-
-<div class="hr-neon"></div>
-
-<!-- PRICING -->
-<section id="pricing">
-  <div class="wrap">
-    <div class="sec-head rv" style="text-align:center;">
-      <span class="sec-eyebrow">💎 PLANS</span>
-      <h2 class="sec-title t" data-ar="اختر باقتك" data-en="Choose Your Plan">اختر باقتك</h2>
-      <p class="sec-sub t" style="margin:0 auto;" data-ar="جميع الباقات تشمل سيرفر NEO 4K PRO • تفعيل فوري عبر البوت" data-en="All plans include NEO 4K PRO server • Instant bot activation">جميع الباقات تشمل سيرفر NEO 4K PRO • تفعيل فوري عبر البوت</p>
+    
+    <!-- Orders Grid -->
+    <div class="orders-grid" id="ordersGrid">
+      <!-- Orders will be loaded here -->
     </div>
-    <div class="pricing-grid">
-      <div class="plan trial rv rv1">
-        <div class="plan-badge badge-trial">⚡ <span class="t" data-ar="تجربة" data-en="Trial">تجربة</span></div>
-        <div class="plan-name t" style="margin-top:1.4rem;" data-ar="24 ساعة" data-en="24 Hours">24 ساعة</div>
-        <div><span class="plan-cur">$</span><span class="plan-price" style="color:var(--orange)">2</span></div>
-        <div class="plan-period t" data-ar="ليوم واحد" data-en="For one day">ليوم واحد</div>
-        <div class="trial-limit"><i class="fas fa-bolt"></i><span class="t" data-ar="خصم القيمة عند الاشتراك" data-en="Value deducted upon subscription">خصم القيمة عند الاشتراك</span></div>
-        <hr class="plan-hr">
-        <ul class="plan-feats">
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="سيرفر NEO 4K PRO" data-en="NEO 4K PRO Server">سيرفر NEO 4K PRO</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="جميع القنوات" data-en="All Channels">جميع القنوات</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم فني" data-en="Tech Support">دعم فني</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="تفعيل فوري" data-en="Instant Activation">تفعيل فوري</span></li>
-        </ul>
-        <button class="btn-order btn-order-trial" onclick="openModal('تجربة 24 ساعة — 2$','24-Hour Trial — $2','trial')">
-          <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
-        </button>
-      </div>
-      <div class="plan rv rv2">
-        <div class="plan-name t" data-ar="شهر واحد" data-en="1 Month">شهر واحد</div>
-        <div><span class="plan-cur">$</span><span class="plan-price">6.99</span></div>
-        <div class="plan-period t" data-ar="30 يوم" data-en="30 days">30 يوم</div>
-        <hr class="plan-hr">
-        <ul class="plan-feats">
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="سيرفر NEO 4K PRO" data-en="NEO 4K PRO Server">سيرفر NEO 4K PRO</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="آلاف القنوات" data-en="Thousands of Channels">آلاف القنوات</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="أفلام ومسلسلات" data-en="Movies & Series">أفلام ومسلسلات</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="رياضة بث مباشر" data-en="Live Sports">رياضة بث مباشر</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم فني" data-en="Support">دعم فني</span></li>
-        </ul>
-        <button class="btn-order btn-order-outline" onclick="openModal('شهر واحد — 6.99$','1 Month — $6.99','1month')">
-          <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
-        </button>
-      </div>
-      <div class="plan popular rv rv3">
-        <div class="plan-badge badge-popular">⭐ <span class="t" data-ar="الأكثر طلباً" data-en="Most Popular">الأكثر طلباً</span></div>
-        <div class="plan-name t" style="margin-top:1.4rem;" data-ar="3 أشهر" data-en="3 Months">3 أشهر</div>
-        <div><span class="plan-cur">$</span><span class="plan-price">14.99</span></div>
-        <div class="plan-period t" data-ar="3 أشهر • وفّر 30%" data-en="3 months • Save 30%">3 أشهر • وفّر 30%</div>
-        <hr class="plan-hr">
-        <ul class="plan-feats">
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="سيرفر NEO 4K PRO" data-en="NEO 4K PRO Server">سيرفر NEO 4K PRO</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="آلاف القنوات" data-en="Thousands of Channels">آلاف القنوات</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="أفلام ومسلسلات" data-en="Movies & Series">أفلام ومسلسلات</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="رياضة بث مباشر" data-en="Live Sports">رياضة بث مباشر</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم متواصل 24/7" data-en="24/7 Support">دعم متواصل 24/7</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="توفير 30%" data-en="Save 30%">توفير 30%</span></li>
-        </ul>
-        <button class="btn-order btn-order-neon" onclick="openModal('3 أشهر — 14.99$','3 Months — $14.99','3months')">
-          <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
-        </button>
-      </div>
-      <div class="plan rv rv4">
-        <div class="plan-name t" data-ar="6 أشهر" data-en="6 Months">6 أشهر</div>
-        <div><span class="plan-cur">$</span><span class="plan-price">22.99</span></div>
-        <div class="plan-period t" data-ar="6 أشهر • وفّر 50%" data-en="6 months • Save 50%">6 أشهر • وفّر 50%</div>
-        <hr class="plan-hr">
-        <ul class="plan-feats">
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="سيرفر NEO 4K PRO" data-en="NEO 4K PRO Server">سيرفر NEO 4K PRO</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="آلاف القنوات" data-en="Thousands of Channels">آلاف القنوات</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="أفلام ومسلسلات" data-en="Movies & Series">أفلام ومسلسلات</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="رياضة بث مباشر" data-en="Live Sports">رياضة بث مباشر</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم متواصل 24/7" data-en="24/7 Support">دعم متواصل 24/7</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="توفير 50%" data-en="Save 50%">توفير 50%</span></li>
-        </ul>
-        <button class="btn-order btn-order-outline" onclick="openModal('6 أشهر — 22.99$','6 Months — $22.99','6months')">
-          <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
-        </button>
-      </div>
-      <div class="plan gold rv rv5">
-        <div class="plan-badge badge-gold">🏆 <span class="t" data-ar="أفضل عرض" data-en="Best Value">أفضل عرض</span></div>
-        <div class="plan-name t" style="margin-top:1.4rem;" data-ar="سنة كاملة" data-en="Full Year">سنة كاملة</div>
-        <div><span class="plan-cur">$</span><span class="plan-price">35.99</span></div>
-        <div class="plan-period t" data-ar="12 شهر • وفّر 60%" data-en="12 months • Save 60%">12 شهر • وفّر 60%</div>
-        <hr class="plan-hr">
-        <ul class="plan-feats">
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="سيرفر NEO 4K PRO" data-en="NEO 4K PRO Server">سيرفر NEO 4K PRO</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="آلاف القنوات" data-en="Thousands of Channels">آلاف القنوات</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="أفلام ومسلسلات" data-en="Movies & Series">أفلام ومسلسلات</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="رياضة بث مباشر" data-en="Live Sports">رياضة بث مباشر</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="دعم VIP 24/7" data-en="VIP Support 24/7">دعم VIP 24/7</span></li>
-          <li><i class="fas fa-check-circle"></i><span class="t" data-ar="توفير 60%" data-en="Save 60%">توفير 60%</span></li>
-        </ul>
-        <button class="btn-order btn-order-gold" onclick="openModal('سنة كاملة — 35.99$','Full Year — $35.99','1year')">
-          <i class="fab fa-telegram"></i><span class="t" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="hr-neon"></div>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="wrap" style="text-align:center;">
-    <div class="sec-head rv">
-      <span class="sec-eyebrow">📲 <span class="t" data-ar="تواصل معنا" data-en="Get In Touch">تواصل معنا</span></span>
-      <h2 class="sec-title t" data-ar="نحن هنا لمساعدتك" data-en="We're Here to Help">نحن هنا لمساعدتك</h2>
-      <p class="sec-sub t" data-ar="للاشتراك أو الاستفسار تواصل معنا مباشرة عبر بوت تيليغرام" data-en="For subscriptions or inquiries, reach us via our official Telegram bot">للاشتراك أو الاستفسار تواصل معنا مباشرة عبر بوت تيليغرام</p>
-    </div>
-    <div class="social-row">
-      <a href="https://t.me/IPTV_NEO4K_BOT" target="_blank" class="soc-btn soc-tg rv rv1">
-        <i class="fab fa-telegram" style="font-size:1.15rem;"></i>
-        <span class="t" data-ar="بوت تيليغرام VYNEX" data-en="VYNEX Telegram Bot">بوت تيليغرام VYNEX</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="wrap">
-    <div class="foot-logo">VYNEX IPTV</div>
-    <p>✦ NEO 4K PRO SERVER ✦</p>
-    <p style="margin-top:.45rem;">© 2025 VYNEX IPTV — <span class="t" data-ar="جميع الحقوق محفوظة" data-en="All Rights Reserved">جميع الحقوق محفوظة</span></p>
-  </div>
-</footer>
-
-<!-- FLOAT -->
-<a href="https://t.me/IPTV_NEO4K_BOT" target="_blank" class="float-btn">
-  <i class="fab fa-telegram"></i>
-  <span class="t" data-ar="البوت الرسمي" data-en="Official Bot">البوت الرسمي</span>
-</a>
-
-<!-- MODAL -->
-<style>
-.form-step{display:none}.form-step.active{display:block}
-.order-form-field{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;color:var(--text);font-family:inherit;font-size:.88rem;margin-bottom:.85rem;outline:none;transition:border-color .25s;box-sizing:border-box}
-.order-form-field:focus{border-color:var(--neon)}
-.order-form-field::placeholder{color:var(--muted)}
-.form-label{font-size:.75rem;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-bottom:.3rem;display:block}
-.step-indicator{display:flex;justify-content:center;gap:.5rem;margin-bottom:1.4rem}
-.step-dot{width:8px;height:8px;border-radius:50%;background:var(--border2);transition:background .3s}
-.step-dot.active{background:var(--neon);box-shadow:0 0 8px var(--neon)}
-.modal-cta-outline{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:.9rem;border-radius:50px;background:transparent;color:var(--neon-soft);border:1.5px solid var(--border2);font-size:.92rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:.6rem;transition:all .3s}
-.modal-cta-outline:hover{border-color:var(--neon);box-shadow:var(--glow-sm)}
-.copy-box{background:var(--bg2);border:1px dashed var(--border2);border-radius:12px;padding:1rem;margin-bottom:1rem;font-size:.82rem;color:var(--text2);line-height:1.8}
-</style>
-<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
-  <div class="modal-box" style="max-height:90vh;overflow-y:auto;">
-    <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
-    <div class="modal-neo-badge"><span class="modal-neo-txt">✦ NEO 4K PRO SERVER ✦</span></div>
-    <div class="step-indicator">
-      <div class="step-dot active" id="dot1"></div>
-      <div class="step-dot" id="dot2"></div>
-      <div class="step-dot" id="dot3"></div>
-    </div>
-    <!-- Step 1 -->
-    <div class="form-step active" id="step1">
-      <h2 class="modal-title t" data-ar="الباقة المختارة" data-en="Selected Plan">الباقة المختارة</h2>
-      <div class="modal-plan-name" id="modalPlanName"></div>
-      <div class="server-info" style="margin-bottom:1rem;">
-        <div class="server-feats">
-          <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="جودة 4K Ultra HD" data-en="4K Ultra HD">جودة 4K Ultra HD</span></div>
-          <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="+20,000 قناة" data-en="20,000+ Channels">+20,000 قناة</span></div>
-          <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="استقرار 99.9%" data-en="99.9% Uptime">استقرار 99.9%</span></div>
-          <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="+50,000 فيلم" data-en="50,000+ Movies">+50,000 فيلم</span></div>
-          <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="رياضة مباشرة" data-en="Live Sports">رياضة مباشرة</span></div>
-          <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="تفعيل فوري" data-en="Instant Activation">تفعيل فوري</span></div>
-        </div>
-      </div>
-      <button class="modal-cta" onclick="goStep(2)">
-        <i class="fas fa-pen"></i>
-        <span class="t" data-ar="أكمل بيانات الطلب" data-en="Fill Order Details">أكمل بيانات الطلب</span>
-      </button>
-    </div>
-    <!-- Step 2 -->
-    <div class="form-step" id="step2">
-      <h2 class="modal-title t" data-ar="بيانات الطلب" data-en="Order Details">بيانات الطلب</h2>
-      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem;" class="t" data-ar="أدخل بياناتك لإرسالها للبوت مباشرة" data-en="Enter your info to send directly to the bot">أدخل بياناتك لإرسالها للبوت مباشرة</p>
-      <label class="form-label t" data-ar="الاسم الكامل *" data-en="Full Name *">الاسم الكامل *</label>
-      <input class="order-form-field" id="f_name" type="text" placeholder="Ahmed Ali">
-      <label class="form-label t" data-ar="البريد الإلكتروني *" data-en="Email *">البريد الإلكتروني *</label>
-      <input class="order-form-field" id="f_email" type="email" placeholder="example@gmail.com">
-      <label class="form-label t" data-ar="الدولة" data-en="Country">الدولة</label>
-      <input class="order-form-field" id="f_country" type="text" placeholder="Algeria">
-      <label class="form-label t" data-ar="نوع الجهاز" data-en="Device Type">نوع الجهاز</label>
-      <input class="order-form-field" id="f_device" type="text" placeholder="Android, Smart TV, iPhone...">
-      <button class="modal-cta" onclick="goStep3()">
-        <i class="fab fa-telegram"></i>
-        <span class="t" data-ar="إرسال للبوت" data-en="Send to Bot">إرسال للبوت</span>
-      </button>
-      <button class="modal-cta-outline" onclick="goStep(1)">
-        <span class="t" data-ar="🔙 رجوع" data-en="🔙 Back">🔙 رجوع</span>
-      </button>
-    </div>
-    <!-- Step 3 -->
-    <div class="form-step" id="step3">
-      <h2 class="modal-title" style="color:var(--green)">✅ <span class="t" data-ar="طلبك جاهز!" data-en="Order Ready!">طلبك جاهز!</span></h2>
-      <p style="font-size:.82rem;color:var(--muted);margin-bottom:.8rem;" class="t" data-ar="اضغط الزر لفتح البوت وإتمام طلبك:" data-en="Press the button to open bot and complete your order:">اضغط الزر لفتح البوت وإتمام طلبك:</p>
-      <div class="copy-box" id="orderSummaryBox"></div>
-      <a id="finalBotLink" href="#" target="_blank" class="modal-cta" onclick="closeModal()">
-        <i class="fab fa-telegram"></i>
-        <span class="t" data-ar="فتح البوت وإتمام الطلب" data-en="Open Bot & Complete Order">فتح البوت وإتمام الطلب</span>
-      </a>
-      <button class="modal-cta-outline" onclick="goStep(2)">
-        <span class="t" data-ar="✏️ تعديل البيانات" data-en="✏️ Edit Info">✏️ تعديل البيانات</span>
-      </button>
-    </div>
-    <div class="modal-cta-sub"><i class="fab fa-telegram"></i> @IPTV_NEO4K_BOT</div>
   </div>
 </div>
 
 <script>
-/* ── PARTICLES ── */
-(function(){
-  const c = document.getElementById('particles');
-  const ctx = c.getContext('2d');
-  let W, H, pts = [];
-  function resize(){ W = c.width = innerWidth; H = c.height = innerHeight; }
-  function mkPt(){ return {x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,r:Math.random()*1.4+.4,o:Math.random()*.45+.1}; }
-  function init(){ resize(); pts = Array.from({length:85},mkPt); }
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    const light = document.documentElement.getAttribute('data-theme')==='light';
-    const col = light ? '110,20,190' : '176,38,255';
-    pts.forEach(p=>{
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<0||p.x>W)p.vx*=-1;
-      if(p.y<0||p.y>H)p.vy*=-1;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(${col},${p.o})`; ctx.fill();
-    });
-    for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
-      const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.sqrt(dx*dx+dy*dy);
-      if(d<130){ ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y); ctx.strokeStyle=`rgba(${col},${.11*(1-d/130)})`; ctx.lineWidth=.5; ctx.stroke(); }
-    }
-    requestAnimationFrame(draw);
+// ============================================
+// ADMIN PANEL SYSTEM
+// ============================================
+
+let logoClickCount = 0;
+let logoClickTimer = null;
+const ADMIN_CODE = 'vynex123#';
+const WHATSAPP_NUMBER = '213672261893';
+
+// Logo click handler (5 clicks to open admin)
+document.getElementById('logo').addEventListener('click', function(e) {
+  // Don't trigger if clicking on modal or other elements
+  if (e.target.closest('.modal-overlay') || e.target.closest('.admin-panel-overlay')) return;
+  
+  logoClickCount++;
+  
+  if (logoClickCount === 1) {
+    logoClickTimer = setTimeout(() => {
+      logoClickCount = 0;
+    }, 3000);
   }
-  window.addEventListener('resize',resize);
-  init(); draw();
-})();
-
-/* FAQ Accordion */
-document.querySelectorAll('.faq-question').forEach(btn => {
-  btn.addEventListener('click', function() {
-    const item = this.parentNode;
-    item.classList.toggle('active');
-    const answer = item.querySelector('.faq-answer');
-    if (item.classList.contains('active')) {
-      answer.style.display = 'block';
-    } else {
-      answer.style.display = 'none';
-    }
-  });
+  
+  if (logoClickCount >= 5) {
+    clearTimeout(logoClickTimer);
+    logoClickCount = 0;
+    openAdminLogin();
+  }
 });
-// Initially hide all answers
-document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
 
-/* NAVBAR */
-window.addEventListener('scroll',()=>{ document.getElementById('navbar').classList.toggle('scrolled',scrollY>30); });
-
-/* REVEAL */
-const obs = new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);} }); },{threshold:.1});
-document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-
-/* THEME */
-let isDark = true;
-function toggleTheme(){
-  isDark = !isDark;
-  const t = isDark ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', t);
-  document.getElementById('themeIcon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+function openAdminLogin() {
+  document.getElementById('adminLoginOverlay').classList.add('open');
+  document.getElementById('adminCodeInput').value = '';
+  document.getElementById('adminCodeInput').focus();
+  document.getElementById('adminError').style.display = 'none';
 }
 
-/* LANGUAGE */
-let lang = 'ar';
-function toggleLang(){
-  lang = lang === 'ar' ? 'en' : 'ar';
-  const html = document.documentElement;
-  html.setAttribute('data-lang', lang);
-  html.setAttribute('lang', lang);
-  html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-  document.getElementById('langTxt').textContent = lang === 'ar' ? 'EN' : 'AR';
-  document.querySelectorAll('.t').forEach(el=>{ const v = el.getAttribute('data-'+lang); if(v) el.textContent = v; });
-  document.title = lang === 'ar' ? 'VYNEX IPTV — عالم الترفيه بين يديك' : 'VYNEX IPTV — Entertainment at Your Fingertips';
+function checkAdminCode() {
+  const input = document.getElementById('adminCodeInput').value;
+  if (input === ADMIN_CODE) {
+    document.getElementById('adminLoginOverlay').classList.remove('open');
+    openAdminPanel();
+  } else {
+    document.getElementById('adminError').style.display = 'block';
+  }
 }
 
-/* MODAL & FORM */
-let currentPlanId = '';
-let currentPlanLabel = '';
+// Close admin login on overlay click
+document.getElementById('adminLoginOverlay').addEventListener('click', function(e) {
+  if (e.target === this) {
+    this.classList.remove('open');
+  }
+});
 
-function openModal(ar, en, planId){
-  currentPlanId = planId || '';
-  currentPlanLabel = (lang==='ar'?ar:en);
+// Enter key on admin code input
+document.getElementById('adminCodeInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') checkAdminCode();
+});
+
+function openAdminPanel() {
+  document.getElementById('adminPanelOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  loadOrders();
+}
+
+function closeAdminPanel() {
+  document.getElementById('adminPanelOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Order Management System
+let orders = JSON.parse(localStorage.getItem('vynex_orders') || '[]');
+let currentFilter = 'all';
+
+function generateTicketNumber() {
+  const prefix = 'VNX';
+  const timestamp = Date.now().toString(36).toUpperCase();
+  const random = Math.random().toString(36).substring(2, 5).toUpperCase();
+  return `${prefix}-${timestamp}-${random}`;
+}
+
+function saveOrder(orderData) {
+  const order = {
+    id: generateTicketNumber(),
+    ...orderData,
+    status: 'new', // new, progress, completed
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+  orders.unshift(order);
+  localStorage.setItem('vynex_orders', JSON.stringify(orders));
+  return order;
+}
+
+function updateOrderStatus(orderId, newStatus) {
+  const order = orders.find(o => o.id === orderId);
+  if (order) {
+    order.status = newStatus;
+    order.updatedAt = new Date().toISOString();
+    localStorage.setItem('vynex_orders', JSON.stringify(orders));
+    loadOrders();
+  }
+}
+
+function deleteOrder(orderId) {
+  if (confirm('Are you sure you want to delete this order?')) {
+    orders = orders.filter(o => o.id !== orderId);
+    localStorage.setItem('vynex_orders', JSON.stringify(orders));
+    loadOrders();
+  }
+}
+
+function loadOrders() {
+  updateStats();
+  renderOrders();
+}
+
+function updateStats() {
+  const newCount = orders.filter(o => o.status === 'new').length;
+  const progressCount = orders.filter(o => o.status === 'progress').length;
+  const completedCount = orders.filter(o => o.status === 'completed').length;
+  
+  document.getElementById('statNew').textContent = newCount;
+  document.getElementById('statProgress').textContent = progressCount;
+  document.getElementById('statCompleted').textContent = completedCount;
+  document.getElementById('statTotal').textContent = orders.length;
+  
+  document.getElementById('tabAll').textContent = orders.length;
+  document.getElementById('tabNew').textContent = newCount;
+  document.getElementById('tabProgress').textContent = progressCount;
+  document.getElementById('tabCompleted').textContent = completedCount;
+}
+
+function filterOrders(status) {
+  currentFilter = status;
+  
+  // Update active tab
+  document.querySelectorAll('.admin-tab').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  event.target.closest('.admin-tab').classList.add('active');
+  
+  renderOrders();
+}
+
+function searchOrders() {
+  renderOrders();
+}
+
+function renderOrders() {
+  const grid = document.getElementById('ordersGrid');
+  const searchTerm = document.getElementById('orderSearch').value.toLowerCase();
+  
+  let filtered = orders;
+  
+  // Apply status filter
+  if (currentFilter !== 'all') {
+    filtered = filtered.filter(o => o.status === currentFilter);
+  }
+  
+  // Apply search filter
+  if (searchTerm) {
+    filtered = filtered.filter(o => 
+      o.id.toLowerCase().includes(searchTerm) ||
+      o.name?.toLowerCase().includes(searchTerm) ||
+      o.email?.toLowerCase().includes(searchTerm)
+    );
+  }
+  
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="no-orders">No orders found</div>';
+    return;
+  }
+  
+  grid.innerHTML = filtered.map(order => `
+    <div class="order-card ${order.status}">
+      <div class="order-header">
+        <div class="order-id">${order.id}</div>
+        <div class="order-status ${order.status}">
+          ${order.status === 'new' ? '🔴 New' : order.status === 'progress' ? '🟡 In Progress' : '🟢 Completed'}
+        </div>
+      </div>
+      <div class="order-details">
+        <div class="order-detail">
+          <label>Name</label>
+          <span>${order.name || 'N/A'}</span>
+        </div>
+        <div class="order-detail">
+          <label>Email</label>
+          <span>${order.email || 'N/A'}</span>
+        </div>
+        <div class="order-detail">
+          <label>Country</label>
+          <span>${order.country || 'N/A'}</span>
+        </div>
+        <div class="order-detail">
+          <label>Device</label>
+          <span>${order.device || 'N/A'}</span>
+        </div>
+        <div class="order-detail">
+          <label>Plan</label>
+          <span>${order.planName || 'N/A'}</span>
+        </div>
+        <div class="order-detail">
+          <label>Price</label>
+          <span>$${order.price || '0'}</span>
+        </div>
+        <div class="order-detail">
+          <label>Payment</label>
+          <span>${order.payment || 'N/A'}</span>
+        </div>
+        <div class="order-detail">
+          <label>Date</label>
+          <span>${new Date(order.createdAt).toLocaleString()}</span>
+        </div>
+      </div>
+      <div class="order-actions">
+        ${order.status !== 'progress' ? `<button class="order-btn order-btn-progress" onclick="updateOrderStatus('${order.id}', 'progress')">Mark In Progress</button>` : ''}
+        ${order.status !== 'completed' ? `<button class="order-btn order-btn-complete" onclick="updateOrderStatus('${order.id}', 'completed')">Mark Completed</button>` : ''}
+        ${order.status === 'new' ? `<button class="order-btn order-btn-delete" onclick="deleteOrder('${order.id}')">Delete</button>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ============================================
+// UPDATED ORDER MODAL WITH WHATSAPP
+// ============================================
+
+let selectedPayment = '';
+
+function openOrderModal(planId, planNameAr, planNameEn, price) {
+  currentPlanId = planId;
+  currentPlanLabel = lang === 'ar' ? planNameAr : planNameEn;
+  currentPlanPrice = price;
+  
   document.getElementById('modalPlanName').textContent = '🛒 ' + currentPlanLabel;
-  document.querySelectorAll('#modalOverlay .t').forEach(el=>{ const v=el.getAttribute('data-'+lang); if(v) el.textContent=v; });
+  document.querySelectorAll('#modalOverlay .t').forEach(el => {
+    const v = el.getAttribute('data-' + lang);
+    if (v) el.textContent = v;
+  });
+  
+  // Reset form
+  document.getElementById('f_name').value = '';
+  document.getElementById('f_email').value = '';
+  document.getElementById('f_country').value = '';
+  document.getElementById('f_device').value = '';
+  selectedPayment = '';
+  
   goStep(1);
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
-function goStep(n){
-  [1,2,3].forEach(i=>{
-    document.getElementById('step'+i).classList.toggle('active', i===n);
-    document.getElementById('dot'+i).classList.toggle('active', i<=n);
-  });
-}
-
-function goStep3(){
-  const name    = document.getElementById('f_name').value.trim();
-  const email   = document.getElementById('f_email').value.trim();
+// Override goStep3 to include payment and generate ticket
+function goStep3() {
+  const name = document.getElementById('f_name').value.trim();
+  const email = document.getElementById('f_email').value.trim();
   const country = document.getElementById('f_country').value.trim();
-  const device  = document.getElementById('f_device').value.trim();
-  if(!name || !email){ alert(lang==='ar'?'الاسم والبريد مطلوبان':'Name and Email are required'); return; }
-
-  const orderData = { plan: currentPlanId, lang: lang, name, email, country, device };
-  const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(orderData)))).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
+  const device = document.getElementById('f_device').value.trim();
   
-  const botLink = 'https://t.me/IPTV_NEO4K_BOT?start=order_' + encoded;
-  document.getElementById('finalBotLink').href = botLink;
-
-  const box = document.getElementById('orderSummaryBox');
-  if(lang==='ar'){
-    box.innerHTML = '<strong>📦 ' + currentPlanLabel + '</strong><br>👤 ' + name + '<br>📧 ' + email + (country?'<br>🌍 '+country:'') + (device?'<br>📱 '+device:'');
-  } else {
-    box.innerHTML = '<strong>📦 ' + currentPlanLabel + '</strong><br>👤 ' + name + '<br>📧 ' + email + (country?'<br>🌍 '+country:'') + (device?'<br>📱 '+device:'');
+  if (!name || !email) {
+    alert(lang === 'ar' ? 'الاسم والبريد مطلوبان' : 'Name and Email are required');
+    return;
   }
+  
+  if (!selectedPayment) {
+    alert(lang === 'ar' ? 'اختر طريقة الدفع' : 'Please select payment method');
+    return;
+  }
+  
+  // Save order to localStorage
+  const orderData = {
+    plan: currentPlanId,
+    planName: currentPlanLabel,
+    price: currentPlanPrice,
+    name: name,
+    email: email,
+    country: country,
+    device: device,
+    payment: selectedPayment,
+    lang: lang
+  };
+  
+  const savedOrder = saveOrder(orderData);
+  
+  // Generate WhatsApp message
+  const message = encodeURIComponent(
+    `*🆕 NEW ORDER - VYNEX IPTV*\n\n` +
+    `🎫 *Ticket:* ${savedOrder.id}\n` +
+    `👤 *Name:* ${name}\n` +
+    `📧 *Email:* ${email}\n` +
+    `🌍 *Country:* ${country || 'N/A'}\n` +
+    `📱 *Device:* ${device || 'N/A'}\n` +
+    `📦 *Plan:* ${currentPlanLabel}\n` +
+    `💰 *Price:* $${currentPlanPrice}\n` +
+    `💳 *Payment:* ${selectedPayment}\n` +
+    `⏰ *Time:* ${new Date().toLocaleString()}\n\n` +
+    `Please confirm and proceed with payment.`
+  );
+  
+  const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+  document.getElementById('finalWhatsAppLink').href = whatsappLink;
+  
+  // Show summary
+  const box = document.getElementById('orderSummaryBox');
+  box.innerHTML = `
+    <div class="ticket-number">${savedOrder.id}</div>
+    <div class="order-summary">
+      <div class="summary-row">
+        <span class="summary-label">Plan</span>
+        <span class="summary-value">${currentPlanLabel}</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-label">Price</span>
+        <span class="summary-value">$${currentPlanPrice}</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-label">Name</span>
+        <span class="summary-value">${name}</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-label">Email</span>
+        <span class="summary-value">${email}</span>
+      </div>
+      ${country ? `
+      <div class="summary-row">
+        <span class="summary-label">Country</span>
+        <span class="summary-value">${country}</span>
+      </div>` : ''}
+      <div class="summary-row">
+        <span class="summary-label">Payment</span>
+        <span class="summary-value">${selectedPayment}</span>
+      </div>
+    </div>
+  `;
+  
   goStep(3);
 }
 
-function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
-function handleOverlayClick(e){ if(e.target===document.getElementById('modalOverlay')) closeModal(); }
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+// Payment selection
+function selectPayment(method) {
+  selectedPayment = method;
+  document.querySelectorAll('.payment-option').forEach(opt => {
+    opt.classList.remove('selected');
+  });
+  event.currentTarget.classList.add('selected');
+}
+
+// Update modal HTML to include payment step
+document.addEventListener('DOMContentLoaded', function() {
+  // Replace step 2 content with payment selection
+  const step2 = document.getElementById('step2');
+  step2.innerHTML = `
+    <h2 class="modal-title t" data-ar="بيانات الطلب" data-en="Order Details">Order Details</h2>
+    <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem;">Enter your details and select payment method</p>
+    
+    <label class="form-label">Full Name *</label>
+    <input class="order-form-field" id="f_name" type="text" placeholder="John Doe">
+    
+    <label class="form-label">Email *</label>
+    <input class="order-form-field" id="f_email" type="email" placeholder="example@gmail.com">
+    
+    <label class="form-label">Country</label>
+    <input class="order-form-field" id="f_country" type="text" placeholder="Algeria">
+    
+    <label class="form-label">Device Type</label>
+    <input class="order-form-field" id="f_device" type="text" placeholder="Android TV, Smart TV, iPhone...">
+    
+    <label class="form-label">Payment Method *</label>
+    <div class="payment-grid">
+      <div class="payment-option" onclick="selectPayment('RedotPay')">
+        <i class="fas fa-wallet" style="color:#ff6b6b;"></i>
+        <span>RedotPay</span>
+      </div>
+      <div class="payment-option" onclick="selectPayment('PayPal')">
+        <i class="fab fa-paypal" style="color:#0070ba;"></i>
+        <span>PayPal</span>
+      </div>
+      <div class="payment-option" onclick="selectPayment('Binance USDT')">
+        <i class="fas fa-coins" style="color:#f0b90b;"></i>
+        <span>Binance USDT</span>
+      </div>
+      <div class="payment-option" onclick="selectPayment('CCP Algeria')">
+        <i class="fas fa-university" style="color:#00a8e8;"></i>
+        <span>CCP Algeria</span>
+      </div>
+    </div>
+    
+    <button class="modal-cta" onclick="goStep3()">
+      <i class="fab fa-whatsapp"></i>
+      <span>Send via WhatsApp</span>
+    </button>
+    <button class="modal-cta-outline" onclick="goStep(1)">
+      <span>🔙 Back</span>
+    </button>
+  `;
+  
+  // Update step 3 to show WhatsApp button
+  const step3 = document.getElementById('step3');
+  step3.innerHTML = `
+    <h2 class="modal-title" style="color:var(--green)">✅ Order Ready!</h2>
+    <p style="font-size:.82rem;color:var(--muted);margin-bottom:.8rem;">Your order has been saved. Click below to send via WhatsApp:</p>
+    
+    <div class="copy-box" id="orderSummaryBox"></div>
+    
+    <a id="finalWhatsAppLink" href="#" target="_blank" class="modal-cta modal-cta-whatsapp" onclick="closeModal()">
+      <i class="fab fa-whatsapp"></i>
+      <span>Open WhatsApp & Send Order</span>
+    </a>
+    
+    <button class="modal-cta-outline" onclick="goStep(2)">
+      <span>✏️ Edit Details</span>
+    </button>
+    
+    <p style="font-size:.75rem;color:var(--muted);margin-top:1rem;text-align:center;">
+      <i class="fas fa-info-circle"></i> 
+      Save your ticket number for reference
+    </p>
+  `;
+});
 </script>
-</body>
-</html>
