@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="dark" data-lang="ar">
+<html lang="en" dir="ltr" data-theme="dark" data-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VYNEX IPTV — عالم الترفيه بين يديك</title>
+<title>VYNEX IPTV — Entertainment at Your Fingertips</title>
 <meta name="description" content="VYNEX IPTV — NEO 4K PRO Server">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -131,6 +131,9 @@ section{padding:5.5rem 0}
 .feat-icon{font-size:2rem;margin-bottom:1.1rem;display:block}
 .feat-title{font-size:1rem;font-weight:700;margin-bottom:.5rem;color:var(--text)}
 .feat-desc{font-size:.84rem;color:var(--muted);line-height:1.75}
+
+/* Apply default language EN on load */
+document.querySelectorAll('.t').forEach(el=>{const v=el.getAttribute('data-en');if(v)el.innerHTML=v;});
 
 /* FAQ */
 #faq{background:var(--bg);transition:background .4s}
@@ -359,7 +362,7 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
       </button>
       <button class="btn-lang" onclick="toggleLang()">
         <i class="fas fa-globe"></i>
-        <span id="langTxt">EN</span>
+        <span id="langTxt">AR</span>
       </button>
       <a href="https://wa.me/213672261893" target="_blank" class="btn-tg">
         <i class="fab fa-whatsapp"></i>
@@ -619,6 +622,12 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
     <div class="form-step active" id="step1">
       <h2 class="modal-title t" data-ar="الباقة المختارة" data-en="Selected Plan">الباقة المختارة</h2>
       <div class="modal-plan-name" id="modalPlanName"></div>
+      <!-- Trial notice -->
+      <div id="trialNotice" style="display:none;background:rgba(255,140,0,.07);border:1px solid rgba(255,140,0,.35);border-radius:13px;padding:1rem 1.1rem;margin-bottom:1rem;font-size:.83rem;line-height:1.8;color:var(--text2);">
+        <div style="font-weight:800;color:var(--orange);margin-bottom:.4rem;">⚡ كيف تعمل التجربة؟</div>
+        تدفع <strong>2$</strong> فقط للتجربة لمدة <strong>24 ساعة</strong> وتستمتع بكل المحتوى بجودة 4K.<br>
+        إذا أعجبك الخدمة وأردت الاشتراك لاحقاً، سنخصم الـ <strong>2$</strong> تلقائياً من سعر أي باقة تختارها! 🎉
+      </div>
       <div class="server-info" style="margin-bottom:1rem;">
         <div class="server-feats">
           <div class="sf-item"><i class="fas fa-check-circle"></i><span class="t" data-ar="جودة 4K Ultra HD" data-en="4K Ultra HD">جودة 4K Ultra HD</span></div>
@@ -640,8 +649,14 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
       <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem;" class="t" data-ar="سيتم إرسال طلبك مباشرة لواتساب مع رقم تتبع" data-en="Your order will be sent directly to WhatsApp with a tracking number">سيتم إرسال طلبك مباشرة لواتساب مع رقم تتبع</p>
       <label class="form-label t" data-ar="الاسم الكامل *" data-en="Full Name *">الاسم الكامل *</label>
       <input class="order-form-field" id="f_name" type="text" placeholder="Ahmed Ali">
-      <label class="form-label t" data-ar="رقم الواتساب *" data-en="WhatsApp Number *">رقم الواتساب *</label>
-      <input class="order-form-field" id="f_phone" type="tel" placeholder="+213 XXX XXX XXX">
+      <label class="form-label t" data-ar="رقم الواتساب * (مع رمز الدولة)" data-en="WhatsApp Number * (with country code)">رقم الواتساب * (مع رمز الدولة)</label>
+      <div style="position:relative;">
+        <input class="order-form-field" id="f_phone" type="tel" placeholder="+213 6XX XXX XXX" style="margin-bottom:.3rem;" oninput="formatPhone(this)">
+      </div>
+      <div style="background:rgba(37,211,102,.07);border:1px solid rgba(37,211,102,.3);border-radius:9px;padding:.55rem .9rem;margin-bottom:.85rem;font-size:.78rem;color:#25d366;display:flex;align-items:center;gap:.5rem;">
+        <i class="fab fa-whatsapp"></i>
+        <span class="t" data-en="⚠️ Enter your personal WhatsApp number so we can send you activation details." data-ar="⚠️ أدخل رقم واتساب الشخصي الخاص بك حتى نتمكن من إرسال بيانات التفعيل إليك.">⚠️ Enter your personal WhatsApp number so we can send you activation details.</span>
+      </div>
       <label class="form-label t" data-ar="الدولة" data-en="Country">الدولة</label>
       <input class="order-form-field" id="f_country" type="text" placeholder="Algeria">
       <label class="form-label t" data-ar="نوع الجهاز" data-en="Device Type">نوع الجهاز</label>
@@ -769,12 +784,12 @@ let isDark=true;
 function toggleTheme(){isDark=!isDark;const t=isDark?'dark':'light';document.documentElement.setAttribute('data-theme',t);document.getElementById('themeIcon').className=isDark?'fas fa-sun':'fas fa-moon';}
 
 /* LANGUAGE */
-let lang='ar';
+let lang='en';
 function toggleLang(){
-  lang=lang==='ar'?'en':'ar';
+  lang=lang==='en'?'ar':'en';
   const html=document.documentElement;html.setAttribute('data-lang',lang);html.setAttribute('lang',lang);html.setAttribute('dir',lang==='ar'?'rtl':'ltr');
-  document.getElementById('langTxt').textContent=lang==='ar'?'EN':'AR';
-  document.querySelectorAll('.t').forEach(el=>{const v=el.getAttribute('data-'+lang);if(v)el.textContent=v;});
+  document.getElementById('langTxt').textContent=lang==='en'?'AR':'EN';
+  document.querySelectorAll('.t').forEach(el=>{const v=el.getAttribute('data-'+lang);if(v)el.innerHTML=v;});
   document.title=lang==='ar'?'VYNEX IPTV — عالم الترفيه بين يديك':'VYNEX IPTV — Entertainment at Your Fingertips';
 }
 
@@ -894,9 +909,17 @@ async function deleteOrder(id){
 ══════════════════════════════════ */
 let currentPlanId='';let currentPlanLabel='';let selectedPayment='';let currentOrderId='';
 
+function formatPhone(input){
+  let v=input.value.replace(/[^0-9+]/g,'');
+  if(v.startsWith('00')) v='+'+v.slice(2);
+  input.value=v;
+}
+
 function openModal(ar,en,planId){
   currentPlanId=planId||'';currentPlanLabel=(lang==='ar'?ar:en);selectedPayment='';
   document.getElementById('modalPlanName').textContent='🛒 '+currentPlanLabel;
+  // Show trial notice only for trial plan
+  document.getElementById('trialNotice').style.display=(planId==='trial')?'block':'none';
   document.querySelectorAll('#modalOverlay .t').forEach(el=>{const v=el.getAttribute('data-'+lang);if(v)el.textContent=v;});
   document.querySelectorAll('.payment-opt').forEach(b=>b.classList.remove('selected'));
   goStep(1);
