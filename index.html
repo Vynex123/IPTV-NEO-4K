@@ -806,17 +806,33 @@ function checkSecret(){
 }
 
 /* ══════════════════════════════════
-   ORDERS localStorage
+   ORDERS — Google Sheets API
 ══════════════════════════════════ */
-function getOrders(){try{return JSON.parse(localStorage.getItem('vynex_orders')||'[]');}catch{return[];}}
-function saveOrders(arr){localStorage.setItem('vynex_orders',JSON.stringify(arr));}
+const SHEET_URL='https://script.google.com/macros/s/AKfycbyZnT8O6LRAQoJNg20HHgy3XA3Yp3Rbve2FgybftyzCEaNXFYGAD55rLoob4_S6bMGiPQ/exec';
 function generateOrderId(){return'VNX-'+Date.now().toString(36).toUpperCase().slice(-6);}
+
+async function sheetRequest(data){
+  try{
+    await fetch(SHEET_URL,{method:'POST',body:JSON.stringify(data)});
+  }catch(e){console.error('Sheet error',e);}
+}
+
+async function getOrders(){
+  try{
+    const r=await fetch(SHEET_URL);
+    const data=await r.json();
+    return Array.isArray(data)?data:[];
+  }catch(e){return[];}
+}
 
 /* ══════════════════════════════════
    ADMIN PANEL
 ══════════════════════════════════ */
 let currentFilter='all';
-function openAdmin(){document.getElementById('adminOverlay').classList.add('open');renderOrders();}
+async function openAdmin(){
+  document.getElementById('adminOverlay').classList.add('open');
+  await renderOrders();
+}
 function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');}
 function setFilter(f,btn){
   currentFilter=f;
@@ -824,32 +840,29 @@ function setFilter(f,btn){
   btn.classList.add('active');
   renderOrders();
 }
-function updateStats(){
-  const orders=getOrders();
+function updateStats(orders){
   document.getElementById('statNew').textContent=orders.filter(o=>o.status==='new').length;
   document.getElementById('statPending').textContent=orders.filter(o=>o.status==='pending').length;
   document.getElementById('statDone').textContent=orders.filter(o=>o.status==='done').length;
 }
-function renderOrders(){
-  updateStats();
-  const orders=getOrders();
+async function renderOrders(){
+  const list=document.getElementById('ordersList');
+  list.innerHTML=`<div class="empty-state"><i class="fas fa-spinner fa-spin"></i> جاري التحميل...</div>`;
+  const orders=await getOrders();
+  updateStats(orders);
   const q=(document.getElementById('adminSearch').value||'').toLowerCase();
   const filtered=orders.filter(o=>{
     const matchFilter=currentFilter==='all'||o.status===currentFilter;
-    const matchSearch=!q||o.id.toLowerCase().includes(q)||o.name.toLowerCase().includes(q)||o.phone.includes(q);
+    const matchSearch=!q||String(o.id).toLowerCase().includes(q)||String(o.name).toLowerCase().includes(q)||String(o.phone).includes(q);
     return matchFilter&&matchSearch;
-  }).sort((a,b)=>b.createdAt-a.createdAt);
-
-  const list=document.getElementById('ordersList');
-  if(!filtered.length){list.innerHTML=`<div class="empty-state"><i class="fas fa-inbox"></i><span class="t" data-ar="لا توجد طلبات" data-en="No orders found">لا توجد طلبات</span></div>`;return;}
-
-  const statusMap={new:{label:lang==='ar'?'جديد':'New',cls:'s-new',dot:'🟣'},pending:{label:lang==='ar'?'قيد التنفيذ':'Pending',cls:'s-pending',dot:'🟡'},done:{label:lang==='ar'?'مكتمل':'Done',cls:'s-done',dot:'🟢'}};
+  });
+  if(!filtered.length){list.innerHTML=`<div class="empty-state"><i class="fas fa-inbox"></i><br>لا توجد طلبات</div>`;return;}
+  const statusMap={new:{label:'جديد',cls:'s-new',dot:'🟣'},pending:{label:'قيد التنفيذ',cls:'s-pending',dot:'🟡'},done:{label:'مكتمل',cls:'s-done',dot:'🟢'}};
   list.innerHTML=filtered.map(o=>{
     const s=statusMap[o.status]||statusMap.new;
-    const dt=new Date(o.createdAt).toLocaleString('ar-DZ');
     return `<div class="order-card" id="oc_${o.id}">
       <div class="order-card-top">
-        <div><div class="order-id">#${o.id}</div><div class="order-time">${dt}</div></div>
+        <div><div class="order-id">#${o.id}</div><div class="order-time">${o.date||''}</div></div>
         <div class="status-badge ${s.cls}">${s.dot} ${s.label}</div>
       </div>
       <div class="order-card-body">
@@ -859,21 +872,21 @@ function renderOrders(){
       </div>
       <div class="order-actions">
         <button class="action-btn a-del" onclick="deleteOrder('${o.id}')"><i class="fas fa-trash"></i></button>
-        <button class="action-btn a-new" onclick="changeStatus('${o.id}','new')">🆕 ${lang==='ar'?'جديد':'New'}</button>
-        <button class="action-btn a-pending" onclick="changeStatus('${o.id}','pending')">⏳ ${lang==='ar'?'قيد التنفيذ':'Pending'}</button>
-        <button class="action-btn a-done" onclick="changeStatus('${o.id}','done')">✅ ${lang==='ar'?'مكتمل':'Done'}</button>
+        <button class="action-btn a-new" onclick="changeStatus('${o.id}','new')">🆕 جديد</button>
+        <button class="action-btn a-pending" onclick="changeStatus('${o.id}','pending')">⏳ قيد التنفيذ</button>
+        <button class="action-btn a-done" onclick="changeStatus('${o.id}','done')">✅ مكتمل</button>
       </div>
     </div>`;
   }).join('');
 }
-function changeStatus(id,status){
-  const orders=getOrders();
-  const idx=orders.findIndex(o=>o.id===id);
-  if(idx>-1){orders[idx].status=status;saveOrders(orders);renderOrders();}
+async function changeStatus(id,status){
+  await sheetRequest({action:'update',id,status});
+  await renderOrders();
 }
-function deleteOrder(id){
-  if(!confirm(lang==='ar'?'هل تريد حذف هذا الطلب؟':'Delete this order?'))return;
-  const orders=getOrders().filter(o=>o.id!==id);saveOrders(orders);renderOrders();
+async function deleteOrder(id){
+  if(!confirm('هل تريد حذف هذا الطلب؟'))return;
+  await sheetRequest({action:'delete',id});
+  await renderOrders();
 }
 
 /* ══════════════════════════════════
@@ -912,9 +925,8 @@ function goStep3(){
   // Generate order ID
   currentOrderId=generateOrderId();
 
-  // Save to localStorage
-  const order={id:currentOrderId,name,phone,country,device,plan:currentPlanLabel,planId:currentPlanId,payment:selectedPayment,status:'new',createdAt:Date.now()};
-  const orders=getOrders();orders.push(order);saveOrders(orders);
+  // Save to Google Sheets
+  sheetRequest({action:'add',id:currentOrderId,name,phone,country,device,plan:currentPlanLabel,payment:selectedPayment,status:'new'});
 
   // Build WhatsApp message
   const sep='━━━━━━━━━━━━━━━━━━━━';
