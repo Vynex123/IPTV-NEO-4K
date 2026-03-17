@@ -206,6 +206,16 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.8rem 0;
 .foot-logo{font-family:var(--font-display);font-size:1.35rem;font-weight:800;letter-spacing:3px;background:linear-gradient(135deg,var(--text),var(--neon));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
 footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
 
+
+
+/* WA SPINNER */
+.wa-spinner{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c4a);display:flex;align-items:center;justify-content:center;font-size:1.8rem;animation:spinPulse 1.2s ease-in-out infinite;box-shadow:0 0 30px rgba(37,211,102,.5);}
+@keyframes spinPulse{0%,100%{transform:scale(1);box-shadow:0 0 20px rgba(37,211,102,.4);}50%{transform:scale(1.12);box-shadow:0 0 45px rgba(37,211,102,.8);}}
+
+/* WAVE DIVIDER */
+.wave-divider{width:100%;line-height:0;overflow:hidden;position:relative;z-index:1;}
+.wave-divider svg{width:100%;height:40px;display:block;}
+
 /* FLOAT */
 .float-btn{position:fixed;bottom:1.5rem;left:1.5rem;z-index:500;display:flex;align-items:center;gap:.55rem;background:linear-gradient(135deg,#25d366,#128c4a);color:#fff;padding:.68rem 1.4rem;border-radius:50px;font-size:.82rem;font-weight:700;text-decoration:none;box-shadow:0 0 18px rgba(37,211,102,.4);cursor:pointer;animation:floatAnim 3s ease-in-out infinite;transition:box-shadow .3s}
 .float-btn:hover{box-shadow:0 0 32px rgba(37,211,102,.7)}
@@ -409,7 +419,9 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
   </div>
 </section>
 
-<div class="hr-neon"></div>
+<div class="wave-divider">
+<svg viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,20 C240,40 480,0 720,20 C960,40 1200,0 1440,20 L1440,40 L0,40 Z" fill="var(--bg2)" opacity="0.5"/><path d="M0,25 C360,5 720,40 1080,15 C1260,7 1350,30 1440,20" fill="none" stroke="url(#waveGrad)" stroke-width="1.5"/><defs><linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="transparent"/><stop offset="30%" stop-color="var(--neon)" stop-opacity="0.6"/><stop offset="70%" stop-color="var(--neon)" stop-opacity="0.6"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs></svg>
+</div>
 
 <!-- FEATURES -->
 <section id="features">
@@ -430,7 +442,9 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
   </div>
 </section>
 
-<div class="hr-neon"></div>
+<div class="wave-divider">
+<svg viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,20 C240,40 480,0 720,20 C960,40 1200,0 1440,20 L1440,40 L0,40 Z" fill="var(--bg2)" opacity="0.5"/><path d="M0,25 C360,5 720,40 1080,15 C1260,7 1350,30 1440,20" fill="none" stroke="url(#waveGrad)" stroke-width="1.5"/><defs><linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="transparent"/><stop offset="30%" stop-color="var(--neon)" stop-opacity="0.6"/><stop offset="70%" stop-color="var(--neon)" stop-opacity="0.6"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs></svg>
+</div>
 
 <!-- FAQ -->
 <section id="faq">
@@ -473,7 +487,9 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
   </div>
 </section>
 
-<div class="hr-neon"></div>
+<div class="wave-divider">
+<svg viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,20 C240,40 480,0 720,20 C960,40 1200,0 1440,20 L1440,40 L0,40 Z" fill="var(--bg2)" opacity="0.5"/><path d="M0,25 C360,5 720,40 1080,15 C1260,7 1350,30 1440,20" fill="none" stroke="url(#waveGrad)" stroke-width="1.5"/><defs><linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="transparent"/><stop offset="30%" stop-color="var(--neon)" stop-opacity="0.6"/><stop offset="70%" stop-color="var(--neon)" stop-opacity="0.6"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs></svg>
+</div>
 
 <!-- PRICING -->
 <section id="pricing">
@@ -574,7 +590,9 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
   </div>
 </section>
 
-<div class="hr-neon"></div>
+<div class="wave-divider">
+<svg viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,20 C240,40 480,0 720,20 C960,40 1200,0 1440,20 L1440,40 L0,40 Z" fill="var(--bg2)" opacity="0.5"/><path d="M0,25 C360,5 720,40 1080,15 C1260,7 1350,30 1440,20" fill="none" stroke="url(#waveGrad)" stroke-width="1.5"/><defs><linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="transparent"/><stop offset="30%" stop-color="var(--neon)" stop-opacity="0.6"/><stop offset="70%" stop-color="var(--neon)" stop-opacity="0.6"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs></svg>
+</div>
 
 <!-- CONTACT -->
 <section id="contact">
@@ -624,9 +642,8 @@ footer p{color:var(--muted);font-size:.78rem;line-height:1.9}
       <div class="modal-plan-name" id="modalPlanName"></div>
       <!-- Trial notice -->
       <div id="trialNotice" style="display:none;background:rgba(255,140,0,.07);border:1px solid rgba(255,140,0,.35);border-radius:13px;padding:1rem 1.1rem;margin-bottom:1rem;font-size:.83rem;line-height:1.8;color:var(--text2);">
-        <div style="font-weight:800;color:var(--orange);margin-bottom:.4rem;">⚡ كيف تعمل التجربة؟</div>
-        تدفع <strong>2$</strong> فقط للتجربة لمدة <strong>24 ساعة</strong> وتستمتع بكل المحتوى بجودة 4K.<br>
-        إذا أعجبك الخدمة وأردت الاشتراك لاحقاً، سنخصم الـ <strong>2$</strong> تلقائياً من سعر أي باقة تختارها! 🎉
+        <div style="font-weight:800;color:var(--orange);margin-bottom:.4rem;" class="t" data-en="⚡ How does the trial work?" data-ar="⚡ كيف تعمل التجربة؟">⚡ How does the trial work?</div>
+        <span class="t" data-en="Pay only <strong>$2</strong> to try the service for <strong>24 hours</strong> and enjoy all content in 4K quality. If you like it and decide to subscribe later, we will deduct the <strong>$2</strong> from the price of any plan you choose! 🎉" data-ar="تدفع <strong>2$</strong> فقط للتجربة لمدة <strong>24 ساعة</strong> وتستمتع بكل المحتوى بجودة 4K. إذا أعجبك الخدمة وأردت الاشتراك لاحقاً، سنخصم الـ <strong>2$</strong> تلقائياً من سعر أي باقة تختارها! 🎉">Pay only <strong>$2</strong> to try the service for <strong>24 hours</strong> and enjoy all content in 4K quality. If you like it and decide to subscribe later, we will deduct the <strong>$2</strong> from the price of any plan you choose! 🎉</span>
       </div>
       <div class="server-info" style="margin-bottom:1rem;">
         <div class="server-feats">
@@ -972,9 +989,30 @@ ${sep}
   box.innerHTML=`<strong>🆔 ${currentOrderId}</strong><br>📦 ${currentPlanLabel}<br>👤 ${name}<br>📱 ${phone}${country?'<br>🌍 '+country:''}${device?'<br>📺 '+device:''}<br>💳 ${selectedPayment}`;
   goStep(3);
 }
+
+function openWhatsAppWithLoader(btn){
+  const url=document.getElementById('finalWaLink').href;
+  const overlay=document.getElementById('loadingOverlay');
+  overlay.style.opacity='1';overlay.style.visibility='visible';
+  setTimeout(()=>{
+    window.open(url,'_blank');
+    setTimeout(()=>{
+      overlay.style.opacity='0';overlay.style.visibility='hidden';
+      closeModal();
+    },1800);
+  },900);
+}
+
 function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';}
 function handleOverlayClick(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeSecret();}});
 </script>
+
+<!-- LOADING OVERLAY -->
+<div id="loadingOverlay" style="position:fixed;inset:0;z-index:1100;background:rgba(5,5,15,.92);backdrop-filter:blur(12px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;">
+  <div class="wa-spinner"></div>
+  <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:#25d366;" class="t" data-en="Opening WhatsApp..." data-ar="جاري فتح واتساب...">Opening WhatsApp...</div>
+  <div style="font-size:.78rem;color:var(--muted);" class="t" data-en="Your order is being prepared 📦" data-ar="يتم تجهيز طلبك 📦">Your order is being prepared 📦</div>
+</div>
 </body>
 </html>
