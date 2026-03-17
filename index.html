@@ -937,7 +937,7 @@ function openModal(ar,en,planId){
   document.getElementById('modalPlanName').textContent='🛒 '+currentPlanLabel;
   // Show trial notice only for trial plan
   document.getElementById('trialNotice').style.display=(planId==='trial')?'block':'none';
-  document.querySelectorAll('#modalOverlay .t').forEach(el=>{const v=el.getAttribute('data-'+lang);if(v)el.textContent=v;});
+  document.querySelectorAll('#modalOverlay .t').forEach(el=>{const v=el.getAttribute('data-'+lang);if(v)el.innerHTML=v;});
   document.querySelectorAll('.payment-opt').forEach(b=>b.classList.remove('selected'));
   goStep(1);
   document.getElementById('modalOverlay').classList.add('open');
